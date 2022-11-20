@@ -1,0 +1,36 @@
+<Window x:Class="WpfApp1.PastAppointsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="PastAppointsWindow" Height="200" Width="300">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="48*"/>
+            <ColumnDefinition Width="223*"/>
+            <ColumnDefinition Width="529*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="9*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.ColumnSpan="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="10*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1" Background="#1d4ed8">
+            </Grid>
+            <Grid Grid.Column="1" Grid.Row="0" Background="#1d4ed8">
+            </Grid>
+        </Grid>
+        <Label Content="Upcoming Appointments" HorizontalAlignment="Left" Margin="238,241,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.Column="2" RenderTransformOrigin="0.86,0.262" FontSize="16"/>
+        <ListBox Grid.Column="2" HorizontalAlignment="Left" Height="68" Margin="196,277,0,0" Grid.Row="1" VerticalAlignment="Top" Width="284" d:ItemsSource="{d:SampleData ItemCount=0}"/>
+        <Label Content="Past Appointments" HorizontalAlignment="Left" Margin="77,-6,0,0" VerticalAlignment="Top" Grid.Column="1" Grid.ColumnSpan="2" Foreground="White"/>
+        <Rectangle Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="146" Margin="10,0,0,0" Grid.Row="1" Stroke="Black" VerticalAlignment="Center" Width="280"/>
+        <Label Content="Dr. Amr @ 12:00 PM, September 17, 2022" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="238" Grid.Column="1"/>
+        <Label Content="Dr. Araiz @ 5:00 PM, March 30, 2022" HorizontalAlignment="Left" Margin="10,41,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="238" Grid.Column="1"/>
+    </Grid>
+</Window>
