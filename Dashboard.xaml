@@ -1,0 +1,164 @@
+﻿<Page x:Class="WpfApp1.Dashboard"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApp1"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Dashboard">
+    <Grid Background="#e2e8f0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Border Margin="20 20 20 10" Padding="20" Background="#f9fafb" CornerRadius="4">
+                    <StackPanel>
+                        <TextBlock FontSize="24">
+                            Welcome!
+                        </TextBlock>
+                        <TextBlock FontSize="16">The following doctors are in today:</TextBlock>
+                        <TextBlock FontSize="16">Dr. Amr, GP</TextBlock>
+                        <TextBlock FontSize="16">Dr. Chirag, GP</TextBlock>
+                        <TextBlock FontSize="16">Dr. Raphael, GP</TextBlock>
+                    </StackPanel>
+                    <Border.Effect>
+                        <DropShadowEffect Opacity="0.06" Direction="270" BlurRadius="4" ShadowDepth="2"/>
+                    </Border.Effect>
+                </Border>
+            </Grid>
+
+            <StackPanel Grid.Row="1">
+                <Border Margin="20 10" Padding="1" Background="#1d4ed8" CornerRadius="4">
+                    <Button Background="#1d4ed8" Padding="9" Foreground="#eff6ff">
+                        <TextBlock>Book for <Bold>Existing Patient</Bold></TextBlock>
+                    </Button>
+                    <Border.Effect>
+                        <DropShadowEffect Opacity=".06" Direction="270" BlurRadius="4" ShadowDepth="2"/>
+                    </Border.Effect>
+                </Border>
+                <Border Margin="20 10" Padding="1" Background="#1d4ed8" CornerRadius="4">
+                    <Button Background="#1d4ed8" Padding="9" Foreground="#eff6ff">
+                        <TextBlock>Book for <Bold>New Patient</Bold></TextBlock>
+                    </Button>
+                    <Border.Effect>
+                        <DropShadowEffect Opacity=".06" Direction="270" BlurRadius="4" ShadowDepth="2"/>
+                    </Border.Effect>
+                </Border>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Column="1">
+            <Border Margin="10 20 20 20" Background="#f9fafb" CornerRadius="4" Padding="8">
+                <DockPanel>
+                    <Border DockPanel.Dock="Top" Padding="10" VerticalAlignment="Top" BorderThickness="0 0 0 1" BorderBrush="#d1d5db">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Column="0" Grid.Row="0" VerticalAlignment="Center">
+                                <TextBlock FontSize="16" Text="Appointments for today"/>
+                                <TextBlock FontSize="24" Text="October 8"/>
+                            </StackPanel>
+
+                            <WrapPanel Grid.Column="2" Grid.Row="0" VerticalAlignment="Center">
+                                <Border BorderThickness="1" Margin="4" BorderBrush="#1d4ed8" CornerRadius="2">
+                                    <Button Content="&lt;" Padding="16 8" Background="#1d4ed8" Foreground="#eff6ff" BorderThickness="0" FontWeight="Bold" FontSize="16"></Button>
+                                </Border>
+                                <Border BorderThickness="1" Margin="4" BorderBrush="#1d4ed8" CornerRadius="2">
+                                    <Button Content="&gt;" Padding="16 8" Background="#1d4ed8" Foreground="#eff6ff" BorderThickness="0" FontWeight="Bold" FontSize="16"></Button>
+                                </Border>
+                            </WrapPanel>
+                            <Grid Grid.Row="1" Grid.ColumnSpan="3" Margin="0 20 0 10">
+                                <TextBox x:Name="SearchTermTextBox" FontSize="16" Padding="4"/>
+                                <TextBlock FontSize="16" Margin="6 4" IsHitTestVisible="False" Text="Search using Alberta Health ID" Foreground="DarkGray">
+                                    <TextBlock.Style>
+                                        <Style TargetType="{x:Type TextBlock}">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Text, ElementName=SearchTermTextBox}" Value="">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                    <ListView BorderThickness="0" Name="quickView" Background="#f9fafb"  ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible" d:ItemsSource="{d:SampleData ItemCount=12}" DockPanel.Dock="Bottom">
+                        <ListView.Style>
+                            <Style TargetType="ListView">
+                                <Style.Triggers>
+                                    <Trigger Property="HasItems"
+                         Value="False">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="ListView">
+                                                    <Grid>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="3*" />
+                                                            <RowDefinition Height="2*" />
+                                                        </Grid.RowDefinitions>
+                                                        <StackPanel Grid.Row="1">
+                                                            <TextBlock TextAlignment="Center" Grid.Row="0" FontSize="24" Foreground="#6b7280" FontWeight="Medium">It's a chill day!</TextBlock>
+                                                            <TextBlock TextAlignment="Center" Grid.Row="1" Foreground="#6b7280">No appointments have been booked for this day.</TextBlock>
+                                                        </StackPanel>
+                                                        <Border Padding="20">
+                                                            <Image Source="/empty-list.png" Grid.Row="0" Width="{Binding ActualWidth, ElementName=Tb}" />
+                                                        </Border>
+                                                    </Grid>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ListView.Style>
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalAlignment" Value="Stretch" />
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Border Padding="4 10" BorderThickness="0 0 0 1" BorderBrush="#d1d5db">
+                                        <StackPanel>
+                                            <TextBlock FontSize="16" FontWeight="Medium" Text="{Binding FullName}"></TextBlock>
+                                            <TextBlock FontSize="16" Foreground="#6b7280">
+                                                <TextBlock.Text>
+                                                    <MultiBinding StringFormat="{}{0} w/ {1}">
+                                                        <Binding Path="StartEnd" />
+                                                        <Binding Path="Doctor" />
+                                                    </MultiBinding>
+                                                </TextBlock.Text>
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </Border>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </DockPanel>
+                <Border.Effect>
+                    <DropShadowEffect Opacity="0.06" Direction="270" BlurRadius="4" ShadowDepth="2"/>
+                </Border.Effect>
+            </Border>
+        </Grid>
+    </Grid>
+</Page>
