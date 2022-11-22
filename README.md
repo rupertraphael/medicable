@@ -4,7 +4,7 @@
 This repository is made for team medicable's group project for CPSC 481, at the University of Calgary. 
 
 <p align="center">
-  <img width="200" src="https://user-images.githubusercontent.com/69314416/203299989-165d9fe1-022d-4612-847b-61fbfd914646.png">
+  <img width="300" src="https://user-images.githubusercontent.com/69314416/203300269-3897dcd0-b0d5-47a8-8700-5d6ac6043490.png">
 </p>
 
 ## Team Members
