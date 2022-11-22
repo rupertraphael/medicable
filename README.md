@@ -40,12 +40,12 @@ Interface will be catered only to front-line workers or receptionists, and patie
 We are developing a medical appointment booking system for front-line workers at medical clinics. Hence, the system will be primarily used by frontline medical staff, such as nurses, doctors and especially, receptionists. 
 
 We expect the users to:
-– have computer literacy,
-– be accustomed to using medical terms, 
-– be familiar with the clinic, and
-– be authorized to use the system.
+- have computer literacy,
+- be accustomed to using medical terms, 
+- be familiar with the clinic, and
+- be authorized to use the system.
 
-Patients will not be the ones directly interacting with the interface.
+**Patients will not be the ones directly interacting with the interface.**
 
 
 ## Work Contexts
