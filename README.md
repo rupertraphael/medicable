@@ -2,8 +2,9 @@
 
 ### CPSC 481, Human-Computer Interaction, Fall 2022.
 This repository is made for team medicable's group project for CPSC 481, at the University of Calgary. 
+
 <p align="center">
-  <img width="460" src="https://user-images.githubusercontent.com/69314416/203297837-6fbb74e8-297a-483e-bd3c-f977c7dd48d6.png">
+  <img width="200" src="https://user-images.githubusercontent.com/69314416/203299989-165d9fe1-022d-4612-847b-61fbfd914646.png">
 </p>
 
 ## Team Members
