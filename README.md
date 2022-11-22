@@ -1,5 +1,5 @@
 ## medicable - Medical Appointment Scheduling System
-## CPSC 481, Human-Computer Interaction, Fall 2022. 
+## CPSC 481, Human-Computer Interaction, Fall 2022. ##
 This repository is made for team medicable's group project for CPSC 481, at the University of Calgary. 
                             ![image](https://user-images.githubusercontent.com/69314416/203294588-825ed1ea-d964-4fa6-9027-5c7ee9571f05.png)
 
