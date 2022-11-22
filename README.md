@@ -1,7 +1,8 @@
 ## medicable - Medical Appointment Scheduling System
 ### CPSC 481, Human-Computer Interaction, Fall 2022.
 This repository is made for team medicable's group project for CPSC 481, at the University of Calgary. 
-![MEDICABLE (3)](https://user-images.githubusercontent.com/69314416/203297258-b019e00f-d74e-4f6c-8f51-7665dac37450.png)
+!![MEDICABLE (3)](https://user-images.githubusercontent.com/69314416/203297620-d6891f63-d214-4342-b426-42954814d25d.png)
+
 
 ### Background Environment
 A medium-sized medical clinic with multiple doctors for various specializations on-site, has contracted our firm, Medicable, to build a new, more efficient interface for their medical appointment booking system. Their clinic used to be small, and they already had a system in place for scheduling appointments. However, after a recent expansion, they are now big enough to necessitate a better system because their current system cannot handle the volume of patients.
