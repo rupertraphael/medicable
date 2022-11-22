@@ -26,10 +26,6 @@ namespace WpfApp1
         {
             InitializeComponent();
 
-            MainNavWindow.Source = new Uri("Calendar.xaml", UriKind.Relative);
-
-
-
         }
 
         public class Appointment
@@ -102,6 +98,22 @@ namespace WpfApp1
                 _end = end;
                 _doctor = doctor;
             }
+        }
+
+        private void Dashboard_Button_Click(object sender, RoutedEventArgs e)
+        {
+            Dashboard_Button.Background = (new BrushConverter()).ConvertFromString("#1e40af") as Brush;
+            Patients_Button.Background = (new BrushConverter()).ConvertFromString("#1d4ed8") as Brush;
+            Patients_Button.FontWeight = FontWeights.Regular;
+            MainNavWindow.Source = new Uri("Dashboard.xaml", UriKind.Relative);
+        }
+
+        private void Patients_Button_Click(object sender, RoutedEventArgs e)
+        {
+            Patients_Button.Background = (new BrushConverter()).ConvertFromString("#1e40af") as Brush;
+            Dashboard_Button.Background = (new BrushConverter()).ConvertFromString("#1d4ed8") as Brush;
+            Dashboard_Button.FontWeight = FontWeights.Regular;
+            MainNavWindow.Source = new Uri("Patients.xaml", UriKind.Relative);
         }
     }
 }

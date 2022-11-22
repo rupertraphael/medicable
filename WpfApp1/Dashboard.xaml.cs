@@ -36,5 +36,13 @@ namespace WpfApp1
             InitializeComponent();
             quickView.ItemsSource = appointments;
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService ns = NavigationService.GetNavigationService(this);
+            ns.Navigate(new Uri("Patients.xaml", UriKind.Relative));
+        }
     }
+
+
 }
