@@ -38,12 +38,6 @@
                         </Grid.ColumnDefinitions>
                         <Button Padding="5,1" BorderThickness="0" Background="#1e40af" Foreground="#eff6ff" FontWeight="Bold">Patients</Button>
                     </Grid>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition SharedSizeGroup="MySizeGroup" />
-                        </Grid.ColumnDefinitions>
-                        <Button Padding="5,1" BorderThickness="0" Background="#1d4ed8" Foreground="#eff6ff">Calendar</Button>
-                    </Grid>
                 </StackPanel>
             </Grid>
         </Grid>
@@ -71,14 +65,14 @@
             <TextBox HorizontalAlignment="Left" Margin="265,104,0,0" TextWrapping="Wrap" Text="(403)-555-1112" VerticalAlignment="Top" Width="97"/>
             <Label Content="Address" HorizontalAlignment="Left" Margin="14,133,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.86,0.262"/>
             <TextBox HorizontalAlignment="Left" Margin="16,159,0,0" TextWrapping="Wrap" Text="301, 36 St., NW T3L 5PC" VerticalAlignment="Top" Width="214"/>
-            <Button Background="#1d4ed8" Padding="9" Foreground="#eff6ff" Margin="263,142,28,214">
+            <Button Background="#1d4ed8" Padding="9" Foreground="#eff6ff" Margin="263,142,28,214" Click="HealthHistoryDialog">
                 <TextBlock Text="Health History"/>
             </Button>
             <Label Content="Upcoming Appointments" HorizontalAlignment="Center" Margin="0,222,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.86,0.262" FontSize="16"/>
             <ListBox HorizontalAlignment="Left" Height="68" Margin="51,251,0,0" VerticalAlignment="Top" Width="284" d:ItemsSource="{d:SampleData ItemCount=0}"/>
             <Label Content="Preferred Doctor" HorizontalAlignment="Left" Margin="13,177,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.86,0.262"/>
             <TextBox HorizontalAlignment="Left" Margin="18,199,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="97"/>
-            <Button Background="#1d4ed8" Padding="9" Foreground="#eff6ff" Margin="219,187,28,168">
+            <Button Background="#1d4ed8" Padding="1" Foreground="#eff6ff" Margin="219,187,28,168" Click="PastAppointmentsDialog">
                 <TextBlock Text="Past Appointments"/>
             </Button>
             <Label Content="Dr. Rupert @ 10:30 AM, November 10, 2022" HorizontalAlignment="Left" Margin="60,253,0,0" VerticalAlignment="Top" RenderTransformOrigin="17.687,6.342"/>

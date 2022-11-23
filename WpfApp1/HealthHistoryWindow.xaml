@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="HealthHistoryWindow" Height="200" Width="300">
+        Title="HealthHistoryWindow" Height="250" Width="350"
+        WindowStartupLocation="CenterOwner">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="48*"/>
@@ -29,9 +30,9 @@
         <Label Content="Upcoming Appointments" HorizontalAlignment="Left" Margin="238,241,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.Column="2" RenderTransformOrigin="0.86,0.262" FontSize="16"/>
         <ListBox Grid.Column="2" HorizontalAlignment="Left" Height="68" Margin="196,277,0,0" Grid.Row="1" VerticalAlignment="Top" Width="284" d:ItemsSource="{d:SampleData ItemCount=0}"/>
         <Label Content="Health History" HorizontalAlignment="Left" Margin="5,-6,0,0" VerticalAlignment="Top" Grid.Column="2" Foreground="White" Grid.RowSpan="2"/>
-        <Label Content="Allergy Information" HorizontalAlignment="Left" Margin="11,10,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.ColumnSpan="3"/>
-        <Label Content="Conditions" HorizontalAlignment="Left" Margin="11,78,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.ColumnSpan="3"/>
-        <TextBox Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="37" Margin="16,37,0,0" Grid.Row="1" TextWrapping="Wrap" Text="N/A" VerticalAlignment="Top" Width="268" VerticalScrollBarVisibility="Visible"/>
-        <TextBox Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="37" Margin="16,109,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Joint pains" VerticalAlignment="Top" Width="268" VerticalScrollBarVisibility="Visible"/>
+        <Label Content="Allergy Information" HorizontalAlignment="Left" Margin="15,21,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.Column="1"/>
+        <Label Content="Conditions" HorizontalAlignment="Center" Margin="0,89,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.Column="1"/>
+        <TextBox Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="37" Margin="20,48,0,0" Grid.Row="1" TextWrapping="Wrap" Text="N/A" VerticalAlignment="Top" Width="268" VerticalScrollBarVisibility="Visible" Grid.Column="1"/>
+        <TextBox Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="37" Margin="20,120,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Joint pains" VerticalAlignment="Top" Width="268" VerticalScrollBarVisibility="Visible" Grid.Column="1"/>
     </Grid>
 </Window>

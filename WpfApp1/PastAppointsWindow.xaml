@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="PastAppointsWindow" Height="200" Width="300">
+        Title="PastAppointsWindow" Height="250" Width="350"
+        WindowStartupLocation="CenterOwner">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="48*"/>
@@ -28,9 +29,9 @@
         </Grid>
         <Label Content="Upcoming Appointments" HorizontalAlignment="Left" Margin="238,241,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.Column="2" RenderTransformOrigin="0.86,0.262" FontSize="16"/>
         <ListBox Grid.Column="2" HorizontalAlignment="Left" Height="68" Margin="196,277,0,0" Grid.Row="1" VerticalAlignment="Top" Width="284" d:ItemsSource="{d:SampleData ItemCount=0}"/>
-        <Label Content="Past Appointments" HorizontalAlignment="Left" Margin="77,-6,0,0" VerticalAlignment="Top" Grid.Column="1" Grid.ColumnSpan="2" Foreground="White"/>
-        <Rectangle Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="146" Margin="10,0,0,0" Grid.Row="1" Stroke="Black" VerticalAlignment="Center" Width="280"/>
-        <Label Content="Dr. Amr @ 12:00 PM, September 17, 2022" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="238" Grid.Column="1"/>
-        <Label Content="Dr. Araiz @ 5:00 PM, March 30, 2022" HorizontalAlignment="Left" Margin="10,41,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="238" Grid.Column="1"/>
+        <Label Content="Past Appointments" HorizontalAlignment="Left" Margin="0,-6,0,0" VerticalAlignment="Top" Grid.Column="2" Foreground="White"/>
+        <Rectangle Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="146" Margin="14,23,0,0" Grid.Row="1" Stroke="Black" VerticalAlignment="Top" Width="280" Grid.Column="1"/>
+        <Label Content="Dr. Amr @ 12:00 PM, September 17, 2022" HorizontalAlignment="Left" Margin="35,31,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="238" Grid.Column="1"/>
+        <Label Content="Dr. Araiz @ 5:00 PM, March 30, 2022" HorizontalAlignment="Left" Margin="35,62,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="238" Grid.Column="1"/>
     </Grid>
 </Window>
