@@ -32,7 +32,6 @@ namespace WpfApp1
         {
             private string _firstName;
             private string _lastName;
-            private int _day;
             private string _start;
             private string _end;
             private string _doctor;
@@ -48,12 +47,6 @@ namespace WpfApp1
             {
                 get { return _lastName; }
                 set { _lastName = value; }
-            }
-
-            public int Day
-            {
-                get { return _day; }
-                set { _day = value; }
             }
 
             public string Start
@@ -86,14 +79,12 @@ namespace WpfApp1
             public Appointment(
                 string firstname,
                 string lastname,
-                int day,
                 string start,
                 string end,
                 string doctor)
             {
                 _firstName = firstname;
                 _lastName = lastname;
-                _day = day;
                 _start = start;
                 _end = end;
                 _doctor = doctor;
