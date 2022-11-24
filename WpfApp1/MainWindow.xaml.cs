@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Diagnostics;
 
 namespace WpfApp1
 {
@@ -22,10 +23,23 @@ namespace WpfApp1
 
     public partial class MainWindow : Window
     {
+        private Dictionary<string, Page> pages = new Dictionary<string, Page>();
+
         public MainWindow()
         {
+            // initialize pages
+            this.pages["dashboard"] = new Dashboard();
+            this.pages["patients"] = new Patients();
+
             InitializeComponent();
 
+            MainNavFrame.LoadCompleted += MainNavFrame_LoadCompleted;
+
+        }
+
+        private void MainNavFrame_LoadCompleted(object sender, NavigationEventArgs e)
+        {
+            Trace.WriteLine(sender.ToString());
         }
 
         public class Appointment
@@ -96,7 +110,10 @@ namespace WpfApp1
             Dashboard_Button.Background = (new BrushConverter()).ConvertFromString("#1e40af") as Brush;
             Patients_Button.Background = (new BrushConverter()).ConvertFromString("#1d4ed8") as Brush;
             Patients_Button.FontWeight = FontWeights.Regular;
-            MainNavWindow.Source = new Uri("Dashboard.xaml", UriKind.Relative);
+
+            //MainNavFrame.Source = new Uri("Dashboard.xaml", UriKind.Relative);
+
+            MainNavFrame.NavigationService.Navigate(this.pages["dashboard"]);
         }
 
         private void Patients_Button_Click(object sender, RoutedEventArgs e)
@@ -104,7 +121,8 @@ namespace WpfApp1
             Patients_Button.Background = (new BrushConverter()).ConvertFromString("#1e40af") as Brush;
             Dashboard_Button.Background = (new BrushConverter()).ConvertFromString("#1d4ed8") as Brush;
             Dashboard_Button.FontWeight = FontWeights.Regular;
-            MainNavWindow.Source = new Uri("Patients.xaml", UriKind.Relative);
+
+            MainNavFrame.NavigationService.Navigate(this.pages["patients"]);
         }
     }
 }

@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static WpfApp1.MainWindow;
+using System.Diagnostics;
 
 namespace WpfApp1
 {
@@ -55,7 +56,7 @@ namespace WpfApp1
         private void Book_Existing_Patient_Click(object sender, RoutedEventArgs e)
         {
             NavigationService ns = NavigationService.GetNavigationService(this);
-            ns.Navigate(new Uri("Patients.xaml", UriKind.Relative));
+            ns.Navigate(new Uri("Patients.xaml", UriKind.Relative), "patients");
         }
 
         private void Quickview_Next(object sender, RoutedEventArgs e)
@@ -86,6 +87,15 @@ namespace WpfApp1
             {
                 quickViewSubtitle.Text = "Appointments for ";
             }
+        }
+
+        private void NavigationService_LoadCompleted(object sender, NavigationEventArgs e)
+        {
+            string str = (string)e.ExtraData;
+
+            Trace.WriteLine("navigated to dashboard!");
+
+            // do whatever with str, like assign to a view model field, etc.
         }
     }
 
