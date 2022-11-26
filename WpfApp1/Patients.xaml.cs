@@ -24,5 +24,18 @@ namespace WpfApp1
         {
             InitializeComponent();
         }
+
+        private void OnKeyDownHandler(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                SearchBar.Text = "You Entered: " + SearchBar.Text;
+            }
+        }
+
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

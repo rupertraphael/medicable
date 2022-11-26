@@ -97,6 +97,11 @@ namespace WpfApp1
 
             // do whatever with str, like assign to a view model field, etc.
         }
+
+        private void quickView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 
 

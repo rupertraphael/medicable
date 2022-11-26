@@ -49,8 +49,8 @@
                 </StackPanel>
             </Grid>
         </Grid>
-        <TextBox Grid.ColumnSpan="3" HorizontalAlignment="Left" Margin="10,35,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="390" Text="Linda Walsh"/>
-        <ListView Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=1}" Margin="10,69,400,20" Grid.ColumnSpan="3" ScrollViewer.VerticalScrollBarVisibility="Visible" FontWeight="Bold">
+        <TextBox Grid.ColumnSpan="3" HorizontalAlignment="Left" Margin="10,35,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="390" KeyDown="OnKeyDownHandler" Name="SearchBar"/>
+        <ListView Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=1}" Margin="10,69,400,20" Grid.ColumnSpan="3" ScrollViewer.VerticalScrollBarVisibility="Visible" FontWeight="Bold" SelectionChanged="ListView_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="160" Header="Name" DisplayMemberBinding="{Binding Linda Walsh}"/>
