@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static WpfApp1.MainWindow;
 
 namespace WpfApp1
 {
@@ -23,6 +24,12 @@ namespace WpfApp1
         public Patients()
         {
             InitializeComponent();
+
+            List <APatient> patientList = new List <APatient>();
+            patientList.Add(new APatient("Scott Turner", "(403) - 555 - 1430", "13256-1231", "", "", ""));
+            patientList.Add(new APatient("Rosy Usher", "(403)-555-6122 ", "11661-1209", "", "", ""));
+            patientList.Add(new APatient("Linda Walsh", "(403)-555-1112", "15671-1200", "", "", ""));
+            patientList.Add(new APatient("Albert Zander", "(403)-555-1430", "13112-1764", "", "", ""));
         }
 
         private void OnKeyDownHandler(object sender, KeyEventArgs e)
