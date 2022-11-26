@@ -46,7 +46,7 @@
                 </StackPanel>
             </Grid>
         </Grid>
-        <Frame Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="1" Name="MainNavFrame" Source="Calendar.xaml" NavigationUIVisibility="Hidden"></Frame>
+        <Frame Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="1" Name="MainNavFrame" NavigationUIVisibility="Hidden"></Frame>
         
     </Grid>
 </Window>
