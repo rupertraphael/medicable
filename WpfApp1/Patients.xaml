@@ -1,0 +1,92 @@
+﻿<Page x:Class="WpfApp1.Patients"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApp1"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Patients">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="48*"/>
+            <ColumnDefinition Width="223*"/>
+            <ColumnDefinition Width="529*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="9*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.ColumnSpan="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="10*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1" Background="#1d4ed8">
+                <TextBlock Padding="10" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#eff6ff" FontWeight="Bold">Clinic Name</TextBlock>
+            </Grid>
+            <Grid Grid.Column="1" Grid.Row="0" Background="#1d4ed8">
+                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Grid.IsSharedSizeScope="True">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition SharedSizeGroup="MySizeGroup" />
+                        </Grid.ColumnDefinitions>
+                        <Button Padding="14" BorderThickness="0" Background="#1d4ed8" Foreground="#eff6ff">Dashboard</Button>
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition SharedSizeGroup="MySizeGroup" />
+                        </Grid.ColumnDefinitions>
+                        <Button Padding="5,1" BorderThickness="0" Background="#1e40af" Foreground="#eff6ff" FontWeight="Bold">Patients</Button>
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition SharedSizeGroup="MySizeGroup" />
+                        </Grid.ColumnDefinitions>
+                        <Button Padding="5,1" BorderThickness="0" Background="#1d4ed8" Foreground="#eff6ff">Calendar</Button>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </Grid>
+        <TextBox Grid.ColumnSpan="3" HorizontalAlignment="Left" Margin="10,35,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="390" Text="Linda Walsh"/>
+        <ListView Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=1}" Margin="10,69,400,20" Grid.ColumnSpan="3" ScrollViewer.VerticalScrollBarVisibility="Visible" FontWeight="Bold">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="160" Header="Name" DisplayMemberBinding="{Binding Linda Walsh}"/>
+                    <GridViewColumn Width="100" Header="Phone #" DisplayMemberBinding="{Binding (403)-555-1112}" />
+                    <GridViewColumn Width="100" Header="Health Care #" DisplayMemberBinding="{Binding 15671-1200}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Label Grid.Column="2" Content="Linda Walsh" HorizontalAlignment="Left" Margin="144,25,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="22"/>
+        <Rectangle Grid.Column="2" HorizontalAlignment="Left" Height="301" Margin="144,70,10,20" Grid.Row="1" Stroke="Black" VerticalAlignment="Top" Width="375"/>
+        <Rectangle Grid.Column="2" HorizontalAlignment="Left" Height="45" Margin="144,25,0,0" Grid.Row="1" Stroke="Black" VerticalAlignment="Top" Width="375"/>
+        <Label Content="Health Care ID" HorizontalAlignment="Left" Margin="153,75,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.Column="2" RenderTransformOrigin="0.86,0.262"/>
+        <TextBox HorizontalAlignment="Left" Margin="155,101,0,0" Grid.Row="1" TextWrapping="Wrap" Text="15671-1200" VerticalAlignment="Top" Width="77" Grid.Column="2"/>
+        <Label Content="Date of Birth" HorizontalAlignment="Left" Margin="280,75,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.Column="2" RenderTransformOrigin="0.86,0.262"/>
+        <TextBox HorizontalAlignment="Left" Margin="282,101,0,0" Grid.Row="1" TextWrapping="Wrap" Text="1982/05/11" VerticalAlignment="Top" Width="75" Grid.Column="2"/>
+        <Label Content="Telephone #" HorizontalAlignment="Left" Margin="402,75,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.Column="2" RenderTransformOrigin="0.86,0.262"/>
+        <TextBox HorizontalAlignment="Left" Margin="404,101,0,0" Grid.Row="1" TextWrapping="Wrap" Text="(403)-555-1112" VerticalAlignment="Top" Width="97" Grid.Column="2"/>
+        <Label Content="Address" HorizontalAlignment="Left" Margin="153,130,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.Column="2" RenderTransformOrigin="0.86,0.262"/>
+        <TextBox HorizontalAlignment="Left" Margin="155,156,0,0" Grid.Row="1" TextWrapping="Wrap" Text="301, 36 St., NW T3L 5PC" VerticalAlignment="Top" Width="214" Grid.Column="2"/>
+        <Button Background="#1d4ed8" Padding="9" Foreground="#eff6ff" Margin="402,139,28,217" Grid.Column="2" Grid.Row="1">
+            <TextBlock Text="Health History"/>
+        </Button>
+        <Label Content="Upcoming Appointments" HorizontalAlignment="Left" Margin="239,219,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.Column="2" RenderTransformOrigin="0.86,0.262" FontSize="16"/>
+        <ListBox Grid.Column="2" HorizontalAlignment="Left" Height="68" Margin="190,248,0,0" Grid.Row="1" VerticalAlignment="Top" Width="284" d:ItemsSource="{d:SampleData ItemCount=0}"/>
+        <Label Content="Preferred Doctor" HorizontalAlignment="Left" Margin="152,174,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.Column="2" RenderTransformOrigin="0.86,0.262"/>
+        <TextBox HorizontalAlignment="Left" Margin="157,196,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="97" Grid.Column="2"/>
+        <Button Background="#1d4ed8" Padding="9" Foreground="#eff6ff" Margin="358,184,28,171" Grid.Column="2" Grid.Row="1">
+            <TextBlock Text="Past Appointments"/>
+        </Button>
+        <Label Content="Dr. Rupert @ 10:30 AM, November 10, 2022" HorizontalAlignment="Left" Margin="199,250,0,0" Grid.Row="1" VerticalAlignment="Top" RenderTransformOrigin="17.687,6.342" Grid.Column="2"/>
+        <Label Content="Scott Turner                             (403)-555-1430      13256-1231" HorizontalAlignment="Left" Margin="15,110,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.ColumnSpan="3" Width="363"/>
+        <Label Content="Rosy Usher                               (403)-555-6122      11661-1209" HorizontalAlignment="Left" Margin="15,136,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.ColumnSpan="3" Width="363"/>
+        <Label Content="Linda Walsh                           (403)-555-1112     15671-1200" HorizontalAlignment="Left" Margin="15,161,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.ColumnSpan="3" Width="363" FontWeight="Bold"/>
+        <Label Content="Albert Zander                           (403)-555-1430     13112-1764" HorizontalAlignment="Left" Margin="15,187,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.ColumnSpan="3" Width="363"/>
+        <Button Background="#1d4ed8" Padding="9" Foreground="#eff6ff" Margin="260,324,126,31" Grid.Column="2" Grid.Row="1">
+            <TextBlock Text="Book Appointment"/>
+        </Button>
+    </Grid>
+</Page>
