@@ -35,8 +35,9 @@
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Column="0" Grid.Row="0" VerticalAlignment="Center">
                     <ComboBox FontSize="20" Background="#f9fafb" Margin="8 4">
-                        <ComboBoxItem IsSelected="True" Background="#f9fafb">October 2022</ComboBoxItem>
                         <ComboBoxItem Background="#f9fafb">November 2022</ComboBoxItem>
+                        <ComboBoxItem IsSelected="True" Background="#f9fafb">December 2022</ComboBoxItem>
+                        <ComboBoxItem Background="#f9fafb">January 2023</ComboBoxItem>
                     </ComboBox>
                     <ComboBox FontSize="14" Background="#f9fafb" Margin="8 4">
                         <ComboBoxItem IsSelected="True" Background="#f9fafb">

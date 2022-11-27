@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Diagnostics;
 
 namespace WpfApp1
 {
@@ -22,21 +23,98 @@ namespace WpfApp1
 
     public partial class MainWindow : Window
     {
+        private Dictionary<string, Page> pages = new Dictionary<string, Page>();
+
         public MainWindow()
         {
+            // initialize pages
+            this.pages["dashboard"] = new Dashboard();
+            this.pages["patients"] = new Patients();
+
             InitializeComponent();
 
-            MainNavWindow.Source = new Uri("Calendar.xaml", UriKind.Relative);
-
-
+            MainNavFrame.LoadCompleted += MainNavFrame_LoadCompleted;
 
         }
+
+        private void MainNavFrame_LoadCompleted(object sender, NavigationEventArgs e)
+        {
+            Trace.WriteLine(sender.ToString());
+        }
+
+        public class APatient
+        {
+            private string _patientName;
+            private string _patientPhoneNumber;
+            private string _patientHealthCareNumber;
+            private string _patientDOB;
+            private string _patientAddress;
+            private string _patientPreferredDoctor;
+
+            public string PatientName
+            {
+                get { return _patientName; }
+                set { _patientName = value; }
+            }
+
+            public string PatientPhoneNumber
+            {
+                get { return _patientPhoneNumber; }
+                set { _patientPhoneNumber = value; }
+            }
+
+            public string PatientHealthCareNumber
+            {
+                get { return _patientHealthCareNumber; }
+                set { _patientHealthCareNumber = value; }
+            }
+
+            public string PatientDOB
+            {
+                get { return _patientDOB; }
+                set { _patientDOB = value; }
+            }
+
+            public string PersonAddress
+            {
+                get { return _patientAddress; }
+                set { _patientAddress = value; }
+            }
+
+            public string PatientPreferredDoctor
+            {
+                get { return _patientPreferredDoctor; }
+                set { _patientPreferredDoctor = value; }
+            }
+
+            public override string ToString()
+            {
+                return this.PatientName;
+            }
+
+            public APatient(
+                string patientName,
+                string patientPhoneNumber,
+                string patientHealthCareNumber,
+                string patientDOB,
+                string patientAddress,
+                string patientPreferredDoctor)
+            {
+                _patientName = patientName;
+                _patientPhoneNumber = patientPhoneNumber;
+                _patientHealthCareNumber = patientHealthCareNumber;
+                _patientDOB = patientDOB;
+                _patientAddress = patientAddress;
+                _patientPreferredDoctor = patientPreferredDoctor;
+            }
+
+        }
+
 
         public class Appointment
         {
             private string _firstName;
             private string _lastName;
-            private int _day;
             private string _start;
             private string _end;
             private string _doctor;
@@ -52,12 +130,6 @@ namespace WpfApp1
             {
                 get { return _lastName; }
                 set { _lastName = value; }
-            }
-
-            public int Day
-            {
-                get { return _day; }
-                set { _day = value; }
             }
 
             public string Start
@@ -90,18 +162,36 @@ namespace WpfApp1
             public Appointment(
                 string firstname,
                 string lastname,
-                int day,
                 string start,
                 string end,
                 string doctor)
             {
                 _firstName = firstname;
                 _lastName = lastname;
-                _day = day;
                 _start = start;
                 _end = end;
                 _doctor = doctor;
             }
+        }
+
+        private void Dashboard_Button_Click(object sender, RoutedEventArgs e)
+        {
+            Dashboard_Button.Background = (new BrushConverter()).ConvertFromString("#1e40af") as Brush;
+            Patients_Button.Background = (new BrushConverter()).ConvertFromString("#1d4ed8") as Brush;
+            Patients_Button.FontWeight = FontWeights.Regular;
+
+            //MainNavFrame.Source = new Uri("Dashboard.xaml", UriKind.Relative);
+
+            MainNavFrame.NavigationService.Navigate(this.pages["dashboard"]);
+        }
+
+        private void Patients_Button_Click(object sender, RoutedEventArgs e)
+        {
+            Patients_Button.Background = (new BrushConverter()).ConvertFromString("#1e40af") as Brush;
+            Dashboard_Button.Background = (new BrushConverter()).ConvertFromString("#1d4ed8") as Brush;
+            Dashboard_Button.FontWeight = FontWeights.Regular;
+
+            MainNavFrame.NavigationService.Navigate(this.pages["patients"]);
         }
     }
 }

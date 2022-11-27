@@ -21,7 +21,7 @@
             <RowDefinition Height="1*"></RowDefinition>
             <RowDefinition Height="9*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid>
+        <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"></ColumnDefinition>
                 <ColumnDefinition Width="10*"></ColumnDefinition>
@@ -35,24 +35,18 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition SharedSizeGroup="MySizeGroup" />
                         </Grid.ColumnDefinitions>
-                        <Button Padding="14" BorderThickness="0" Background="#1e40af" Foreground="#eff6ff" FontWeight="Bold">Dashboard</Button>
+                        <Button Padding="14" BorderThickness="0" Background="#1e40af" Foreground="#eff6ff" FontWeight="Bold" Click="Dashboard_Button_Click" Name="Dashboard_Button">Dashboard</Button>
                     </Grid>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition SharedSizeGroup="MySizeGroup" />
                         </Grid.ColumnDefinitions>
-                        <Button Padding="5,1" BorderThickness="0" Background="#1d4ed8" Foreground="#eff6ff">Patients</Button>
-                    </Grid>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition SharedSizeGroup="MySizeGroup" />
-                        </Grid.ColumnDefinitions>
-                        <Button Padding="5,1" BorderThickness="0" Background="#1d4ed8" Foreground="#eff6ff">Calendar</Button>
+                        <Button Padding="5,1" BorderThickness="0" Background="#1d4ed8" Foreground="#eff6ff" Click="Patients_Button_Click" Name="Patients_Button">Patients</Button>
                     </Grid>
                 </StackPanel>
             </Grid>
         </Grid>
-        <Frame Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="1" Name="MainNavWindow"></Frame>
+        <Frame Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="1" Name="MainNavFrame" Source="Calendar.xaml" NavigationUIVisibility="Hidden"></Frame>
         
     </Grid>
 </Window>
