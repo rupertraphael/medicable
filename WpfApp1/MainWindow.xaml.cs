@@ -43,8 +43,8 @@ namespace WpfApp1
 
             InitializeComponent();
 
-            MainNavFrame.NavigationService.Navigate(this.DashboardPage);
-            this.DashboardPage.Loaded += DashboardPage_Loaded;
+            //MainNavFrame.NavigationService.Navigate(this.DashboardPage);
+            //this.DashboardPage.Loaded += DashboardPage_Loaded;
 
             MainNavFrame.LoadCompleted += MainNavFrame_LoadCompleted;
 

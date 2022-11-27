@@ -34,9 +34,9 @@
                     <RowDefinition Height="Auto"></RowDefinition>
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Column="0" Grid.Row="0" VerticalAlignment="Center">
-                    <ComboBox FontSize="20" Background="#f9fafb" Margin="8 4">
+                    <ComboBox FontSize="20" Background="#f9fafb" Margin="8 4" Name="SelectedMonth" SelectedValuePath="Content" DropDownClosed="setPageByMonth">
                         <ComboBoxItem Background="#f9fafb">November 2022</ComboBoxItem>
-                        <ComboBoxItem IsSelected="True" Background="#f9fafb">December 2022</ComboBoxItem>
+                        <ComboBoxItem Background="#f9fafb">December 2022</ComboBoxItem>
                         <ComboBoxItem Background="#f9fafb">January 2023</ComboBoxItem>
                     </ComboBox>
                     <ComboBox FontSize="14" Background="#f9fafb" Margin="8 4">
@@ -51,16 +51,16 @@
 
                 <WrapPanel Grid.Column="2" Grid.Row="0" VerticalAlignment="Center">
                     <Border BorderThickness="1" Margin="4" BorderBrush="#1d4ed8" CornerRadius="2">
-                        <Button Content="&lt;" Padding="16 8" Background="#1d4ed8" Foreground="#eff6ff" BorderThickness="0" FontWeight="Bold" FontSize="16"></Button>
+                        <Button Content="&lt;" Padding="16 8" Background="#1d4ed8" Foreground="#eff6ff" BorderThickness="0" FontWeight="Bold" FontSize="16" Click="PreviousWeek"></Button>
                     </Border>
                     <Border BorderThickness="1" Margin="4" BorderBrush="#1d4ed8" CornerRadius="2">
-                        <Button Content="&gt;" Padding="16 8" Background="#1d4ed8" Foreground="#eff6ff" BorderThickness="0" FontWeight="Bold" FontSize="16"></Button>
+                        <Button Content="&gt;" Padding="16 8" Background="#1d4ed8" Foreground="#eff6ff" BorderThickness="0" FontWeight="Bold" FontSize="16" Click="NextWeek"></Button>
                     </Border>
                     <Border BorderThickness="1" Margin="8 4" BorderBrush="#1d4ed8" CornerRadius="2">
-                        <Button Content="Book Appointment" Padding="16 8" Background="#1d4ed8" Foreground="#eff6ff" BorderThickness="0" FontWeight="Bold" FontSize="16"></Button>
+                        <Button Content="Select Appointment Slot" Padding="16 8" Background="#1d4ed8" Foreground="#eff6ff" BorderThickness="0" FontWeight="Bold" FontSize="16"></Button>
                     </Border>
                 </WrapPanel>
-                <Grid Grid.Row="1" Grid.ColumnSpan="3">
+                <Grid Grid.Row="1" Grid.ColumnSpan="3" Name="CalendarDaysRow">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.5*"></ColumnDefinition>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -69,43 +69,8 @@
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Border Grid.Column="1">
-                        <WrapPanel HorizontalAlignment="Center">
-                            <TextBlock Padding="2">Mon</TextBlock>
-                            <TextBlock FontWeight="Bold" Padding="2">7</TextBlock>
-                        </WrapPanel>
-                    </Border>
-                    <Border Grid.Column="2">
-                        <WrapPanel HorizontalAlignment="Center">
-                            <TextBlock Padding="2">Tue</TextBlock>
-                            <TextBlock FontWeight="Bold" Padding="2">8</TextBlock>
-                        </WrapPanel>
-                    </Border>
-                    <Border Grid.Column="3">
-                        <WrapPanel HorizontalAlignment="Center">
-                            <TextBlock Padding="2">Wed</TextBlock>
-                            <TextBlock FontWeight="Bold" Padding="2">9</TextBlock>
-                        </WrapPanel>
-                    </Border>
-                    <Border Grid.Column="4">
-                        <WrapPanel HorizontalAlignment="Center">
-                            <TextBlock Padding="2">Thu</TextBlock>
-                            <TextBlock FontWeight="Bold" Padding="2">10</TextBlock>
-                        </WrapPanel>
-                    </Border>
-                    <Border Grid.Column="5">
-                        <WrapPanel HorizontalAlignment="Center">
-                            <TextBlock Padding="2">Fri</TextBlock>
-                            <TextBlock FontWeight="Bold" Padding="2">11</TextBlock>
-                        </WrapPanel>
-                    </Border>
-                    <Border Grid.Column="6">
-                        <WrapPanel HorizontalAlignment="Center">
-                            <TextBlock Padding="2">Sat</TextBlock>
-                            <TextBlock FontWeight="Bold" Padding="2">12</TextBlock>
-                        </WrapPanel>
-                    </Border>
                 </Grid>
             </Grid>
             <Grid Grid.Row="2">

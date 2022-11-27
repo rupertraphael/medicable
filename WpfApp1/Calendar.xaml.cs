@@ -15,13 +15,84 @@ using System.Windows.Shapes;
 
 namespace WpfApp1
 {
+    public class Appointment
+    {
+        private string _firstName;
+        private string _lastName;
+        private string _doctor;
+        private DateTime _startDate;
+
+
+        public string FirstName
+        {
+            get { return _firstName; }
+            set { _firstName = value; }
+        }
+
+        public string LastName
+        {
+            get { return _lastName; }
+            set { _lastName = value; }
+        }
+
+        public DateTime StartDate
+        {
+            get { return _startDate; }
+            set { _startDate = value; }
+        }
+
+        public DateTime EndDate
+        {
+            get { return _startDate; }
+            set { _startDate = value; }
+        }
+
+        public string FullName
+        {
+            get { return _firstName + " " + _lastName; }
+        }
+
+        public string Doctor
+        {
+            get { return _doctor; }
+        }
+
+        public Appointment(
+            string firstname,
+            string lastname,
+            DateTime startDate,
+            string doctor)
+        {
+            _firstName = firstname;
+            _lastName = lastname;
+            _startDate = startDate;
+            _doctor = doctor;
+        }
+    }
+
     /// <summary>
     /// Interaction logic for Page1.xaml
     /// </summary>
     public partial class Calendar : Page
     {
+
+        List<int> calendarDays = new List<int>();
+        List<string> Days = new List<string>()
+        {
+            "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+        };
+        private int page = 2;
+
         public Calendar()
         {
+            // initialize days being shown on the calendar
+            
+            calendarDays.Add(31); // October 31
+            calendarDays.AddRange(Enumerable.Range(1, 30)); // November
+            calendarDays.AddRange(Enumerable.Range(1, 31)); // December
+            calendarDays.AddRange(Enumerable.Range(1, 31)); // January
+            calendarDays.AddRange(Enumerable.Range(1, 5)); // February
+
 
             List<string> hours = new List<string>();
             hours.Add("9AM");
@@ -33,6 +104,8 @@ namespace WpfApp1
             hours.Add("3PM");
             hours.Add("4PM");
             InitializeComponent();
+
+            SelectedMonth.SelectedValue = getMonthByPage();
 
             int row = 0;
             foreach(string s in hours)
@@ -68,7 +141,7 @@ namespace WpfApp1
                 columns.ColumnDefinitions.Add(hcd);
                 columns.Children.Add(hourCellContainer);
 
-                for (int i = 1; i < 7; i++)
+                for (int i = 0; i < 7; i++)
                 {
                     ColumnDefinition cd = new ColumnDefinition();
                     cd.Width = (GridLength)glc.ConvertFromString("1*");
@@ -78,7 +151,7 @@ namespace WpfApp1
                     Border appointmentCellContainer = new Border();
                     appointmentCellContainer.BorderThickness = new Thickness(0, 0, 1, 0);
                     appointmentCellContainer.BorderBrush = (new BrushConverter()).ConvertFromString("#d1d5db") as Brush;
-                    appointmentCellContainer.SetValue(Grid.ColumnProperty, i);
+                    appointmentCellContainer.SetValue(Grid.ColumnProperty, i+1);
                     for (int j = 0; j < 2; j++)
                     {
                         if ((i * row + (j)) % 3 == 0 || (i * row + (j)) == 9)
@@ -135,8 +208,111 @@ namespace WpfApp1
                 CalendarRows.Children.Add(rowContainer);
             }
 
+            renderCalendarDayRow();
+
 
             
+        }
+
+        private void renderCalendarDayRow()
+        {
+            CalendarDaysRow.Children.Clear();
+
+            Border c = new Border();
+            c.BorderThickness = new Thickness(0, 0, 0, 1);
+            c.BorderBrush = (new BrushConverter()).ConvertFromString("#d1d5db") as Brush;
+            c.Padding = new Thickness(2);
+            c.SetValue(Grid.ColumnProperty, 0);
+            CalendarDaysRow.Children.Add(c);
+
+
+            for (int i = 0; i < Days.Count; i++)
+            {
+                int index = (this.page - 1) * Days.Count + i;
+
+                WrapPanel dayWP = new WrapPanel();
+                dayWP.HorizontalAlignment = HorizontalAlignment.Center;
+
+                TextBlock dayTB = new TextBlock();
+                dayTB.Text = this.Days[i] + " ";
+
+                TextBlock dateTB = new TextBlock();
+                dateTB.Text = this.calendarDays[index].ToString();
+                dateTB.FontWeight = FontWeights.Bold;
+
+                dayWP.Children.Add(dayTB);
+                dayWP.Children.Add(dateTB);
+
+                Border dateContainer = new Border();
+                dateContainer.BorderThickness = new Thickness(0, 0, 0, 1);
+                dateContainer.BorderBrush = (new BrushConverter()).ConvertFromString("#d1d5db") as Brush;
+                dateContainer.Padding = new Thickness(2);
+                dateContainer.Child = dayWP;
+                dateContainer.SetValue(Grid.ColumnProperty, i+1);
+
+                CalendarDaysRow.Children.Add(dateContainer);
+            }
+
+        }
+
+        private void NextWeek(object sender, RoutedEventArgs e)
+        {
+            this.page++;
+
+            if (this.page > this.getMaxPage())
+            {
+                this.page = this.getMaxPage();
+            }
+
+            renderCalendarDayRow();
+            SelectedMonth.SelectedValue = getMonthByPage();
+        }
+
+        private void PreviousWeek(object sender, RoutedEventArgs e)
+        {
+            this.page--;
+
+            if (this.page < 1)
+            {
+                this.page = 1;
+            }
+
+            renderCalendarDayRow();
+            SelectedMonth.SelectedValue = getMonthByPage();
+        }
+
+        private int getMaxPage()
+        {
+            return calendarDays.Count / Days.Count;
+        }
+
+        private string getMonthByPage()
+        {
+            if (page > 9)
+                return "January 2023"; // January
+
+            if (page > 4)
+                return "December 2022"; // December
+
+            return "November 2022";
+        }
+
+        private void setPageByMonth(object sender, EventArgs e)
+        {
+            switch (SelectedMonth.SelectedValue)
+            {
+                case "December 2022":
+                    this.page = 5;
+                    break;
+                case "January 2023":
+                    this.page = 10;
+                    break;
+                default:
+                    this.page = 1;
+                    break;
+            }
+
+            renderCalendarDayRow();
         }
     }
 }
