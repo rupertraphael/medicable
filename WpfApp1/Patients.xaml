@@ -50,12 +50,12 @@
             </Grid>
         </Grid>
         <TextBox Grid.ColumnSpan="3" HorizontalAlignment="Left" Margin="10,35,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="390" KeyDown="OnKeyDownHandler" Name="SearchBar"/>
-        <ListView Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=1}" Margin="10,69,400,20" Grid.ColumnSpan="3" ScrollViewer.VerticalScrollBarVisibility="Visible" FontWeight="Bold" SelectionChanged="ListView_SelectionChanged">
+        <ListView Grid.Row="1" Name="patientView" d:ItemsSource="{d:SampleData ItemCount=13}" Margin="10,69,400,20" Grid.ColumnSpan="3" ScrollViewer.VerticalScrollBarVisibility="Visible" FontWeight="Bold" SelectionChanged="ListView_SelectionChanged">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Width="160" Header="Name" DisplayMemberBinding="{Binding Linda Walsh}"/>
-                    <GridViewColumn Width="100" Header="Phone #" DisplayMemberBinding="{Binding (403)-555-1112}" />
-                    <GridViewColumn Width="100" Header="Health Care #" DisplayMemberBinding="{Binding 15671-1200}" />
+                    <GridViewColumn Width="160" Header="Name" DisplayMemberBinding="{Binding PatientName}"/>
+                    <GridViewColumn Width="100" Header="Phone #" DisplayMemberBinding="{Binding PatientPhoneNumber}" />
+                    <GridViewColumn Width="100" Header="Health Care #" DisplayMemberBinding="{Binding PatientHealthCareNumber}" />
                 </GridView>
             </ListView.View>
         </ListView>
@@ -81,10 +81,6 @@
             <TextBlock Text="Past Appointments"/>
         </Button>
         <Label Content="Dr. Rupert @ 10:30 AM, November 10, 2022" HorizontalAlignment="Left" Margin="199,250,0,0" Grid.Row="1" VerticalAlignment="Top" RenderTransformOrigin="17.687,6.342" Grid.Column="2"/>
-        <Label Content="Scott Turner                             (403)-555-1430      13256-1231" HorizontalAlignment="Left" Margin="15,110,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.ColumnSpan="3" Width="363"/>
-        <Label Content="Rosy Usher                               (403)-555-6122      11661-1209" HorizontalAlignment="Left" Margin="15,136,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.ColumnSpan="3" Width="363"/>
-        <Label Content="Linda Walsh                           (403)-555-1112     15671-1200" HorizontalAlignment="Left" Margin="15,161,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.ColumnSpan="3" Width="363" FontWeight="Bold"/>
-        <Label Content="Albert Zander                           (403)-555-1430     13112-1764" HorizontalAlignment="Left" Margin="15,187,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.ColumnSpan="3" Width="363"/>
         <Button Background="#1d4ed8" Padding="9" Foreground="#eff6ff" Margin="260,324,126,31" Grid.Column="2" Grid.Row="1">
             <TextBlock Text="Book Appointment"/>
         </Button>

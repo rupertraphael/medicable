@@ -87,6 +87,11 @@ namespace WpfApp1
                 set { _patientPreferredDoctor = value; }
             }
 
+            public override string ToString()
+            {
+                return this.PatientName;
+            }
+
             public APatient(
                 string patientName,
                 string patientPhoneNumber,
@@ -102,6 +107,7 @@ namespace WpfApp1
                 _patientAddress = patientAddress;
                 _patientPreferredDoctor = patientPreferredDoctor;
             }
+
         }
 
 
