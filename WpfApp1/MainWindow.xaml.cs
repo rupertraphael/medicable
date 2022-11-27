@@ -24,17 +24,35 @@ namespace WpfApp1
     public partial class MainWindow : Window
     {
         private Dictionary<string, Page> pages = new Dictionary<string, Page>();
+        private List<Appointment>[] Appointments;
+        private Page DashboardPage = new Dashboard();
+        private Page PatientsPage = new Patients();
+
 
         public MainWindow()
         {
-            // initialize pages
-            this.pages["dashboard"] = new Dashboard();
-            this.pages["patients"] = new Patients();
+            List<Appointment> today = new List<Appointment>();
+            today.Add(new Appointment("Rupert", "Amodia", "9:00AM", "9:30AM", "Dr. Chirag"));
+            today.Add(new Appointment("Araiz", "Asad", "10:00am", "10:30am", "Dr. Raphael"));
+            today.Add(new Appointment("Elizabeth Chu", "Asad", "11:00am", "10:30am", "Dr. Amr"));
+            today.Add(new Appointment("David", "Smith", "11:00am", "11:30am", "Dr. Raphael"));
+
+            this.Appointments = new List<Appointment>[5];
+            this.Appointments[0] = today;
+            this.Appointments[1] = new List<Appointment>();
 
             InitializeComponent();
 
+            //MainNavFrame.NavigationService.Navigate(this.DashboardPage);
+            //this.DashboardPage.Loaded += DashboardPage_Loaded;
+
             MainNavFrame.LoadCompleted += MainNavFrame_LoadCompleted;
 
+        }
+
+        private void DashboardPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            Trace.WriteLine("hello dashboard");
         }
 
         private void MainNavFrame_LoadCompleted(object sender, NavigationEventArgs e)
@@ -182,7 +200,7 @@ namespace WpfApp1
 
             //MainNavFrame.Source = new Uri("Dashboard.xaml", UriKind.Relative);
 
-            MainNavFrame.NavigationService.Navigate(this.pages["dashboard"]);
+            MainNavFrame.NavigationService.Navigate(this.DashboardPage);
         }
 
         private void Patients_Button_Click(object sender, RoutedEventArgs e)
@@ -191,7 +209,7 @@ namespace WpfApp1
             Dashboard_Button.Background = (new BrushConverter()).ConvertFromString("#1d4ed8") as Brush;
             Dashboard_Button.FontWeight = FontWeights.Regular;
 
-            MainNavFrame.NavigationService.Navigate(this.pages["patients"]);
+            MainNavFrame.NavigationService.Navigate(this.PatientsPage);
         }
     }
 }
