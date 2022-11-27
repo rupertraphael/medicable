@@ -32,6 +32,7 @@ namespace WpfApp1
             patientList.Add(new APatient("Linda Walsh", "403-555-1112", "15671-1200", "", "", ""));
             patientList.Add(new APatient("Albert Zander", "403-555-1430", "13112-1764", "", "", ""));
             patientList.Add(new APatient("Antony Simmons", "587-412-8666", "16543-1289", "", "", ""));
+            patientList.Add(new APatient("Bruno Simmons", "587-222-8656", "16552-1139", "", "", ""));
             SearchBar.Text = "Search by Name, Phone Number, Alberta HealthCare # ";
             patientView.ItemsSource = patientList;
         }
