@@ -49,8 +49,8 @@
                 </StackPanel>
             </Grid>
         </Grid>
-        <TextBox Grid.ColumnSpan="3" HorizontalAlignment="Left" Margin="10,35,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="390" KeyDown="OnKeyDownHandler" Name="SearchBar" PreviewMouseDown="SearchBar_MouseDown" TextChanged="SearchBar_TextChanged" />
-        <ListView Grid.Row="1" Name="patientView" d:ItemsSource="{d:SampleData ItemCount=13}" Margin="10,69,400,20" Grid.ColumnSpan="3" ScrollViewer.VerticalScrollBarVisibility="Visible" SelectionChanged="ListView_SelectionChanged">
+        <TextBox Grid.ColumnSpan="3" HorizontalAlignment="Left" Margin="10,35,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="390" Name="SearchBar" PreviewMouseDown="SearchBar_MouseDown" TextChanged="SearchBar_TextChanged" />
+        <ListView Grid.Row="1" Name="patientView" d:ItemsSource="{d:SampleData ItemCount=13}" Margin="10,69,400,20" Grid.ColumnSpan="3" ScrollViewer.VerticalScrollBarVisibility="Visible" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="160" Header="Name" DisplayMemberBinding="{Binding PatientName}"/>
