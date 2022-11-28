@@ -39,13 +39,9 @@
                         <ComboBoxItem Background="#f9fafb">December 2022</ComboBoxItem>
                         <ComboBoxItem Background="#f9fafb">January 2023</ComboBoxItem>
                     </ComboBox>
-                    <ComboBox FontSize="14" Background="#f9fafb" Margin="8 4">
-                        <ComboBoxItem IsSelected="True" Background="#f9fafb">
-                            Dr. Amr, GP
-                        </ComboBoxItem>
-                        <ComboBoxItem Background="#f9fafb">
-                            Dr. Raphael, GP
-                        </ComboBoxItem>
+                    <ComboBox FontSize="14" Background="#f9fafb" Margin="8 4" Name="SelectedDoctor" SelectedValuePath="Content" SelectionChanged="setPageByDoctor">
+                        <ComboBoxItem Background="#f9fafb">Dr. Amr, GP</ComboBoxItem>
+                        <ComboBoxItem Background="#f9fafb">Dr. Raphael, GP</ComboBoxItem>
                     </ComboBox>
                 </StackPanel>
 

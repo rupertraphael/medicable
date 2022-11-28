@@ -31,11 +31,13 @@ namespace WpfApp1
 
         public MainWindow()
         {
-            List<Appointment> today = new List<Appointment>();
-            today.Add(new Appointment("Rupert", "Amodia", "9:00AM", "9:30AM", "Dr. Chirag"));
-            today.Add(new Appointment("Araiz", "Asad", "10:00am", "10:30am", "Dr. Raphael"));
-            today.Add(new Appointment("Elizabeth Chu", "Asad", "11:00am", "10:30am", "Dr. Amr"));
-            today.Add(new Appointment("David", "Smith", "11:00am", "11:30am", "Dr. Raphael"));
+            List<Appointment> today = new List<Appointment>
+            {
+                new Appointment("Rupert", "Amodia", "9:00AM", "9:30AM", "Dr. Chirag"),
+                new Appointment("Araiz", "Asad", "10:00am", "10:30am", "Dr. Raphael"),
+                new Appointment("Elizabeth Chu", "Asad", "11:00am", "10:30am", "Dr. Amr"),
+                new Appointment("David", "Smith", "11:00am", "11:30am", "Dr. Raphael")
+            };
 
             this.Appointments = new List<Appointment>[5];
             this.Appointments[0] = today;

@@ -23,7 +23,7 @@ namespace WpfApp1
     public partial class Dashboard : Page
     {
         private int quickViewPage;
-        private List<Appointment>[] Appointments;
+        private List<Appointment> Appointments = new List<Appointment>();
         private string[] dates = {
                 "December 1", "December 2", "December 3" , "December 4", "December 5"
             };
@@ -48,7 +48,11 @@ namespace WpfApp1
 
         private void Quickview_Next(object sender, RoutedEventArgs e)
         {
-            this.quickViewPage = (this.quickViewPage + 1) % this.Appointments.Length;
+            this.quickViewPage = this.quickViewPage++;
+            if (this.quickViewPage > this.Appointments.Count())
+            {
+                this.quickViewPage = this.Appointments.Count();
+            }
             this.setQuickViewBasedOnPage(this.quickViewPage);
         }
 
@@ -56,16 +60,15 @@ namespace WpfApp1
         {
             if (this.quickViewPage == 0)
             {
-                this.quickViewPage = this.Appointments.Length;
+                this.quickViewPage = 1;
             }
-
-            this.quickViewPage = this.quickViewPage - 1;
+            this.quickViewPage--;
             this.setQuickViewBasedOnPage(this.quickViewPage);
         }
 
         private void setQuickViewBasedOnPage(int page)
         {
-            quickView.ItemsSource = this.Appointments[page];
+            quickView.ItemsSource = this.Appointments;
             quickViewTitle.Text = this.dates[page];
             if(page == 0)
             {

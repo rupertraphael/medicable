@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -83,32 +84,37 @@ namespace WpfApp1
         };
         private int page = 2;
 
+        public string preSelectedDoctor = "";
+
         public Calendar()
         {
             // initialize days being shown on the calendar
-            
+
             calendarDays.Add(31); // October 31
-            calendarDays.AddRange(Enumerable.Range(1, 30)); // November
-            calendarDays.AddRange(Enumerable.Range(1, 31)); // December
-            calendarDays.AddRange(Enumerable.Range(1, 31)); // January
-            calendarDays.AddRange(Enumerable.Range(1, 5)); // February
+            calendarDays.AddRange(Enumerable.Range(1, 30)); // November.. 1-30
+            calendarDays.AddRange(Enumerable.Range(1, 31)); // December.. 31-61
+            calendarDays.AddRange(Enumerable.Range(1, 31)); // January.. 62-92
+            calendarDays.AddRange(Enumerable.Range(1, 5)); // February.. 93-97
 
-
-            List<string> hours = new List<string>();
-            hours.Add("9AM");
-            hours.Add("10AM");
-            hours.Add("11AM");
-            hours.Add("12PM");
-            hours.Add("1PM");
-            hours.Add("2PM");
-            hours.Add("3PM");
-            hours.Add("4PM");
             InitializeComponent();
+
+            SelectedDoctor.SelectedValue = preSelectedDoctor;
+
+            renderCalendarPage();
+        }
+
+        private void renderCalendarPage()
+        {
+            CalendarRows.RowDefinitions.Clear();
+            CalendarRows.Children.Clear();
 
             SelectedMonth.SelectedValue = getMonthByPage();
 
+            var startTime = DateTime.Parse("2012-01-28 09:00:00");
+            var endTime = startTime.AddHours(7);
+
             int row = 0;
-            foreach(string s in hours)
+            while (startTime <= endTime)
             {
                 // rowContainer is the wrapper for every calendar row
                 // which corresponds to 1 hour in the calendar
@@ -116,7 +122,7 @@ namespace WpfApp1
 
                 // tb is the hour (e.g. 3PM) textblock
                 TextBlock tb = new TextBlock();
-                tb.Text = s;
+                tb.Text = startTime.ToShortTimeString();
                 tb.TextAlignment = TextAlignment.Right;
 
                 rowContainer.SetValue(Grid.RowProperty, row++);
@@ -130,8 +136,8 @@ namespace WpfApp1
                 // cd for hour
                 ColumnDefinition hcd = new ColumnDefinition();
                 GridLengthConverter glc = new GridLengthConverter();
-                hcd.Width = (GridLength) glc.ConvertFromString("0.5*");
-                
+                hcd.Width = (GridLength)glc.ConvertFromString("0.5*");
+
                 Border hourCellContainer = new Border();
                 hourCellContainer.Child = tb;
                 hourCellContainer.BorderThickness = new Thickness(0, 0, 1, 0);
@@ -141,8 +147,14 @@ namespace WpfApp1
                 columns.ColumnDefinitions.Add(hcd);
                 columns.Children.Add(hourCellContainer);
 
-                for (int i = 0; i < 7; i++)
+                for (int i = 0; i < Days.Count; i++)
                 {
+                    DateTime calendarStartDateTime = DateTime.Parse(
+                        String.Format(
+                                "{0} {1}", getDate(getCalendarDaysIndexByColumn(i)), startTime.ToLongTimeString()
+                            )
+                        );
+
                     ColumnDefinition cd = new ColumnDefinition();
                     cd.Width = (GridLength)glc.ConvertFromString("1*");
                     columns.ColumnDefinitions.Add(cd);
@@ -151,49 +163,50 @@ namespace WpfApp1
                     Border appointmentCellContainer = new Border();
                     appointmentCellContainer.BorderThickness = new Thickness(0, 0, 1, 0);
                     appointmentCellContainer.BorderBrush = (new BrushConverter()).ConvertFromString("#d1d5db") as Brush;
-                    appointmentCellContainer.SetValue(Grid.ColumnProperty, i+1);
-                    for (int j = 0; j < 2; j++)
+                    appointmentCellContainer.SetValue(Grid.ColumnProperty, i + 1);
+
+                    if (hasAppointment(calendarStartDateTime))
                     {
-                        if ((i * row + (j)) % 3 == 0 || (i * row + (j)) == 9)
-                        {
-                            Border appointment = new Border();
+                        // render Appointment
 
-                            string[] names = {"Deeann Tezure","Dulcy Pretorius","Sheffield Peregrine","Seka Wade","Vachel Raselles","Stoddard Ferrarone","Cherise Cropton","Jeanne Percy","Tamarah Esherwood","Norry Nettle","Loy Latliff","Gipsy Le Estut","Leroi Ipwell","Randie Ludlow","Aline Smeath","Arnaldo Bolam","Yolane Duker","Cointon Stonhewer","Bartholomeus Spincks","Jonah Ygou","Reagan Obee","Lonnie Meedendorpe","Gene Kench","Conroy Umney","Mommy Hevner","Jamaal MacDermid","Stefano Sommerly","Willetta Pedrazzi","Frannie Somerset","Gloriana Hopkynson","Gertruda Dolligon","Aloise Galfour","Holli Duligall","Latrina Crawford","Durward Corlett","Bartholomeo Pynn","Jeanine Blaylock","Tiffanie O'Scollain","Edward Caroline","Murdoch Cicculini","Shaylyn Urlich","Hinze Glasscott","Mylo Adamowicz","Fields Pettifor","Lisbeth Phippard","Peria Loftus","Padriac Mereweather","Sunshine Rikel","Indira Lazell","Kakalina Mellon","Bernette Davie","Worthington Dashper","Violette Surmeyer","Shannah Glamart","Mag Leasor","Liam Harbidge","Irma Thickin","Micah Teligin","Amelina Yakubovics","Dennie Livick"};
+                        Appointment appointment = this.getAppointments()[calendarStartDateTime];
 
-                            appointment.Background = (new BrushConverter()).ConvertFromString("#dbeafe") as Brush;
-                            appointment.Padding = new Thickness(4);
-                            appointment.SetValue(Grid.RowProperty, j);
-                            appointment.Margin = new Thickness(2, 1, 2, 1);
+                        Border b = new Border();
+                        b.Background = (new BrushConverter()).ConvertFromString("#dbeafe") as Brush;
+                        b.Padding = new Thickness(4);
+                        b.SetValue(Grid.RowProperty, 0);
+                        b.Margin = new Thickness(2, 1, 2, 1);
 
-                            TextBlock appointmentInfo = new TextBlock();
-                            appointmentInfo.Text = "Appointment with " + names[(i * row + (j)) % 20];
-                            appointmentInfo.TextWrapping = TextWrapping.Wrap;
-                            appointmentInfo.VerticalAlignment = VerticalAlignment.Center;
-                            appointmentInfo.Foreground = (new BrushConverter()).ConvertFromString("#1e3a8a") as Brush;
-                            appointmentInfo.TextTrimming = TextTrimming.CharacterEllipsis;
+                        TextBlock atb = new TextBlock();
+                        atb.Text = "Appointment with " + appointment.FullName;
+                        atb.TextWrapping = TextWrapping.Wrap;
+                        atb.VerticalAlignment = VerticalAlignment.Center;
+                        atb.Foreground = (new BrushConverter()).ConvertFromString("#1e3a8a") as Brush;
+                        atb.TextTrimming = TextTrimming.CharacterEllipsis;
 
-                            appointment.Child = appointmentInfo;
+                        b.Child = atb;
 
-                            RowDefinition appointmentCellRD = new RowDefinition();
-                            appointmentCellRD.Height = (GridLength)glc.ConvertFromString("1*");
-                            appointmentCell.RowDefinitions.Add(appointmentCellRD);
+                        RowDefinition appointmentCellRD = new RowDefinition();
+                        appointmentCellRD.Height = (GridLength)glc.ConvertFromString("1*");
+                        appointmentCell.RowDefinitions.Add(appointmentCellRD);
 
-                            appointmentCell.Children.Add(appointment);
-                        } else
-                        {
-                            Button appointmentButton = new Button();
-
-                            appointmentButton.Background = Brushes.Transparent;
-                            appointmentButton.BorderThickness = new Thickness(0);
-                            appointmentButton.SetValue(Grid.RowProperty, j);
-
-                            RowDefinition appointmentCellRD = new RowDefinition();
-                            appointmentCellRD.Height = (GridLength)glc.ConvertFromString("1*");
-                            appointmentCell.RowDefinitions.Add(appointmentCellRD);
-
-                            appointmentCell.Children.Add(appointmentButton);
-                        }
+                        appointmentCell.Children.Add(b);
                     }
+                    else
+                    {
+                        // render vacant appointment
+
+                        Button appointmentButton = new Button();
+
+                        appointmentButton.Background = Brushes.Transparent;
+                        appointmentButton.BorderThickness = new Thickness(0);
+
+                        RowDefinition appointmentCellRD = new RowDefinition();
+                        appointmentCell.RowDefinitions.Add(appointmentCellRD);
+
+                        appointmentCell.Children.Add(appointmentButton);
+                    }
+
                     appointmentCellContainer.Child = appointmentCell;
                     columns.Children.Add(appointmentCellContainer);
                 }
@@ -202,16 +215,15 @@ namespace WpfApp1
 
                 // set RD for every calendar row
                 RowDefinition rd = new RowDefinition();
-                rd.Height = new GridLength(100);
+                rd.Height = new GridLength(50);
                 CalendarRows.RowDefinitions.Add(rd);
-                
+
                 CalendarRows.Children.Add(rowContainer);
+
+                startTime = startTime.AddMinutes(30);
             }
 
             renderCalendarDayRow();
-
-
-            
         }
 
         private void renderCalendarDayRow()
@@ -228,8 +240,6 @@ namespace WpfApp1
 
             for (int i = 0; i < Days.Count; i++)
             {
-                int index = (this.page - 1) * Days.Count + i;
-
                 WrapPanel dayWP = new WrapPanel();
                 dayWP.HorizontalAlignment = HorizontalAlignment.Center;
 
@@ -237,7 +247,7 @@ namespace WpfApp1
                 dayTB.Text = this.Days[i] + " ";
 
                 TextBlock dateTB = new TextBlock();
-                dateTB.Text = this.calendarDays[index].ToString();
+                dateTB.Text = getDateForCalendarColumn(i).ToString();
                 dateTB.FontWeight = FontWeights.Bold;
 
                 dayWP.Children.Add(dayTB);
@@ -248,11 +258,50 @@ namespace WpfApp1
                 dateContainer.BorderBrush = (new BrushConverter()).ConvertFromString("#d1d5db") as Brush;
                 dateContainer.Padding = new Thickness(2);
                 dateContainer.Child = dayWP;
-                dateContainer.SetValue(Grid.ColumnProperty, i+1);
+                dateContainer.SetValue(Grid.ColumnProperty, i + 1);
 
                 CalendarDaysRow.Children.Add(dateContainer);
             }
 
+        }
+
+        private int getCalendarDaysIndexByColumn(int column)
+        {
+            return (this.page - 1) * Days.Count + column;
+        }
+
+        private int getDateForCalendarColumn(int column)
+        {
+            return this.calendarDays[getCalendarDaysIndexByColumn(column)];
+        }
+
+        private string getDate(int calendarDaysIndex)
+        {
+            string year = "2022";
+            string month = "10";
+
+            if (calendarDaysIndex > 92)
+            {
+                year = "2023";
+                month = "02";
+            }
+            else if (calendarDaysIndex > 61) {
+                year = "2023";
+                month = "01";
+            }
+            else if (calendarDaysIndex > 30) {
+                year = "2022";
+                month = "12";
+            }
+            else if (calendarDaysIndex > 0)
+            {
+                year = "2022";
+                month = "11";
+            }
+
+            string date = calendarDays[calendarDaysIndex].ToString();
+
+            return String.Format("{0}-{1}-{2}", year, month, date);
         }
 
         private void NextWeek(object sender, RoutedEventArgs e)
@@ -264,7 +313,7 @@ namespace WpfApp1
                 this.page = this.getMaxPage();
             }
 
-            renderCalendarDayRow();
+            renderCalendarPage();
             SelectedMonth.SelectedValue = getMonthByPage();
         }
 
@@ -277,7 +326,7 @@ namespace WpfApp1
                 this.page = 1;
             }
 
-            renderCalendarDayRow();
+            renderCalendarPage();
             SelectedMonth.SelectedValue = getMonthByPage();
         }
 
@@ -312,7 +361,44 @@ namespace WpfApp1
                     break;
             }
 
-            renderCalendarDayRow();
+            renderCalendarPage();
+        }
+
+        private void setPageByDoctor(object sender, EventArgs e)
+        {
+            renderCalendarPage();
+        }
+
+        private Boolean hasAppointment(DateTime dt)
+        {
+            Dictionary<DateTime, Appointment> appointments = getAppointments();
+
+            if (appointments.Count == 0 )
+                return false;
+
+            return appointments.ContainsKey(dt);
+        }
+
+        private Dictionary<DateTime, Appointment> getAppointments()
+        {
+            List<Appointment> Appointments = new List<Appointment>
+            {
+                new Appointment("Rupert", "Amodia", DateTime.Parse("2022-10-31 09:00:00"), "Dr. Amr, GP"),
+                new Appointment("Jacob", "Peralta", DateTime.Parse("2022-10-31 10:00:00"), "Dr. Amr, GP"),
+                new Appointment("Amy", "Santiago", DateTime.Parse("2022-10-31 12:00:00"), "Dr. Amr, GP"),
+                new Appointment("Charles", "Boyle", DateTime.Parse("2022-10-31 14:00:00"), "Dr. Amr, GP"),
+                new Appointment("Rosa", "Diaz", DateTime.Parse("2022-11-07 09:00:00"), "Dr. Amr, GP"),
+                new Appointment("Rosa", "Diaz", DateTime.Parse("2022-11-07 09:30:00"), "Dr. Amr, GP"),
+                new Appointment("Raymond", "Holt", DateTime.Parse("2022-11-07 11:30:00"), "Dr. Amr, GP"),
+                new Appointment("Kevin", "Cozner", DateTime.Parse("2022-11-07 13:30:00"), "Dr. Amr, GP"),
+                new Appointment("Araiz", "Asad", DateTime.Parse("2022-11-07 09:00:00"), "Dr. Raphael, GP"),
+                new Appointment("Elizabeth Chu", "Asad", DateTime.Parse("2022-11-08 15:00:00"), "Dr. Amr, GP"),
+                new Appointment("David", "Smith", DateTime.Parse("2022-11-02 11:30:00"), "Dr. Raphael, GP")
+            };
+
+            Appointments = Appointments.Where(a => a.Doctor == (string) SelectedDoctor.SelectedValue).ToList();
+
+            return Appointments.ToDictionary(appointment => appointment.StartDate, appointment => appointment);
         }
     }
 }
