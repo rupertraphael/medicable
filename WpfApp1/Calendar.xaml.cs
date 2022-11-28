@@ -77,14 +77,14 @@ namespace WpfApp1
     public partial class Calendar : Page
     {
 
-        List<int> calendarDays = new List<int>();
-        List<string> Days = new List<string>()
+        private List<int> calendarDays = new List<int>();
+        private List<string> Days = new List<string>()
         {
             "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
         };
         private int page = 2;
 
-        public string preSelectedDoctor = "";
+        public string preSelectedDoctor = "Dr. Amr, GP";
 
         public Calendar()
         {
@@ -197,6 +197,9 @@ namespace WpfApp1
                         // render vacant appointment
 
                         CheckBox appointmentButton = new CheckBox();
+                        //ScaleTransform scale = new ScaleTransform(2.0, 2.0);
+                        //appointmentButton.RenderTransformOrigin = new Point(0.5, 0.5);
+                        //appointmentButton.RenderTransform = scale;
 
                         appointmentButton.Background = Brushes.Transparent;
                         appointmentButton.BorderThickness = new Thickness(0);
@@ -205,6 +208,9 @@ namespace WpfApp1
                         appointmentCell.RowDefinitions.Add(appointmentCellRD);
 
                         appointmentCell.Children.Add(appointmentButton);
+
+                        appointmentButton.Checked += (sender, e) => AppointmentButton_Checked(sender, e, calendarStartDateTime, appointmentButton);
+                        appointmentButton.IsChecked = selectedDateTimes.ContainsKey(calendarStartDateTime);
                     }
 
                     appointmentCellContainer.Child = appointmentCell;
@@ -224,6 +230,29 @@ namespace WpfApp1
             }
 
             renderCalendarDayRow();
+        }
+
+        private Dictionary<DateTime, CheckBox> selectedDateTimes= new Dictionary<DateTime, CheckBox>();
+        private void AppointmentButton_Checked(object sender, RoutedEventArgs e, DateTime dt, CheckBox cb)
+        {
+            var adjacent = selectedDateTimes.Where(i => dt.Equals(i.Key.AddMinutes(30)) || dt.Equals(i.Key.AddMinutes(-30))).ToDictionary(p => p.Key, p => p.Value);
+
+            if (selectedDateTimes.Count == 0 || adjacent.Count > 0)
+            {
+                selectedDateTimes[dt] = cb;
+            }
+            else
+            {
+                foreach (KeyValuePair<DateTime, CheckBox> sdt in selectedDateTimes)
+                {
+                    sdt.Value.IsChecked = false;
+                }
+
+                selectedDateTimes = new Dictionary<DateTime, CheckBox>()
+                {
+                    {dt, cb}
+                };
+            }
         }
 
         private void renderCalendarDayRow()
