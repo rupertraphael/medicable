@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:WpfApp1"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="bookForNewPatient">
+      Title="BookForNewPatient">
 
     <Grid Background="White">
         <Grid.RowDefinitions>
@@ -45,7 +45,7 @@
         <TextBox x:Name="Last_name_box" HorizontalAlignment="Left" Margin="480,80,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" Height="20" FontSize="13" Foreground="Gray"/>
         <TextBlock x:Name="phone" HorizontalAlignment="Left" Margin="125,125,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Phone no. *" FontSize="14" VerticalAlignment="Top" Height="20" Width="105"/>
         <TextBox x:Name="phone_box" HorizontalAlignment="Left" Margin="125,145,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" Height="20" FontSize="13" Foreground="Gray"/>
-        <TextBlock x:Name="dob" HorizontalAlignment="Left" Margin="480,125,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Date of birth (MM/DD/YY) *" FontSize="14" VerticalAlignment="Top" Height="20" Width="191"/>
+        <TextBlock x:Name="dob" HorizontalAlignment="Left" Margin="480,125,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Date of birth (MM/DD/YYYY) *" FontSize="14" VerticalAlignment="Top" Height="20" Width="191"/>
         <TextBox x:Name="dob_box" HorizontalAlignment="Left" Margin="480,145,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" Height="20" FontSize="13" Foreground="Gray" />
         <TextBlock x:Name="address" HorizontalAlignment="Left" Margin="125,190,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Address *" FontSize="14" VerticalAlignment="Top" Height="20" Width="105"/>
         <TextBox x:Name="address_box" HorizontalAlignment="Left" Margin="125,210,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" Height="20" FontSize="13" Foreground="Gray" />

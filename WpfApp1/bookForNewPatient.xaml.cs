@@ -1,5 +1,4 @@
-﻿using HorizontalPrototype;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,6 +16,7 @@ using System.Xml.Linq;
 using System.ComponentModel;
 using static WpfApp1.MainWindow;
 
+
 namespace WpfApp1
 {
     /// <summary>
@@ -29,7 +29,6 @@ namespace WpfApp1
         public BookForNewPatient()
         {
             InitializeComponent();
-            DataContext = new BookForNewPatientViewModel();
 
         }
 
@@ -40,10 +39,8 @@ namespace WpfApp1
             //patientList.Add(new APatient(First_name_box.Text + " " + Last_name_box.Text, phone_box.Text, health_id_box.Text, dob_box.Text, address_box.Text, "", conditions_box.Text, allergy_box.Text));
 
             NavigationService ns = NavigationService.GetNavigationService(this);
-            ns.Navigate(new Patients());
+            ns.Navigate(new AppointmentDetails());
   
         }
-
-
     }
 }
