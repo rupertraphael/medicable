@@ -196,7 +196,7 @@ namespace WpfApp1
                     {
                         // render vacant appointment
 
-                        Button appointmentButton = new Button();
+                        CheckBox appointmentButton = new CheckBox();
 
                         appointmentButton.Background = Brushes.Transparent;
                         appointmentButton.BorderThickness = new Thickness(0);
