@@ -27,11 +27,12 @@ namespace WpfApp1
         {
             InitializeComponent();
 
-            patientList.Add(new APatient("Scott Turner", "403-555-1430", "13256-1231", "", "", ""));
-            patientList.Add(new APatient("Rosy Usher", "403-555-6122", "11661-1209", "", "", ""));
-            patientList.Add(new APatient("Linda Walsh", "403-555-1112", "15671-1200", "", "", ""));
-            patientList.Add(new APatient("Albert Zander", "403-555-1430", "13112-1764", "", "", ""));
-            patientList.Add(new APatient("Antony Simmons", "587-412-8666", "16543-1289", "", "", ""));
+            patientList.Add(new APatient("Scott Turner", "403-555-1430", "13256-1231", "", "", "", "", ""));
+            patientList.Add(new APatient("Rosy Usher", "403-555-6122", "11661-1209", "", "", "", "", ""));
+            patientList.Add(new APatient("Linda Walsh", "403-555-1112", "15671-1200", "", "", "", "", ""));
+            patientList.Add(new APatient("Albert Zander", "403-555-1430", "13112-1764", "", "", "", "", ""));
+            patientList.Add(new APatient("Antony Simmons", "587-412-8666", "16543-1289", "", "", "", "", ""));
+            patientList.Add(new APatient("Bruno Simmons", "587-222-8656", "16552-1139", "", "", "", "", ""));
             SearchBar.Text = "Search by Name, Phone Number, Alberta HealthCare # ";
             patientView.ItemsSource = patientList;
         }
