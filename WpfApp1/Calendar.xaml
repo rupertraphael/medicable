@@ -8,6 +8,21 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Calendar">
 
+    <Page.Resources>
+        <Style TargetType="Button" x:Key="BlueButton">
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="True">
+                    <Setter Property="Background" Value="#1d4ed8"/>
+                    <Setter Property="Foreground" Value="#eff6ff"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="#6b7280"/>
+                    <Setter Property="Foreground" Value="#6b7280"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+
     <Grid Background="#e2e8f0">
         <Grid Margin="20" Background="#f9fafb">
             <Grid.RowDefinitions>
@@ -53,7 +68,10 @@
                         <Button Content="&gt;" Padding="16 8" Background="#1d4ed8" Foreground="#eff6ff" BorderThickness="0" FontWeight="Bold" FontSize="16" Click="NextWeek"></Button>
                     </Border>
                     <Border BorderThickness="1" Margin="8 4" BorderBrush="#1d4ed8" CornerRadius="2">
-                        <Button Content="Select Appointment Slot" Padding="16 8" Background="#1d4ed8" Foreground="#eff6ff" BorderThickness="0" FontWeight="Bold" FontSize="16"></Button>
+                        <Button Content="Select Appointment Slot" Padding="16 8" Style="{StaticResource BlueButton}" BorderThickness="0" FontWeight="Bold" FontSize="16"></Button>
+                    </Border>
+                    <Border BorderThickness="1" Margin="8 4" CornerRadius="2">
+                        <Button Content="Skip &gt;" Padding="0" Background="Transparent" BorderThickness="0" FontWeight="Bold" FontSize="16"></Button>
                     </Border>
                 </WrapPanel>
                 <Grid Grid.Row="1" Grid.ColumnSpan="3" Name="CalendarDaysRow">

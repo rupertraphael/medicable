@@ -400,5 +400,15 @@ namespace WpfApp1
 
             return Appointments.ToDictionary(appointment => appointment.StartDate, appointment => appointment);
         }
+
+        public bool datesSelected = false;
+        public bool enabled
+        {
+            get { return datesSelected; }
+            set
+            {
+                datesSelected = value;
+            }
+        }
     }
 }
