@@ -30,9 +30,12 @@ namespace WpfApp1
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void BookButton_Click(object sender, RoutedEventArgs e)
         {
-
+            if (datepicker!=null || timepicker!= null)
+            {
+                BookButton.Content = "Proceed";
+            }
         }
     }
 }

@@ -6,13 +6,13 @@
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
         Title="WpfApp1" Height="450" Width="800">
-    <Grid>
+    <Grid HorizontalAlignment="Center" Width="800">
         <Grid.RowDefinitions>
-            <RowDefinition Height="43*"></RowDefinition>
-            <RowDefinition Height="391*"></RowDefinition>
+            <RowDefinition Height="0*"></RowDefinition>
+            <RowDefinition/>
             <RowDefinition Height="0*"/>
         </Grid.RowDefinitions>
-        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Grid.IsSharedSizeScope="True" Margin="542,0,0,0" Width="258">
+        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Grid.IsSharedSizeScope="True" Margin="542,0,0,450" Width="258" Grid.RowSpan="2">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition SharedSizeGroup="mysizeGroup"/>
@@ -32,8 +32,8 @@
         <TextBlock HorizontalAlignment="Center" Margin="0,26,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Appointment Details" FontSize="18" FontWeight="Bold" VerticalAlignment="Top" Height="26" Width="180"/>
         <TextBlock HorizontalAlignment="Left" Margin="55,61,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Patient Name *" FontSize="14" VerticalAlignment="Top" Height="20" Width="105"/>
         <TextBlock HorizontalAlignment="Left" Margin="55,126,0,0" Grid.Row="1" TextWrapping="Wrap" FontSize="14" VerticalAlignment="Top" Height="20" Width="90"><Run Language="en-in" Text="Doctor"/><Run Text=" Name"/></TextBlock>
-        <TextBox HorizontalAlignment="Left" Margin="55,86,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="435" Height="20" FontSize="13" Foreground="Gray" TextChanged="TextBox_TextChanged"/>
-        <ComboBox HorizontalAlignment="Left" Margin="55,221,0,0" Grid.Row="1" VerticalAlignment="Top" Width="140" Height="22">
+        <TextBox HorizontalAlignment="Left" Margin="55,86,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="495" Height="20" FontSize="13" Foreground="Gray"/>
+        <ComboBox x:Name="reason" HorizontalAlignment="Left" Margin="55,221,0,0" Grid.Row="1" VerticalAlignment="Top" Width="140" Height="22" Background="White">
             <ComboBoxItem>Flu-like Symptoms</ComboBoxItem>
             <ComboBoxItem>Nausea</ComboBoxItem>
             <ComboBoxItem>Muscle/Joint Pain</ComboBoxItem>
@@ -42,7 +42,7 @@
 
         </ComboBox>
         <TextBlock HorizontalAlignment="Left" Margin="55,196,0,0" Grid.Row="1" TextWrapping="Wrap" FontSize="14" VerticalAlignment="Top" Height="20" Width="140"><Run Language="en-in" Text="Appointment Reason *"/></TextBlock>
-        <ComboBox HorizontalAlignment="Left" Foreground="Black" Margin="55,151,0,0" Grid.Row="1" VerticalAlignment="Top" Width="275" Height="22">
+        <ComboBox x:Name="doctorlist" HorizontalAlignment="Left" Foreground="Black" Margin="55,151,0,0" Grid.Row="1" VerticalAlignment="Top" Width="305" Height="22">
             <ComboBoxItem Background="LightBlue">Dr. Raphael, GP</ComboBoxItem>
             <ComboBoxItem Background="LightBlue">Dr. Amr, GP</ComboBoxItem>
             <ComboBoxItem Background="LightBlue">Dr. Rupert, GP</ComboBoxItem>
@@ -50,15 +50,15 @@
             <ComboBoxItem Background="LightPink">Dr. Chirag, Chiropractor</ComboBoxItem>
 
         </ComboBox>
-        <TextBox HorizontalAlignment="Left" Margin="205,221,0,0" Grid.Row="1" Background="GhostWhite" TextWrapping="Wrap" Text="" Foreground="Gray" VerticalAlignment="Top" Width="285" Height="45" TextChanged="TextBox_TextChanged"/>
+        <TextBox HorizontalAlignment="Left" Margin="205,221,0,0" Grid.Row="1" Background="GhostWhite" TextWrapping="Wrap" Text="" Foreground="Gray" VerticalAlignment="Top" Width="345" Height="45" TextChanged="TextBox_TextChanged"/>
         <TextBlock HorizontalAlignment="Left" Margin="55,286,0,0" Grid.Row="1" TextWrapping="Wrap" FontSize="14" VerticalAlignment="Top" Height="20" Width="140"><Run Language="en-in" Text="Date"/></TextBlock>
         <TextBlock HorizontalAlignment="Left" Margin="260,286,0,0" Grid.Row="1" TextWrapping="Wrap" FontSize="14" VerticalAlignment="Top" Height="20" Width="140"><Run Language="en-in" Text="Time"/></TextBlock>
-        <DatePicker HorizontalAlignment="Left" Margin="55,311,0,0" Grid.Row="1" VerticalAlignment="Top" Width="150" Height="24"/>
-        <ComboBox HorizontalAlignment="Left" Margin="260,311,0,0" Grid.Row="1" VerticalAlignment="Top" Width="230" Height="24">
+        <DatePicker x:Name="datepicker" HorizontalAlignment="Left" Margin="55,311,0,0" Grid.Row="1" VerticalAlignment="Top" Width="150" Height="24"/>
+        <ComboBox x:Name="timepicker" HorizontalAlignment="Left" Margin="260,311,0,0" Grid.Row="1" VerticalAlignment="Top" Width="230" Height="24" >
             <ComboBoxItem>9:00AM-9:30AM</ComboBoxItem>
             <ComboBoxItem>2:30PM-3:00PM</ComboBoxItem>
             <ComboBoxItem>3:00PM-3:30PM</ComboBoxItem>
         </ComboBox>
-        <Button Content="Book Appointment" HorizontalAlignment="Left" Background="#1d4ed8" Foreground="#eff6ff" FontWeight="Bold" Margin="582,323,0,0" Grid.Row="1" VerticalAlignment="Top" Height="35" Width="178" Click="Button_Click"/>
+        <Button x:Name="BookButton" Content="Book Appointment" HorizontalAlignment="Left" Background="#1d4ed8" Foreground="#eff6ff" FontWeight="Bold" Margin="560,380,0,0" Grid.Row="1" VerticalAlignment="Top" Height="40" Width="200" Click="BookButton_Click"/>
     </Grid>
 </Page>

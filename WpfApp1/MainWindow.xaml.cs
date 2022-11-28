@@ -26,7 +26,7 @@ namespace WpfApp1
         {
             InitializeComponent();
 
-            MainNavWindow.Source = new Uri("Calendar.xaml", UriKind.Relative);
+            MainNavWindow.Source = new Uri("AppointmentDetails.xaml", UriKind.Relative);
 
 
 
