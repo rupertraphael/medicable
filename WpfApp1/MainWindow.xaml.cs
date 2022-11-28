@@ -40,8 +40,6 @@ namespace WpfApp1
             private string _patientDOB;
             private string _patientAddress;
             private string _patientPreferredDoctor;
-            private string _patientHealthHistory;
-            private string _patientConditions;
 
             public string PatientName
             {
@@ -79,18 +77,6 @@ namespace WpfApp1
                 set { _patientPreferredDoctor = value; }
             }
 
-            public string PatientHealthHistory
-            {
-                get { return _patientHealthHistory; }
-                set { _patientHealthHistory = value; }
-            }
-
-            public string PatientConditions
-            {
-                get { return _patientConditions; }
-                set { _patientConditions = value; }
-            }
-
             public override string ToString()
             {
                 return this.PatientName;
@@ -102,9 +88,7 @@ namespace WpfApp1
                 string patientHealthCareNumber,
                 string patientDOB,
                 string patientAddress,
-                string patientPreferredDoctor,
-                string patientHealthHistory,
-                string patientConditions)
+                string patientPreferredDoctor)
             {
                 _patientName = patientName;
                 _patientPhoneNumber = patientPhoneNumber;
@@ -112,8 +96,6 @@ namespace WpfApp1
                 _patientDOB = patientDOB;
                 _patientAddress = patientAddress;
                 _patientPreferredDoctor = patientPreferredDoctor;
-                _patientHealthHistory = patientHealthHistory;
-                _patientConditions = patientConditions;
             }
 
         }
