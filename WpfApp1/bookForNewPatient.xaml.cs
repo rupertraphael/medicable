@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HorizontalPrototype;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,17 +13,37 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Linq;
+using System.ComponentModel;
+using static WpfApp1.MainWindow;
 
 namespace WpfApp1
 {
     /// <summary>
     /// Interaction logic for bookForNewPatient.xaml
     /// </summary>
-    public partial class bookForNewPatient : Page
+    public partial class BookForNewPatient : Page
     {
-        public bookForNewPatient()
+
+
+        public BookForNewPatient()
         {
             InitializeComponent();
+            DataContext = new BookForNewPatientViewModel();
+
         }
+
+        private void CreatePatientBtn_Click(object sender, RoutedEventArgs e)
+        {
+           // if(First_name_box.Text == null)
+        
+            //patientList.Add(new APatient(First_name_box.Text + " " + Last_name_box.Text, phone_box.Text, health_id_box.Text, dob_box.Text, address_box.Text, "", conditions_box.Text, allergy_box.Text));
+
+            NavigationService ns = NavigationService.GetNavigationService(this);
+            ns.Navigate(new Patients());
+  
+        }
+
+
     }
 }
