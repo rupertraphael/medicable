@@ -38,63 +38,47 @@
                         </Grid.ColumnDefinitions>
                         <Button Padding="5,1" BorderThickness="0" Background="#1e40af" Foreground="#eff6ff" FontWeight="Bold">Patients</Button>
                     </Grid>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition SharedSizeGroup="MySizeGroup" />
-                        </Grid.ColumnDefinitions>
-                        <Button Padding="5,1" BorderThickness="0" Background="#1d4ed8" Foreground="#eff6ff">Calendar</Button>
-                    </Grid>
                 </StackPanel>
             </Grid>
         </Grid>
-        <TextBox Grid.ColumnSpan="3" HorizontalAlignment="Left" Margin="10,35,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="390" Text="Linda Walsh"/>
-        <ListView Grid.Row="1" Margin="10,70,400,20" Grid.ColumnSpan="3" ScrollViewer.VerticalScrollBarVisibility="Visible" FontWeight="Bold">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Width="160" Header="Name" DisplayMemberBinding="{Binding Linda Walsh}"/>
-                    <GridViewColumn Width="100" Header="Phone #" DisplayMemberBinding="{Binding (403)-555-1112}" />
-                    <GridViewColumn Width="100" Header="Health Care #" DisplayMemberBinding="{Binding 15671-1200}" />
-                </GridView>
-            </ListView.View>
-        </ListView>
-        <Label Grid.Column="2" Content="Linda Walsh" HorizontalAlignment="Left" Margin="144,25,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="22"/>
-        <Rectangle Grid.Column="2" HorizontalAlignment="Left" Height="301" Margin="144,70,10,20" Grid.Row="1" Stroke="Black" VerticalAlignment="Top" Width="375"/>
-        <Rectangle Grid.Column="2" HorizontalAlignment="Left" Height="45" Margin="144,25,0,0" Grid.Row="1" Stroke="Black" VerticalAlignment="Top" Width="375"/>
-        <Label Content="Health Care ID" HorizontalAlignment="Left" Margin="153,75,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.Column="2" RenderTransformOrigin="0.86,0.262"/>
-        <TextBox HorizontalAlignment="Left" Margin="155,101,0,0" Grid.Row="1" TextWrapping="Wrap" Text="15671-1200" VerticalAlignment="Top" Width="77" Grid.Column="2"/>
-        <Label Content="Date of Birth" HorizontalAlignment="Left" Margin="280,75,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.Column="2" RenderTransformOrigin="0.86,0.262"/>
-        <TextBox HorizontalAlignment="Left" Margin="282,101,0,0" Grid.Row="1" TextWrapping="Wrap" Text="1982/05/11" VerticalAlignment="Top" Width="75" Grid.Column="2"/>
-        <Label Content="Telephone #" HorizontalAlignment="Left" Margin="402,75,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.Column="2" RenderTransformOrigin="0.86,0.262"/>
-        <TextBox HorizontalAlignment="Left" Margin="404,101,0,0" Grid.Row="1" TextWrapping="Wrap" Text="(403)-555-1112" VerticalAlignment="Top" Width="97" Grid.Column="2"/>
-        <Label Content="Address" HorizontalAlignment="Left" Margin="153,130,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.Column="2" RenderTransformOrigin="0.86,0.262"/>
-        <TextBox HorizontalAlignment="Left" Margin="155,156,0,0" Grid.Row="1" TextWrapping="Wrap" Text="301, 36 St., NW T3L 5PC" VerticalAlignment="Top" Width="214" Grid.Column="2"/>
-        <Button Background="#1d4ed8" Padding="9" Foreground="#eff6ff" Margin="402,139,28,217" Grid.Column="2" Grid.Row="1">
-            <TextBlock Text="Health History"/>
-        </Button>
-        <Label Content="Upcoming Appointments" HorizontalAlignment="Left" Margin="239,219,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.Column="2" RenderTransformOrigin="0.86,0.262" FontSize="16"/>
-        <ListBox Grid.Column="2" HorizontalAlignment="Left" Height="68" Margin="190,248,0,0" Grid.Row="1" VerticalAlignment="Top" Width="284" d:ItemsSource="{d:SampleData ItemCount=0}"/>
-        <Label Content="Preferred Doctor" HorizontalAlignment="Left" Margin="152,174,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.Column="2" RenderTransformOrigin="0.86,0.262"/>
-        <TextBox HorizontalAlignment="Left" Margin="157,196,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="97" Grid.Column="2"/>
-        <Button Background="#1d4ed8" Padding="9" Foreground="#eff6ff" Margin="358,184,28,171" Grid.Column="2" Grid.Row="1">
-            <TextBlock Text="Past Appointments"/>
-        </Button>
-        <Label Content="Dr. Rupert @ 10:30 AM, November 10, 2022" HorizontalAlignment="Left" Margin="199,250,0,0" Grid.Row="1" VerticalAlignment="Top" RenderTransformOrigin="17.687,6.342" Grid.Column="2"/>
-        <Label Content="Scott Turner                             (403)-555-1430      13256-1231" HorizontalAlignment="Left" Margin="15,110,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.ColumnSpan="3" Width="363"/>
-        <Label Content="Rosy Usher                               (403)-555-6122      11661-1209" HorizontalAlignment="Left" Margin="15,136,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.ColumnSpan="3" Width="363"/>
-        <Label Content="Linda Walsh                           (403)-555-1112     15671-1200" HorizontalAlignment="Left" Margin="15,161,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.ColumnSpan="3" Width="363" FontWeight="Bold"/>
-        <Label Content="Albert Zander                           (403)-555-1430     13112-1764" HorizontalAlignment="Left" Margin="15,187,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.ColumnSpan="3" Width="363"/>
-        <Button Background="#1d4ed8" Padding="9" Foreground="#eff6ff" Margin="260,324,126,31" Grid.Column="2" Grid.Row="1">
-            <TextBlock Text="Book Appointment"/>
-        </Button>
-        <Grid HorizontalAlignment="Left" Height="507" Margin="113,0,0,0" VerticalAlignment="Center" Width="478" RenderTransformOrigin="0.5,0.5" Grid.Column="2" Grid.Row="1">
-            <Grid.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-0.506"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Grid.RenderTransform>
+        <Grid HorizontalAlignment="Left" Height="391" VerticalAlignment="Center" Width="405" Grid.ColumnSpan="3" Grid.Row="1">
+            <TextBox HorizontalAlignment="Left" Margin="10,52,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="380" Text="Linda Walsh"/>
+            <ListView d:ItemsSource="{d:SampleData ItemCount=1}" Margin="10,79,15,19" ScrollViewer.VerticalScrollBarVisibility="Visible" FontWeight="Bold">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Width="160" Header="Name" DisplayMemberBinding="{Binding Linda Walsh}"/>
+                        <GridViewColumn Width="100" Header="Phone #" DisplayMemberBinding="{Binding (403)-555-1112}" />
+                        <GridViewColumn Width="100" Header="Health Care #" DisplayMemberBinding="{Binding 15671-1200}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+        <Grid HorizontalAlignment="Left" Height="391" Margin="134,0,0,0" VerticalAlignment="Center" Width="395" Grid.Column="2" Grid.Row="1">
+            <Label Content="Linda Walsh" HorizontalAlignment="Left" Margin="5,28,0,0" VerticalAlignment="Top" FontSize="22"/>
+            <Rectangle HorizontalAlignment="Left" Height="301" Margin="5,73,0,0" Stroke="Black" VerticalAlignment="Top" Width="375"/>
+            <Rectangle HorizontalAlignment="Left" Height="45" Margin="5,28,0,0" Stroke="Black" VerticalAlignment="Top" Width="375"/>
+            <Label Content="Health Care ID" HorizontalAlignment="Left" Margin="14,78,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.86,0.262"/>
+            <TextBox HorizontalAlignment="Left" Margin="16,104,0,0" TextWrapping="Wrap" Text="15671-1200" VerticalAlignment="Top" Width="77"/>
+            <Label Content="Date of Birth" HorizontalAlignment="Left" Margin="141,78,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.86,0.262"/>
+            <TextBox HorizontalAlignment="Left" Margin="143,104,0,0" TextWrapping="Wrap" Text="1982/05/11" VerticalAlignment="Top" Width="75"/>
+            <Label Content="Telephone #" HorizontalAlignment="Left" Margin="263,78,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.86,0.262"/>
+            <TextBox HorizontalAlignment="Left" Margin="265,104,0,0" TextWrapping="Wrap" Text="(403)-555-1112" VerticalAlignment="Top" Width="97"/>
+            <Label Content="Address" HorizontalAlignment="Left" Margin="14,133,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.86,0.262"/>
+            <TextBox HorizontalAlignment="Left" Margin="16,159,0,0" TextWrapping="Wrap" Text="301, 36 St., NW T3L 5PC" VerticalAlignment="Top" Width="214"/>
+            <Button Background="#1d4ed8" Padding="9" Foreground="#eff6ff" Margin="263,142,28,214" Click="HealthHistoryDialog">
+                <TextBlock Text="Health History"/>
+            </Button>
+            <Label Content="Upcoming Appointments" HorizontalAlignment="Center" Margin="0,222,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.86,0.262" FontSize="16"/>
+            <ListBox HorizontalAlignment="Left" Height="68" Margin="51,251,0,0" VerticalAlignment="Top" Width="284" d:ItemsSource="{d:SampleData ItemCount=0}"/>
+            <Label Content="Preferred Doctor" HorizontalAlignment="Left" Margin="13,177,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.86,0.262"/>
+            <TextBox HorizontalAlignment="Left" Margin="18,199,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="97"/>
+            <Button Background="#1d4ed8" Padding="1" Foreground="#eff6ff" Margin="219,187,28,168" Click="PastAppointmentsDialog">
+                <TextBlock Text="Past Appointments"/>
+            </Button>
+            <Label Content="Dr. Rupert @ 10:30 AM, November 10, 2022" HorizontalAlignment="Left" Margin="60,253,0,0" VerticalAlignment="Top" RenderTransformOrigin="17.687,6.342"/>
+            <Button Background="#1d4ed8" Padding="9" Foreground="#eff6ff" Margin="121,327,126,28">
+                <TextBlock Text="Book Appointment"/>
+            </Button>
         </Grid>
     </Grid>
 </Window>

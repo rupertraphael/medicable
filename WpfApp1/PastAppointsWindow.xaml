@@ -5,7 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="PastAppointsWindow" Height="200" Width="300">
+        Title="PastAppointsWindow" Height="250" Width="350"
+        WindowStartupLocation="CenterOwner">
+    <Window.Resources>
+        <Style x:Key="itemstyle" TargetType="{x:Type ListViewItem}">
+            <EventSetter Event="MouseDoubleClick" Handler="HandleDoubleClick" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="48*"/>
@@ -28,9 +36,28 @@
         </Grid>
         <Label Content="Upcoming Appointments" HorizontalAlignment="Left" Margin="238,241,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.Column="2" RenderTransformOrigin="0.86,0.262" FontSize="16"/>
         <ListBox Grid.Column="2" HorizontalAlignment="Left" Height="68" Margin="196,277,0,0" Grid.Row="1" VerticalAlignment="Top" Width="284" d:ItemsSource="{d:SampleData ItemCount=0}"/>
-        <Label Content="Past Appointments" HorizontalAlignment="Left" Margin="77,-6,0,0" VerticalAlignment="Top" Grid.Column="1" Grid.ColumnSpan="2" Foreground="White"/>
-        <Rectangle Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="146" Margin="10,0,0,0" Grid.Row="1" Stroke="Black" VerticalAlignment="Center" Width="280"/>
-        <Label Content="Dr. Amr @ 12:00 PM, September 17, 2022" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="238" Grid.Column="1"/>
-        <Label Content="Dr. Araiz @ 5:00 PM, March 30, 2022" HorizontalAlignment="Left" Margin="10,41,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="238" Grid.Column="1"/>
+        <Label Content="Past Appointments" HorizontalAlignment="Left" Margin="0,-6,0,0" VerticalAlignment="Top" Grid.Column="2" Foreground="White"/>
+        <ListView BorderThickness="0" Name="apptView" Background="#f9fafb"  ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible" d:ItemsSource="{d:SampleData ItemCount=12}" DockPanel.Dock="Bottom" Grid.ColumnSpan="2" Margin="13,34,34,10" Grid.Column="1" Grid.Row="1" ItemContainerStyle="{StaticResource itemstyle}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Border Padding="4 10" BorderThickness="0 0 0 1" BorderBrush="#d1d5db">
+                            <StackPanel>
+                                <TextBlock FontSize="12" FontWeight="Medium" Text="{Binding FullName}"></TextBlock>
+                                <TextBlock FontSize="12" Foreground="#6b7280">
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0} w/ {1}">
+                                            <Binding Path="StartEnd" />
+                                            <Binding Path="Doctor" />
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Label Grid.Column="1" Content="*Double Click an Appointment to use as a Template*" HorizontalAlignment="Left" Margin="35,10,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" FontStyle="Italic" FontSize="10" Grid.Row="1"/>
     </Grid>
 </Window>
