@@ -50,7 +50,7 @@
             </Grid>
         </Grid>
         <TextBox Grid.ColumnSpan="3" HorizontalAlignment="Left" Margin="10,35,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="390" Name="SearchBar" PreviewMouseDown="SearchBar_MouseDown" TextChanged="SearchBar_TextChanged" />
-        <ListView Grid.Row="1" Name="patientView" d:ItemsSource="{d:SampleData ItemCount=13}" Margin="10,69,400,20" Grid.ColumnSpan="3" ScrollViewer.VerticalScrollBarVisibility="Visible" >
+        <ListView Grid.Row="1" Name="patientView" d:ItemsSource="{d:SampleData ItemCount=13}" PreviewMouseLeftButtonDown= "PatientView_PreviewMouseLeftButtonDown" Margin="10,69,400,20" Grid.ColumnSpan="3" ScrollViewer.VerticalScrollBarVisibility="Visible" SelectionChanged="patientView_SelectionChanged" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="160" Header="Name" DisplayMemberBinding="{Binding PatientName}"/>
@@ -59,24 +59,24 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Label Grid.Column="2" Content="Linda Walsh" HorizontalAlignment="Left" Margin="144,25,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="22"/>
+        <Label Grid.Column="2" Name="clientName" Content="" HorizontalAlignment="Left" Margin="144,25,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="22"/>
         <Rectangle Grid.Column="2" HorizontalAlignment="Left" Height="301" Margin="144,70,10,20" Grid.Row="1" Stroke="Black" VerticalAlignment="Top" Width="375"/>
         <Rectangle Grid.Column="2" HorizontalAlignment="Left" Height="45" Margin="144,25,0,0" Grid.Row="1" Stroke="Black" VerticalAlignment="Top" Width="375"/>
         <Label Content="Health Care ID" HorizontalAlignment="Left" Margin="153,75,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.Column="2" RenderTransformOrigin="0.86,0.262"/>
-        <TextBox HorizontalAlignment="Left" Margin="155,101,0,0" Grid.Row="1" TextWrapping="Wrap" Text="15671-1200" VerticalAlignment="Top" Width="77" Grid.Column="2"/>
+        <TextBox Name="clientHealthID" HorizontalAlignment="Left" Margin="155,101,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="77" Grid.Column="2"/>
         <Label Content="Date of Birth" HorizontalAlignment="Left" Margin="280,75,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.Column="2" RenderTransformOrigin="0.86,0.262"/>
-        <TextBox HorizontalAlignment="Left" Margin="282,101,0,0" Grid.Row="1" TextWrapping="Wrap" Text="1982/05/11" VerticalAlignment="Top" Width="75" Grid.Column="2"/>
+        <TextBox Name="clientDOB" HorizontalAlignment="Left" Margin="282,101,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="75" Grid.Column="2"/>
         <Label Content="Telephone #" HorizontalAlignment="Left" Margin="402,75,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.Column="2" RenderTransformOrigin="0.86,0.262"/>
-        <TextBox HorizontalAlignment="Left" Margin="404,101,0,0" Grid.Row="1" TextWrapping="Wrap" Text="(403)-555-1112" VerticalAlignment="Top" Width="97" Grid.Column="2"/>
+        <TextBox Name="clientPhoneNumber" HorizontalAlignment="Left" Margin="404,101,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="97" Grid.Column="2"/>
         <Label Content="Address" HorizontalAlignment="Left" Margin="153,130,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.Column="2" RenderTransformOrigin="0.86,0.262"/>
-        <TextBox HorizontalAlignment="Left" Margin="155,156,0,0" Grid.Row="1" TextWrapping="Wrap" Text="301, 36 St., NW T3L 5PC" VerticalAlignment="Top" Width="214" Grid.Column="2"/>
+        <TextBox Name="clientAddress" HorizontalAlignment="Left" Margin="155,156,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="214" Grid.Column="2"/>
         <Button Background="#1d4ed8" Padding="9" Foreground="#eff6ff" Margin="402,139,28,217" Grid.Column="2" Grid.Row="1">
             <TextBlock Text="Health History"/>
         </Button>
         <Label Content="Upcoming Appointments" HorizontalAlignment="Left" Margin="239,219,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.Column="2" RenderTransformOrigin="0.86,0.262" FontSize="16"/>
         <ListBox Grid.Column="2" HorizontalAlignment="Left" Height="68" Margin="190,248,0,0" Grid.Row="1" VerticalAlignment="Top" Width="284" d:ItemsSource="{d:SampleData ItemCount=0}"/>
         <Label Content="Preferred Doctor" HorizontalAlignment="Left" Margin="152,174,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.Column="2" RenderTransformOrigin="0.86,0.262"/>
-        <TextBox HorizontalAlignment="Left" Margin="157,196,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="97" Grid.Column="2"/>
+        <TextBox Name="clientPreferredDoctor" HorizontalAlignment="Left" Margin="157,196,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="97" Grid.Column="2"/>
         <Button Background="#1d4ed8" Padding="9" Foreground="#eff6ff" Margin="358,184,28,171" Grid.Column="2" Grid.Row="1">
             <TextBlock Text="Past Appointments"/>
         </Button>

@@ -77,7 +77,7 @@ namespace WpfApp1
                 set { _patientDOB = value; }
             }
 
-            public string PersonAddress
+            public string PatientAddress
             {
                 get { return _patientAddress; }
                 set { _patientAddress = value; }
