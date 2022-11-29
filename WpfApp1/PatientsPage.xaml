@@ -42,13 +42,13 @@
             </Grid>
         </Grid>
         <Grid HorizontalAlignment="Left" Height="391" VerticalAlignment="Center" Width="405" Grid.ColumnSpan="3" Grid.Row="1">
-            <TextBox HorizontalAlignment="Left" Margin="10,52,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="380" Text="Linda Walsh"/>
-            <ListView d:ItemsSource="{d:SampleData ItemCount=1}" Margin="10,79,15,19" ScrollViewer.VerticalScrollBarVisibility="Visible" FontWeight="Bold">
+            <TextBox HorizontalAlignment="Left" Margin="10,52,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="380" Name="SearchBar" PreviewMouseDown="SearchBar_MouseDown" TextChanged="SearchBar_TextChanged"/>
+            <ListView d:ItemsSource="{d:SampleData ItemCount=13}" Name="patientView" Margin="10,79,15,19" ScrollViewer.VerticalScrollBarVisibility="Visible" FontWeight="Bold">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Width="160" Header="Name" DisplayMemberBinding="{Binding Linda Walsh}"/>
-                        <GridViewColumn Width="100" Header="Phone #" DisplayMemberBinding="{Binding (403)-555-1112}" />
-                        <GridViewColumn Width="100" Header="Health Care #" DisplayMemberBinding="{Binding 15671-1200}" />
+                        <GridViewColumn Width="160" Header="Name" DisplayMemberBinding="{Binding PatientName}"/>
+                        <GridViewColumn Width="100" Header="Phone #" DisplayMemberBinding="{Binding PatientPhoneNumber}" />
+                        <GridViewColumn Width="100" Header="Health Care #" DisplayMemberBinding="{Binding PatientHealthCareNumber}" />
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -80,5 +80,6 @@
                 <TextBlock Text="Book Appointment"/>
             </Button>
         </Grid>
+        <Frame Grid.ColumnSpan="3" Name="MainNavWindow" Margin="0,43,0,0" Grid.RowSpan="2"/>
     </Grid>
 </Window>

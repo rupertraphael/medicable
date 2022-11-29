@@ -11,6 +11,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static WpfApp1.MainWindow;
+using static WpfApp1.AppointmentDetails;
+using System;
 
 namespace WpfApp1
 {
@@ -31,7 +33,9 @@ namespace WpfApp1
         protected void HandleDoubleClick(object sender, MouseButtonEventArgs e)
         {
             var appointment = ((ListViewItem)sender).Content as Appointment;
-            MessageBox.Show(appointment.FullName);
+            AppointmentDetails appointmentView = new AppointmentDetails(appointment.FullName, appointment.Doctor);
+            (App.Current.MainWindow).Content = appointmentView;
+            this.Close();
 
         }
     }
