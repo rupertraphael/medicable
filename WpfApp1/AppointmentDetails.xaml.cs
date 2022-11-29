@@ -20,9 +20,24 @@ namespace WpfApp1
     /// </summary>
     public partial class AppointmentDetails : Page
     {
+
         public AppointmentDetails()
         {
             InitializeComponent();
+        }
+
+        public AppointmentDetails(string patientName, string doctorName)
+        {        
+            
+            Dictionary<string, int> doctors = new Dictionary<string, int>();
+            doctors.Add("Dr. Raphael", 0);
+            doctors.Add("Dr. Amr", 1);
+            doctors.Add("Dr. Rupert", 2);
+            doctors.Add("Dr. Araiz", 3);
+            doctors.Add("Dr. Chirag", 4);
+            InitializeComponent();
+            PatientName.Text = patientName;
+            Doctors.SelectedIndex = doctors[doctorName];
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
