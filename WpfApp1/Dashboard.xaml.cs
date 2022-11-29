@@ -36,5 +36,10 @@ namespace WpfApp1
             InitializeComponent();
             quickView.ItemsSource = appointments;
         }
+
+        private void quickView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
