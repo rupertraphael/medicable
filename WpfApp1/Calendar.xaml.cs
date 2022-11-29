@@ -209,7 +209,9 @@ namespace WpfApp1
 
                         appointmentCell.Children.Add(appointmentButton);
 
-                        appointmentButton.Checked += (sender, e) => AppointmentButton_Checked(sender, e, calendarStartDateTime, appointmentButton);
+                        appointmentButton.Foreground = Brushes.Transparent;
+                        appointmentButton.Checked += (sender, e) => AppointmentButton_Checked(sender, e, calendarStartDateTime, appointmentButton, appointmentCellContainer);
+                        appointmentButton.Unchecked += (sender, e) => AppointmentButton_Unchecked(sender, e, calendarStartDateTime, appointmentButton, appointmentCellContainer);
                         appointmentButton.IsChecked = selectedDateTimes.ContainsKey(calendarStartDateTime);
                     }
 
@@ -233,7 +235,7 @@ namespace WpfApp1
         }
 
         private Dictionary<DateTime, CheckBox> selectedDateTimes= new Dictionary<DateTime, CheckBox>();
-        private void AppointmentButton_Checked(object sender, RoutedEventArgs e, DateTime dt, CheckBox cb)
+        private void AppointmentButton_Checked(object sender, RoutedEventArgs e, DateTime dt, CheckBox cb, Border container)
         {
             var adjacent = selectedDateTimes.Where(i => dt.Equals(i.Key.AddMinutes(30)) || dt.Equals(i.Key.AddMinutes(-30))).ToDictionary(p => p.Key, p => p.Value);
 
@@ -253,7 +255,23 @@ namespace WpfApp1
                     {dt, cb}
                 };
             }
+
+            container.Background = Brushes.Green;
+            enableSelectAppointment();
+            disableSkip();
         }
+        private void AppointmentButton_Unchecked(object sender, RoutedEventArgs e, DateTime dt, CheckBox cb, Border container)
+        {
+            selectedDateTimes.Remove(dt);
+            container.Background = Brushes.Transparent;
+
+            if (selectedDateTimes.Count == 0)
+            {
+                enableSkip();
+                disableSelectAppointment();
+            }
+        }
+
 
         private void renderCalendarDayRow()
         {
@@ -430,14 +448,24 @@ namespace WpfApp1
             return Appointments.ToDictionary(appointment => appointment.StartDate, appointment => appointment);
         }
 
-        public bool datesSelected = false;
-        public bool enabled
+        private void disableSkip()
         {
-            get { return datesSelected; }
-            set
-            {
-                datesSelected = value;
-            }
+            SkipButton.IsEnabled = false;
+        }
+
+        private void enableSkip()
+        {
+            SkipButton.IsEnabled = true;
+        }
+
+        private void disableSelectAppointment ()
+        {
+            SelectAppointmentButton.IsEnabled = false;
+        }
+
+        private void enableSelectAppointment()
+        {
+            SelectAppointmentButton.IsEnabled = true;
         }
     }
 }
