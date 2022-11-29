@@ -30,8 +30,8 @@ namespace WpfApp1
 
         protected void HandleDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var track = ((ListViewItem)sender).Content as Appointment;
-            MessageBox.Show(track.FullName);
+            var appointment = ((ListViewItem)sender).Content as Appointment;
+            MessageBox.Show(appointment.FullName);
 
         }
     }
