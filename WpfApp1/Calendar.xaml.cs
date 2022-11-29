@@ -86,6 +86,8 @@ namespace WpfApp1
 
         public string preSelectedDoctor = "Dr. Amr, GP";
 
+        private String selectedDoctor;
+
         public Calendar()
         {
             // initialize days being shown on the calendar
@@ -99,6 +101,7 @@ namespace WpfApp1
             InitializeComponent();
 
             SelectedDoctor.SelectedValue = preSelectedDoctor;
+            selectedDoctor = (string) SelectedDoctor.SelectedValue;
 
             renderCalendarPage();
         }
@@ -235,6 +238,11 @@ namespace WpfApp1
         }
 
         private Dictionary<DateTime, CheckBox> selectedDateTimes= new Dictionary<DateTime, CheckBox>();
+
+        private void clearSelectedDateTimes()
+        {
+            selectedDateTimes.Clear();
+        }
         private void AppointmentButton_Checked(object sender, RoutedEventArgs e, DateTime dt, CheckBox cb, Border container)
         {
             var adjacent = selectedDateTimes.Where(i => dt.Equals(i.Key.AddMinutes(30)) || dt.Equals(i.Key.AddMinutes(-30))).ToDictionary(p => p.Key, p => p.Value);
@@ -256,7 +264,7 @@ namespace WpfApp1
                 };
             }
 
-            container.Background = Brushes.Green;
+            container.Background = (new BrushConverter()).ConvertFromString("#bbf7d0") as Brush;
             enableSelectAppointment();
             disableSkip();
         }
@@ -411,8 +419,41 @@ namespace WpfApp1
             renderCalendarPage();
         }
 
-        private void setPageByDoctor(object sender, EventArgs e)
+
+        private bool handleDoctorChange = true;
+        private void setPageByDoctor(object sender, SelectionChangedEventArgs e)
         {
+            // not so sure about this..
+            // is slower (+1 click) for people experienced with the system
+            // but might accomodate people who are still new to it
+            // might not want to actually add this in because the consequences of clearing out the selected appointments is not that bad
+            // user can simply click the appointments again and if they've accidentally cleared the selection, 
+            // it is likely that the patient must've already mentioned they want those slots
+            
+            // but is a good topic
+            // to discuss in the report or evaluation?
+            if(handleDoctorChange)
+            {
+                if (selectedDateTimes.Count > 0)
+                {
+                    MessageBoxResult result = MessageBox.Show(
+                        "You have already selected appointments. Do you want to change the selected doctor and clear the selected appointments?",
+                        "Clear Selected Appointments",
+                        MessageBoxButton.YesNo);
+
+                    if (result == MessageBoxResult.No)
+                    {
+                        // https://stackoverflow.com/a/8843675
+                        ComboBox combo = (ComboBox)sender;
+                        handleDoctorChange = false;
+                        combo.SelectedItem = e.RemovedItems[0];
+                        return;
+                    }
+                }
+            }
+            handleDoctorChange = true;
+
+            clearSelectedDateTimes();
             renderCalendarPage();
         }
 
@@ -451,21 +492,25 @@ namespace WpfApp1
         private void disableSkip()
         {
             SkipButton.IsEnabled = false;
+            SkipButtonBorder.BorderBrush = Brushes.LightGray;
         }
 
         private void enableSkip()
         {
             SkipButton.IsEnabled = true;
+            SkipButtonBorder.BorderBrush = (new BrushConverter()).ConvertFromString("#f9fafb") as Brush;
         }
 
         private void disableSelectAppointment ()
         {
             SelectAppointmentButton.IsEnabled = false;
+            SelectAppointmentButtonBorder.BorderBrush = Brushes.LightGray;
         }
 
         private void enableSelectAppointment()
         {
             SelectAppointmentButton.IsEnabled = true;
+            SelectAppointmentButtonBorder.BorderBrush = (new BrushConverter()).ConvertFromString("#1d4ed8") as Brush;
         }
     }
 }
