@@ -432,6 +432,8 @@ namespace WpfApp1
             
             // but is a good topic
             // to discuss in the report or evaluation?
+
+            // TODO: bug.. cancel clears the selected appointments
             if(handleDoctorChange)
             {
                 if (selectedDateTimes.Count > 0)
