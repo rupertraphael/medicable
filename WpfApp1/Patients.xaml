@@ -7,82 +7,137 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Patients">
+    <Page.Resources>
+        <Style TargetType="{x:Type Control}" x:Key="baseStyle">
+            <Setter Property="FontSize" Value="16" />
+        </Style>
+        <Style TargetType="{x:Type TextBlock}" x:Key="baseStyleTextBlock">
+            <Setter Property="FontSize" Value="16" />
+        </Style>
+        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource baseStyle}"></Style>
+        <Style TargetType="{x:Type Label}" BasedOn="{StaticResource baseStyle}"></Style>
+        <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource baseStyle}"></Style>
+        <Style TargetType="{x:Type ListView}" BasedOn="{StaticResource baseStyle}"></Style>
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="48*"/>
-            <ColumnDefinition Width="223*"/>
-            <ColumnDefinition Width="529*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1*"></RowDefinition>
-            <RowDefinition Height="9*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Grid Grid.ColumnSpan="3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"></ColumnDefinition>
-                <ColumnDefinition Width="10*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1" Background="#1d4ed8">
-                <TextBlock Padding="10" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#eff6ff" FontWeight="Bold">Clinic Name</TextBlock>
+        <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource baseStyleTextBlock}"></Style>
+    </Page.Resources>
+
+    <Grid Background="#e2e8f0">
+        <Border Margin="20" Background="#f9fafb" CornerRadius="4" Padding="20">
+            <Border.Effect>
+                <DropShadowEffect Opacity="0.06" Direction="270" BlurRadius="4" ShadowDepth="2"/>
+            </Border.Effect>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="5*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Row="0">
+                    <DockPanel>
+                        <StackPanel DockPanel.Dock="Top">
+                            <StackPanel>
+                                <TextBlock FontSize="24" Text="Patients"/>
+                            </StackPanel>
+                            <Grid DockPanel.Dock="Top" Margin="0 10">
+                                <TextBox x:Name="SearchBar" PreviewMouseDown="SearchBar_MouseDown" TextChanged="SearchBar_TextChanged" FontSize="16" Padding="4"/>
+                                <TextBlock FontSize="16" Margin="6 4" IsHitTestVisible="False" Text="Search by Name, Phone Number, Alberta HealthCare #" Foreground="DarkGray">
+                                    <TextBlock.Style>
+                                        <Style TargetType="{x:Type TextBlock}">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Text, ElementName=SearchBar}" Value="">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </Grid>
+                        </StackPanel>
+
+                        <ListView FontSize="16" Grid.Row="1" Name="patientView" d:ItemsSource="{d:SampleData ItemCount=13}" PreviewMouseLeftButtonDown= "PatientView_PreviewMouseLeftButtonDown" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible" SelectionChanged="patientView_SelectionChanged" >
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Width="Auto" Header="Name" DisplayMemberBinding="{Binding PatientName}"/>
+                                    <GridViewColumn Width="Auto" Header="Phone #" DisplayMemberBinding="{Binding PatientPhoneNumber}" />
+                                    <GridViewColumn Width="Auto" Header="Health Care #" DisplayMemberBinding="{Binding PatientHealthCareNumber}" />
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </DockPanel>
+                </Grid>
+                <Border Grid.Column="1" BorderThickness="1 0 0 0" BorderBrush="#d1d5db" Margin="16 0 0 0" Padding="16 0 0 0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <DockPanel Grid.Row="0">
+                            <Border DockPanel.Dock="Top" BorderThickness="0 0 0 1" BorderBrush="#d1d5db">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" Name="clientName" FontSize="22" Padding="0 16"/>
+                                    <Button Grid.Column="1" Background="#1d4ed8" HorizontalAlignment="Right" Padding="16 8" Margin="0 16" Foreground="#eff6ff">
+                                        <TextBlock Text="Book Appointment"/>
+                                    </Button>
+                                </Grid>
+                            </Border>
+                            <ScrollViewer>
+                                <StackPanel CanVerticallyScroll="True">
+                                    <StackPanel Grid.Column="0" Margin="4 0">
+                                        <Label Content="Health Care ID" FontWeight="Medium" Margin="0 6"/>
+                                        <TextBox Name="clientHealthID" Padding="6"/>
+                                    </StackPanel>
+                                    <Grid Margin="4 0">
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Grid.Column="0" Margin="0 0 4 0">
+                                            <Label Content="Telephone #" FontWeight="Medium" Margin="0 6"/>
+                                            <TextBox Name="clientPhoneNumber" Padding="6"/>
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="1" Margin="4 0 0 0">
+                                            <Label Content="Date of Birth" FontWeight="Medium" Margin="0 6"/>
+                                            <TextBox Name="clientDOB" Padding="6"/>
+                                        </StackPanel>
+                                    </Grid>
+
+                                    <StackPanel Margin="4 0">
+                                        <Label Content="Address" FontWeight="Medium" Margin="0 6"/>
+                                        <TextBox Name="clientAddress" Padding="6"/>
+                                    </StackPanel>
+
+                                    <StackPanel Margin="4 0">
+                                        <Label Content="Preferred Doctor" FontWeight="Medium" Margin="0 6"/>
+                                        <TextBox Name="clientPreferredDoctor" Padding="6"/>
+                                    </StackPanel>
+
+                                    <StackPanel Margin="4 0">
+                                        <Label Content="Upcoming Appointments" FontWeight="Medium" Margin="0 6"/>
+                                        <ListBox d:ItemsSource="{d:SampleData ItemCount=2}" MinHeight="200px" Padding="6"/>
+                                    </StackPanel>
+
+                                    <Button Foreground="#1d4ed8" Background="Transparent" BorderThickness="0" Padding="8" Margin="4 16">
+                                        <TextBlock Text="View Past Appointments" TextDecorations="Underline"/>
+                                    </Button>
+
+                                </StackPanel>
+                            </ScrollViewer>
+                            
+                            <!--<Button Background="#1d4ed8" Padding="9" Foreground="#eff6ff" Margin="402,139,28,217" Grid.Column="2" Grid.Row="1">
+                            <TextBlock Text="Health History"/>
+                        </Button>-->
+                        </DockPanel>
+                        
+                    </Grid>
+                    
+                </Border>
             </Grid>
-            <Grid Grid.Column="1" Grid.Row="0" Background="#1d4ed8">
-                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Grid.IsSharedSizeScope="True">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition SharedSizeGroup="MySizeGroup" />
-                        </Grid.ColumnDefinitions>
-                        <Button Padding="14" BorderThickness="0" Background="#1d4ed8" Foreground="#eff6ff">Dashboard</Button>
-                    </Grid>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition SharedSizeGroup="MySizeGroup" />
-                        </Grid.ColumnDefinitions>
-                        <Button Padding="5,1" BorderThickness="0" Background="#1e40af" Foreground="#eff6ff" FontWeight="Bold">Patients</Button>
-                    </Grid>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition SharedSizeGroup="MySizeGroup" />
-                        </Grid.ColumnDefinitions>
-                        <Button Padding="5,1" BorderThickness="0" Background="#1d4ed8" Foreground="#eff6ff">Calendar</Button>
-                    </Grid>
-                </StackPanel>
-            </Grid>
-        </Grid>
-        <TextBox Grid.ColumnSpan="3" HorizontalAlignment="Left" Margin="10,35,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="390" Name="SearchBar" PreviewMouseDown="SearchBar_MouseDown" TextChanged="SearchBar_TextChanged" />
-        <ListView Grid.Row="1" Name="patientView" d:ItemsSource="{d:SampleData ItemCount=13}" PreviewMouseLeftButtonDown= "PatientView_PreviewMouseLeftButtonDown" Margin="10,69,400,20" Grid.ColumnSpan="3" ScrollViewer.VerticalScrollBarVisibility="Visible" SelectionChanged="patientView_SelectionChanged" >
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Width="160" Header="Name" DisplayMemberBinding="{Binding PatientName}"/>
-                    <GridViewColumn Width="100" Header="Phone #" DisplayMemberBinding="{Binding PatientPhoneNumber}" />
-                    <GridViewColumn Width="100" Header="Health Care #" DisplayMemberBinding="{Binding PatientHealthCareNumber}" />
-                </GridView>
-            </ListView.View>
-        </ListView>
-        <Label Grid.Column="2" Name="clientName" Content="" HorizontalAlignment="Left" Margin="144,25,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="22"/>
-        <Rectangle Grid.Column="2" HorizontalAlignment="Left" Height="301" Margin="144,70,10,20" Grid.Row="1" Stroke="Black" VerticalAlignment="Top" Width="375"/>
-        <Rectangle Grid.Column="2" HorizontalAlignment="Left" Height="45" Margin="144,25,0,0" Grid.Row="1" Stroke="Black" VerticalAlignment="Top" Width="375"/>
-        <Label Content="Health Care ID" HorizontalAlignment="Left" Margin="153,75,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.Column="2" RenderTransformOrigin="0.86,0.262"/>
-        <TextBox Name="clientHealthID" HorizontalAlignment="Left" Margin="155,101,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="77" Grid.Column="2"/>
-        <Label Content="Date of Birth" HorizontalAlignment="Left" Margin="280,75,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.Column="2" RenderTransformOrigin="0.86,0.262"/>
-        <TextBox Name="clientDOB" HorizontalAlignment="Left" Margin="282,101,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="75" Grid.Column="2"/>
-        <Label Content="Telephone #" HorizontalAlignment="Left" Margin="402,75,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.Column="2" RenderTransformOrigin="0.86,0.262"/>
-        <TextBox Name="clientPhoneNumber" HorizontalAlignment="Left" Margin="404,101,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="97" Grid.Column="2"/>
-        <Label Content="Address" HorizontalAlignment="Left" Margin="153,130,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.Column="2" RenderTransformOrigin="0.86,0.262"/>
-        <TextBox Name="clientAddress" HorizontalAlignment="Left" Margin="155,156,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="214" Grid.Column="2"/>
-        <Button Background="#1d4ed8" Padding="9" Foreground="#eff6ff" Margin="402,139,28,217" Grid.Column="2" Grid.Row="1">
-            <TextBlock Text="Health History"/>
-        </Button>
-        <Label Content="Upcoming Appointments" HorizontalAlignment="Left" Margin="239,219,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.Column="2" RenderTransformOrigin="0.86,0.262" FontSize="16"/>
-        <ListBox Grid.Column="2" HorizontalAlignment="Left" Height="68" Margin="190,248,0,0" Grid.Row="1" VerticalAlignment="Top" Width="284" d:ItemsSource="{d:SampleData ItemCount=0}"/>
-        <Label Content="Preferred Doctor" HorizontalAlignment="Left" Margin="152,174,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.Column="2" RenderTransformOrigin="0.86,0.262"/>
-        <TextBox Name="clientPreferredDoctor" HorizontalAlignment="Left" Margin="157,196,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="97" Grid.Column="2"/>
-        <Button Background="#1d4ed8" Padding="9" Foreground="#eff6ff" Margin="358,184,28,171" Grid.Column="2" Grid.Row="1">
-            <TextBlock Text="Past Appointments"/>
-        </Button>
-        <Label Content="Dr. Rupert @ 10:30 AM, November 10, 2022" HorizontalAlignment="Left" Margin="199,250,0,0" Grid.Row="1" VerticalAlignment="Top" RenderTransformOrigin="17.687,6.342" Grid.Column="2"/>
-        <Button Background="#1d4ed8" Padding="9" Foreground="#eff6ff" Margin="260,324,126,31" Grid.Column="2" Grid.Row="1">
-            <TextBlock Text="Book Appointment"/>
-        </Button>
+        </Border>
     </Grid>
 </Page>

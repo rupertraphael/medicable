@@ -33,8 +33,7 @@ namespace WpfApp1
             patientList.Add(new APatient("Albert Zander", "403-555-1430", "13112-1764", "09/22/1967", "123 Martin Crescent NE Calgary AB", "Dr Raphael", "", ""));
             patientList.Add(new APatient("Antony Simmons", "587-412-8666", "16543-1289", "11/19/2005", "432 Panaroma RD NW Calgary AB", "Dr Araiz", "", ""));
             patientList.Add(new APatient("Bruno Simmons", "587-222-8656", "16552-1139", "05/06/1945", "170 Ridge ST SW Calgary AB", "", "", ""));
-            SearchBar.Text = "Search by Name, Phone Number, Alberta HealthCare # ";
-            patientView.ItemsSource = patientList;
+            patientView.ItemsSource = patientList.OrderBy(patient => patient.PatientName).ToList(); ;
         }
 
         private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
@@ -56,11 +55,11 @@ namespace WpfApp1
                     outputPatientList.Add(patientList[i]);
                 }
             }
-            patientView.ItemsSource = outputPatientList;
+            patientView.ItemsSource = outputPatientList.OrderBy(patient => patient.PatientName).ToList();
         }
         private void SearchBar_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            SearchBar.Text = "";
+            //SearchBar.Text = "";
         }
 
         private void PatientView_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
