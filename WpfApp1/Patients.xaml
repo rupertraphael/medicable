@@ -22,7 +22,7 @@
         <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource baseStyleTextBlock}"></Style>
     </Page.Resources>
 
-    <Grid Background="#e2e8f0">
+    <Grid Background="#e2e8f0" Name="PatientsPageMain">
         <Border Margin="20" Background="#f9fafb" CornerRadius="4" Padding="20">
             <Border.Effect>
                 <DropShadowEffect Opacity="0.06" Direction="270" BlurRadius="4" ShadowDepth="2"/>
@@ -55,7 +55,7 @@
                             </Grid>
                         </StackPanel>
 
-                        <ListView FontSize="16" Grid.Row="1" Name="patientView" d:ItemsSource="{d:SampleData ItemCount=13}" PreviewMouseLeftButtonDown= "PatientView_PreviewMouseLeftButtonDown" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible" SelectionChanged="patientView_SelectionChanged" >
+                        <ListView FontSize="16" Grid.Row="1" Name="patientView" d:ItemsSource="{d:SampleData ItemCount=13}" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible" SelectionChanged="patientView_SelectionChanged" >
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Width="Auto" Header="Name" DisplayMemberBinding="{Binding PatientName}"/>
@@ -66,8 +66,8 @@
                         </ListView>
                     </DockPanel>
                 </Grid>
-                <Border Grid.Column="1" BorderThickness="1 0 0 0" BorderBrush="#d1d5db" Margin="16 0 0 0" Padding="16 0 0 0">
-                    <Grid>
+                <Border Grid.Column="1" BorderThickness="1 0 0 0" BorderBrush="#d1d5db" Margin="16 0 0 0" Padding="16 0 0 0" Name="PatientView">
+                    <Grid Name="PatientViewGrid">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
                             <RowDefinition Height="Auto"></RowDefinition>
