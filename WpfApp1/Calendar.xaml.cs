@@ -76,6 +76,10 @@ namespace WpfApp1
     /// </summary>
     public partial class Calendar : Page
     {
+        // TODO
+        // 1. Fix bug when cancelling change doctor, selected appointments are cleared.
+        // 2. Today button that goes to the page of the current day/date.
+        // 3. Highlight the today's date
 
         private List<int> calendarDays = new List<int>();
         private List<string> Days = new List<string>()
