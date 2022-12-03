@@ -142,8 +142,8 @@
                                             <TextBlock FontSize="16" FontWeight="Medium" Text="{Binding FullName}"></TextBlock>
                                             <TextBlock FontSize="16" Foreground="#6b7280">
                                                 <TextBlock.Text>
-                                                    <MultiBinding StringFormat="{}{0} w/ {1}">
-                                                        <Binding Path="StartEnd" />
+                                                    <MultiBinding StringFormat="{}{0:t} w/ {1}">
+                                                        <Binding Path="StartDate" />
                                                         <Binding Path="Doctor" />
                                                     </MultiBinding>
                                                 </TextBlock.Text>

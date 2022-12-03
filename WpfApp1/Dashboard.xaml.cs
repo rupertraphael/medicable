@@ -22,22 +22,30 @@ namespace WpfApp1
     /// </summary>
     public partial class Dashboard : Page
     {
-        private int quickViewPage;
+        // TODO
+        // 1. Quickview empty list when search box not empty
+        // 2. Implement search
+        // 3. Implement click on appointment
+        // 4. Group continuous appointments
+
         private List<Appointment> Appointments = new List<Appointment>();
-        private string[] dates = {
-                "December 1", "December 2", "December 3" , "December 4", "December 5"
-            };
+
+        private List<int> calendarDays = new List<int>();
+        private List<string> Days = new List<string>()
+        {
+            "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+        };
+        private DateTime today = DateTime.Parse("2022-12-01 00:00");
+        private DateTime quickViewDate;
+
 
         public Dashboard()
         {
+            quickViewDate= DateTime.Parse(today.ToString());
+
             InitializeComponent();
 
-            this.quickViewPage = 0;
-
-            quickViewTitle.Text = this.dates[quickViewPage];
-
-
-            //quickView.ItemsSource = this.Appointments[quickViewPage];
+            renderList();
         }
 
         private void Book_Existing_Patient_Click(object sender, RoutedEventArgs e)
@@ -48,29 +56,21 @@ namespace WpfApp1
 
         private void Quickview_Next(object sender, RoutedEventArgs e)
         {
-            this.quickViewPage = this.quickViewPage++;
-            if (this.quickViewPage > this.Appointments.Count())
-            {
-                this.quickViewPage = this.Appointments.Count();
-            }
-            this.setQuickViewBasedOnPage(this.quickViewPage);
+            quickViewDate = quickViewDate.AddDays(1);
+            renderList();
         }
 
         private void Quickview_Previous(object sender, RoutedEventArgs e)
         {
-            if (this.quickViewPage == 0)
-            {
-                this.quickViewPage = 1;
-            }
-            this.quickViewPage--;
-            this.setQuickViewBasedOnPage(this.quickViewPage);
+            quickViewDate = quickViewDate.AddDays(-1);
+            renderList();
         }
 
-        private void setQuickViewBasedOnPage(int page)
+        private void renderList()
         {
-            quickView.ItemsSource = this.Appointments;
-            quickViewTitle.Text = this.dates[page];
-            if(page == 0)
+            quickView.ItemsSource = this.getAppointments();
+            quickViewTitle.Text = this.quickViewDate.ToString("D");
+            if(today.Date == quickViewDate.Date)
             {
                 quickViewSubtitle.Text = "Appointments for Today";
             } else
@@ -84,6 +84,29 @@ namespace WpfApp1
             Trace.WriteLine("navigated to dashboard!");
 
             // do whatever with str, like assign to a view model field, etc.
+        }
+
+        private List<Appointment> getAppointments()
+        {
+            // TODO: add end date
+            List<Appointment> Appointments = new List<Appointment>
+            {
+                new Appointment("Rupert", "Amodia", DateTime.Parse("2022-12-01 09:00:00"), "Dr. Amr, GP"),
+                new Appointment("Rupert", "Amodia", DateTime.Parse("2022-12-01 09:30:00"), "Dr. Amr, GP"),
+                new Appointment("Amy", "Santiago", DateTime.Parse("2022-12-01 12:00:00"), "Dr. Amr, GP"),
+                new Appointment("Charles", "Boyle", DateTime.Parse("2022-10-31 14:00:00"), "Dr. Amr, GP"),
+                new Appointment("Rosa", "Diaz", DateTime.Parse("2022-11-07 09:00:00"), "Dr. Amr, GP"),
+                new Appointment("Rosa", "Diaz", DateTime.Parse("2022-11-07 09:30:00"), "Dr. Amr, GP"),
+                new Appointment("Raymond", "Holt", DateTime.Parse("2022-11-07 11:30:00"), "Dr. Amr, GP"),
+                new Appointment("Kevin", "Cozner", DateTime.Parse("2022-11-07 13:30:00"), "Dr. Amr, GP"),
+                new Appointment("Araiz", "Asad", DateTime.Parse("2022-11-07 09:00:00"), "Dr. Raphael, GP"),
+                new Appointment("Elizabeth Chu", "Asad", DateTime.Parse("2022-11-08 15:00:00"), "Dr. Amr, GP"),
+                new Appointment("David", "Smith", DateTime.Parse("2022-11-02 11:30:00"), "Dr. Raphael, GP")
+            };
+
+            return Appointments.Where(appointment => appointment.StartDate.Date == quickViewDate.Date)
+                .OrderBy(appointment => appointment.StartDate)
+                .ToList();
         }
     }
 
