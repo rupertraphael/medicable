@@ -24,37 +24,55 @@ namespace WpfApp1
     public partial class MainWindow : Window
     {
         private Dictionary<string, Page> pages = new Dictionary<string, Page>();
-        private List<Appointment>[] Appointments;
-        private Page DashboardPage = new Dashboard();
-        private Page PatientsPage = new Patients();
+        private Dashboard DashboardPage = new Dashboard();
+        private Patients PatientsPage = new Patients();
 
 
         public MainWindow()
         {
             InitializeComponent();
 
-            //MainNavFrame.NavigationService.Navigate(this.DashboardPage);
             //this.DashboardPage.Loaded += DashboardPage_Loaded;
-            MainNavFrame.LoadCompleted += MainNavFrame_LoadCompleted;
-        }
+            //this.PatientsPage.Loaded += PatientsPage_Loaded;
 
-        private void DashboardPage_Loaded(object sender, RoutedEventArgs e)
-        {
-            Trace.WriteLine("hello dashboard");
+            DashboardPage.PatientsPageLink = PatientsPage;
+
+            MainNavFrame.LoadCompleted += MainNavFrame_LoadCompleted;
         }
 
         private void MainNavFrame_LoadCompleted(object sender, NavigationEventArgs e)
         {
-            Trace.WriteLine(sender.ToString());
+            if (e.Content.GetType() == PatientsPage.GetType() || e.Content.GetType() == (new Calendar()).GetType())
+            {
+                Patients_Button.Background = (new BrushConverter()).ConvertFromString("#1e40af") as Brush;
+                Dashboard_Button.Background = (new BrushConverter()).ConvertFromString("#1d4ed8") as Brush;
+
+                
+            } else if(e.Content.GetType() == DashboardPage.GetType())
+            {
+                Dashboard_Button.Background = (new BrushConverter()).ConvertFromString("#1e40af") as Brush;
+                Patients_Button.Background = (new BrushConverter()).ConvertFromString("#1d4ed8") as Brush;
+            }
         }
 
-        
-
-        private void Dashboard_Button_Click(object sender, RoutedEventArgs e)
+        private void DashboardPage_Loaded(object sender, RoutedEventArgs e)
         {
             Dashboard_Button.Background = (new BrushConverter()).ConvertFromString("#1e40af") as Brush;
             Patients_Button.Background = (new BrushConverter()).ConvertFromString("#1d4ed8") as Brush;
-            Patients_Button.FontWeight = FontWeights.Regular;
+        }
+
+        private void PatientsPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            Patients_Button.Background = (new BrushConverter()).ConvertFromString("#1e40af") as Brush;
+            Dashboard_Button.Background = (new BrushConverter()).ConvertFromString("#1d4ed8") as Brush;
+        }
+
+
+        private void Dashboard_Button_Click(object sender, RoutedEventArgs e)
+        {
+            //Dashboard_Button.Background = (new BrushConverter()).ConvertFromString("#1e40af") as Brush;
+            //Patients_Button.Background = (new BrushConverter()).ConvertFromString("#1d4ed8") as Brush;
+            //Patients_Button.FontWeight = FontWeights.Regular;
 
             //MainNavFrame.Source = new Uri("Dashboard.xaml", UriKind.Relative);
 
@@ -63,9 +81,9 @@ namespace WpfApp1
 
         private void Patients_Button_Click(object sender, RoutedEventArgs e)
         {
-            Patients_Button.Background = (new BrushConverter()).ConvertFromString("#1e40af") as Brush;
-            Dashboard_Button.Background = (new BrushConverter()).ConvertFromString("#1d4ed8") as Brush;
-            Dashboard_Button.FontWeight = FontWeights.Regular;
+            //Patients_Button.Background = (new BrushConverter()).ConvertFromString("#1e40af") as Brush;
+            //Dashboard_Button.Background = (new BrushConverter()).ConvertFromString("#1d4ed8") as Brush;
+            //Dashboard_Button.FontWeight = FontWeights.Regular;
 
             MainNavFrame.NavigationService.Navigate(this.PatientsPage);
         }

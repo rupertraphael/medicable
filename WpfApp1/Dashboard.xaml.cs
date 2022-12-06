@@ -38,6 +38,8 @@ namespace WpfApp1
         private DateTime today = DateTime.Parse("2022-12-01 00:00");
         private DateTime quickViewDate;
 
+        public Patients PatientsPageLink = new Patients();
+
 
         public Dashboard()
         {
@@ -52,7 +54,13 @@ namespace WpfApp1
         private void Book_Existing_Patient_Click(object sender, RoutedEventArgs e)
         {
             NavigationService ns = NavigationService.GetNavigationService(this);
-            ns.Navigate(new Patients(), "patients");
+            ns.Navigate(PatientsPageLink);
+        }
+
+        private void Book_New_Patient_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService ns = NavigationService.GetNavigationService(this);
+            ns.Navigate(new Calendar());
         }
 
         private void Quickview_Next(object sender, RoutedEventArgs e)

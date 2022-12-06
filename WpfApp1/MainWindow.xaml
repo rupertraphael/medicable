@@ -35,7 +35,7 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition SharedSizeGroup="MySizeGroup" />
                         </Grid.ColumnDefinitions>
-                        <Button Padding="14" BorderThickness="0" Background="#1e40af" Foreground="#eff6ff" FontWeight="Bold" Click="Dashboard_Button_Click" Name="Dashboard_Button">Dashboard</Button>
+                        <Button Padding="14" BorderThickness="0" Background="#1e40af" Foreground="#eff6ff" Click="Dashboard_Button_Click" Name="Dashboard_Button">Dashboard</Button>
                     </Grid>
                     <Grid>
                         <Grid.ColumnDefinitions>

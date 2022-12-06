@@ -46,7 +46,7 @@
                     </Border.Effect>
                 </Border>
                 <Border Margin="20 10" Padding="1" Background="#1d4ed8" CornerRadius="4">
-                    <Button Background="#1d4ed8" Padding="9" Foreground="#eff6ff">
+                    <Button Background="#1d4ed8" Padding="9" Foreground="#eff6ff" Click="Book_New_Patient_Click">
                         <TextBlock>Book for <Bold>New Patient</Bold></TextBlock>
                     </Button>
                     <Border.Effect>
