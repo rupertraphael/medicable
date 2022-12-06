@@ -16,61 +16,6 @@ using System.Windows.Shapes;
 
 namespace WpfApp1
 {
-    public class Appointment
-    {
-        private string _firstName;
-        private string _lastName;
-        private string _doctor;
-        private DateTime _startDate;
-
-
-        public string FirstName
-        {
-            get { return _firstName; }
-            set { _firstName = value; }
-        }
-
-        public string LastName
-        {
-            get { return _lastName; }
-            set { _lastName = value; }
-        }
-
-        public DateTime StartDate
-        {
-            get { return _startDate; }
-            set { _startDate = value; }
-        }
-
-        public DateTime EndDate
-        {
-            get { return _startDate; }
-            set { _startDate = value; }
-        }
-
-        public string FullName
-        {
-            get { return _firstName + " " + _lastName; }
-        }
-
-        public string Doctor
-        {
-            get { return _doctor; }
-        }
-
-        public Appointment(
-            string firstname,
-            string lastname,
-            DateTime startDate,
-            string doctor)
-        {
-            _firstName = firstname;
-            _lastName = lastname;
-            _startDate = startDate;
-            _doctor = doctor;
-        }
-    }
-
     /// <summary>
     /// Interaction logic for Page1.xaml
     /// </summary>
@@ -475,20 +420,7 @@ namespace WpfApp1
 
         private Dictionary<DateTime, Appointment> getAppointments()
         {
-            List<Appointment> Appointments = new List<Appointment>
-            {
-                new Appointment("Rupert", "Amodia", DateTime.Parse("2022-10-31 09:00:00"), "Dr. Amr, GP"),
-                new Appointment("Jacob", "Peralta", DateTime.Parse("2022-10-31 10:00:00"), "Dr. Amr, GP"),
-                new Appointment("Amy", "Santiago", DateTime.Parse("2022-10-31 12:00:00"), "Dr. Amr, GP"),
-                new Appointment("Charles", "Boyle", DateTime.Parse("2022-10-31 14:00:00"), "Dr. Amr, GP"),
-                new Appointment("Rosa", "Diaz", DateTime.Parse("2022-11-07 09:00:00"), "Dr. Amr, GP"),
-                new Appointment("Rosa", "Diaz", DateTime.Parse("2022-11-07 09:30:00"), "Dr. Amr, GP"),
-                new Appointment("Raymond", "Holt", DateTime.Parse("2022-11-07 11:30:00"), "Dr. Amr, GP"),
-                new Appointment("Kevin", "Cozner", DateTime.Parse("2022-11-07 13:30:00"), "Dr. Amr, GP"),
-                new Appointment("Araiz", "Asad", DateTime.Parse("2022-11-07 09:00:00"), "Dr. Raphael, GP"),
-                new Appointment("Elizabeth Chu", "Asad", DateTime.Parse("2022-11-08 15:00:00"), "Dr. Amr, GP"),
-                new Appointment("David", "Smith", DateTime.Parse("2022-11-02 11:30:00"), "Dr. Raphael, GP")
-            };
+            List<Appointment> Appointments = DB.Appointments;
 
             Appointments = Appointments.Where(a => a.Doctor == (string) SelectedDoctor.SelectedValue).ToList();
 

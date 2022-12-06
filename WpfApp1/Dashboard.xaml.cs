@@ -42,6 +42,7 @@ namespace WpfApp1
         public Dashboard()
         {
             quickViewDate= DateTime.Parse(today.ToString());
+            List<Appointment> appointments = DB.Appointments;
 
             InitializeComponent();
 
@@ -88,23 +89,7 @@ namespace WpfApp1
 
         private List<Appointment> getAppointments()
         {
-            // TODO: add end date
-            List<Appointment> Appointments = new List<Appointment>
-            {
-                new Appointment("Rupert", "Amodia", DateTime.Parse("2022-12-01 09:00:00"), "Dr. Amr, GP"),
-                new Appointment("Rupert", "Amodia", DateTime.Parse("2022-12-01 09:30:00"), "Dr. Amr, GP"),
-                new Appointment("Amy", "Santiago", DateTime.Parse("2022-12-01 12:00:00"), "Dr. Amr, GP"),
-                new Appointment("Charles", "Boyle", DateTime.Parse("2022-10-31 14:00:00"), "Dr. Amr, GP"),
-                new Appointment("Rosa", "Diaz", DateTime.Parse("2022-11-07 09:00:00"), "Dr. Amr, GP"),
-                new Appointment("Rosa", "Diaz", DateTime.Parse("2022-11-07 09:30:00"), "Dr. Amr, GP"),
-                new Appointment("Raymond", "Holt", DateTime.Parse("2022-11-07 11:30:00"), "Dr. Amr, GP"),
-                new Appointment("Kevin", "Cozner", DateTime.Parse("2022-11-07 13:30:00"), "Dr. Amr, GP"),
-                new Appointment("Araiz", "Asad", DateTime.Parse("2022-11-07 09:00:00"), "Dr. Raphael, GP"),
-                new Appointment("Elizabeth Chu", "Asad", DateTime.Parse("2022-11-08 15:00:00"), "Dr. Amr, GP"),
-                new Appointment("David", "Smith", DateTime.Parse("2022-11-02 11:30:00"), "Dr. Raphael, GP")
-            };
-
-            return Appointments.Where(appointment => appointment.StartDate.Date == quickViewDate.Date)
+            return DB.Appointments.Where(appointment => appointment.StartDate.Date == quickViewDate.Date)
                 .OrderBy(appointment => appointment.StartDate)
                 .ToList();
         }
