@@ -62,6 +62,93 @@ namespace WpfApp1
             Trace.WriteLine(sender.ToString());
         }
 
+        public class APatient
+        {
+            private string _patientName;
+            private string _patientPhoneNumber;
+            private string _patientHealthCareNumber;
+            private string _patientDOB;
+            private string _patientAddress;
+            private string _patientPreferredDoctor;
+            private string _patientHealthHistory;
+            private string _patientConditions;
+
+            public string PatientName
+            {
+                get { return _patientName; }
+                set { _patientName = value; }
+            }
+
+            public string PatientPhoneNumber
+            {
+                get { return _patientPhoneNumber; }
+                set { _patientPhoneNumber = value; }
+            }
+
+            public string PatientHealthCareNumber
+            {
+                get { return _patientHealthCareNumber; }
+                set { _patientHealthCareNumber = value; }
+            }
+
+            public string PatientDOB
+            {
+                get { return _patientDOB; }
+                set { _patientDOB = value; }
+            }
+
+            public string PatientAddress
+            {
+                get { return _patientAddress; }
+                set { _patientAddress = value; }
+            }
+
+            public string PatientPreferredDoctor
+            {
+                get { return _patientPreferredDoctor; }
+                set { _patientPreferredDoctor = value; }
+            }
+
+            public string PatientHealthHistory
+            {
+                get { return _patientHealthHistory; }
+                set { _patientHealthHistory = value; }
+            }
+
+            public string PatientConditions
+            {
+                get { return _patientConditions; }
+                set { _patientConditions = value; }
+            }
+
+            public override string ToString()
+            {
+                return this.PatientName;
+            }
+
+            public APatient(
+                string patientName,
+                string patientPhoneNumber,
+                string patientHealthCareNumber,
+                string patientDOB,
+                string patientAddress,
+                string patientPreferredDoctor,
+                string patientHealthHistory,
+                string patientConditions)
+            {
+                _patientName = patientName;
+                _patientPhoneNumber = patientPhoneNumber;
+                _patientHealthCareNumber = patientHealthCareNumber;
+                _patientDOB = patientDOB;
+                _patientAddress = patientAddress;
+                _patientPreferredDoctor = patientPreferredDoctor;
+                _patientHealthHistory = patientHealthHistory;
+                _patientConditions = patientConditions;
+            }
+
+        }
+
+
         public class Appointment
         {
             private string _firstName;
