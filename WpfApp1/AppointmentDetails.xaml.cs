@@ -30,11 +30,35 @@ namespace WpfApp1
 
         }
 
+        private void timepicker_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            BookButton.Content = "Book Appointment";
+
+        }
         private void BookButton_Click(object sender, RoutedEventArgs e)
         {
-            if (datepicker!=null || timepicker!= null)
+            if (timepicker.SelectedIndex > -1)
             {
-                BookButton.Content = "Proceed";
+                string messageBoxText = "Appointment Confirmed!";
+                string caption = "Appointment Confirmation";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Information;
+                MessageBoxResult result;
+
+                result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
+
+                if(result==MessageBoxResult.OK)
+                {
+                    NavigationService ns = NavigationService.GetNavigationService(this);
+                    ns.Navigate(new Dashboard());
+                }
+
+
+            }
+            else
+            {
+                NavigationService ns = NavigationService.GetNavigationService(this);
+                ns.Navigate(new Calendar());
             }
         }
     }
