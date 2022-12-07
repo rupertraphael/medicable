@@ -99,5 +99,11 @@ namespace WpfApp1
                 PatientView.Child = PatientViewGrid;
             }
         }
+
+        private void Book_Appointment(object sender, RoutedEventArgs e)
+        {
+            NavigationService ns = NavigationService.GetNavigationService(this);
+            ns.Navigate(new AppointmentDetails());
+        }
     }
 }

@@ -13,12 +13,12 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace HorizontalPrototype
+namespace WpfApp1
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for AppointmentDetails.xaml
     /// </summary>
-    public partial class AppointmentDetails : Window
+    public partial class AppointmentDetails : Page
     {
         public AppointmentDetails()
         {
@@ -30,9 +30,36 @@ namespace HorizontalPrototype
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void timepicker_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            BookButton.Content = "Book Appointment";
 
+        }
+        private void BookButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (timepicker.SelectedIndex > -1)
+            {
+                string messageBoxText = "Appointment Confirmed!";
+                string caption = "Appointment Confirmation";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Information;
+                MessageBoxResult result;
+
+                result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
+
+                if (result == MessageBoxResult.OK)
+                {
+                    NavigationService ns = NavigationService.GetNavigationService(this);
+                    ns.Navigate(new Dashboard());
+                }
+
+
+            }
+            else
+            {
+                NavigationService ns = NavigationService.GetNavigationService(this);
+                ns.Navigate(new Calendar());
+            }
         }
     }
 }

@@ -80,7 +80,7 @@
                                         <ColumnDefinition></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
                                     <Label Grid.Column="0" Name="clientName" FontSize="22" Padding="0 16"/>
-                                    <Button Grid.Column="1" Background="#1d4ed8" HorizontalAlignment="Right" Padding="16 8" Margin="0 16" Foreground="#eff6ff">
+                                    <Button Grid.Column="1" Background="#1d4ed8" HorizontalAlignment="Right" Padding="16 8" Margin="0 16" Foreground="#eff6ff" Click="Book_Appointment">
                                         <TextBlock Text="Book Appointment"/>
                                     </Button>
                                 </Grid>
