@@ -54,9 +54,7 @@ namespace WpfApp1
 
         private int today = 31;
 
-        private string preSelectedDoctor = "Dr. Amr, GP";
-
-        private String selectedDoctor;
+        private string preSelectedDoctor = (DB.Doctors.OrderBy(d => d.Name).ToList())[0].DisplayName;
 
         public Calendar(Doctor selectedDoctor) : this()
         {
@@ -98,6 +96,8 @@ namespace WpfApp1
                 doctorContainer.Content = doctor.DisplayName;
                 SelectedDoctor.Items.Add(doctorContainer);
             }
+
+            SelectedDoctor.SelectedValue = preSelectedDoctor;
         }
 
         private void renderCalendarPage()
