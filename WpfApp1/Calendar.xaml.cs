@@ -32,6 +32,25 @@ namespace WpfApp1
         {
             "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
         };
+
+        private List<DateTime> grayedOutDates = new List<DateTime>()
+        {
+            DateTime.Parse("2022-10-31 09:00:00"),
+            DateTime.Parse("2022-11-28 09:00:00"),
+            DateTime.Parse("2022-11-29 09:00:00"),
+            DateTime.Parse("2022-11-30 09:00:00"),
+            DateTime.Parse("2023-01-01 09:00:00"),
+            DateTime.Parse("2023-02-01 09:00:00"),
+            DateTime.Parse("2023-02-02 09:00:00"),
+            DateTime.Parse("2023-02-03 09:00:00"),
+            DateTime.Parse("2023-02-04 09:00:00"),
+            DateTime.Parse("2023-02-05 09:00:00")
+        };
+
+        private List<int> grayedOutDates2 = new List<int>()
+        {
+            0,28,29,30,62,93,94,95,96,97
+        };
         private int page = 2;
 
         public string preSelectedDoctor = "Dr. Amr, GP";
@@ -63,7 +82,9 @@ namespace WpfApp1
 
             SelectedMonth.SelectedValue = getMonthByPage();
 
+            // only the time is important here and not the date.
             var startTime = DateTime.Parse("2012-01-28 09:00:00");
+            
             var endTime = startTime.AddHours(7);
 
             int row = 0;
@@ -170,6 +191,11 @@ namespace WpfApp1
 
                     appointmentCellContainer.Child = appointmentCell;
                     columns.Children.Add(appointmentCellContainer);
+
+                    if (grayedOutDates.Exists(date => date.Date.Equals(calendarStartDateTime.Date)))
+                    {
+                        appointmentCellContainer.Background = (new BrushConverter()).ConvertFromString("#e5e7eb") as Brush; ;
+                    }
                 }
 
                 rowContainer.Child = columns;
