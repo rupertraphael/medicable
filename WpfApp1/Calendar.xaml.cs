@@ -24,7 +24,6 @@ namespace WpfApp1
         // TODO
         // 2. Today button that goes to the page of the current day/date.
         // 3. Highlight the today's date
-        // 4. Grey out dates that are not part of the selected month
         // 5. Colour the doctor items
 
         private List<int> calendarDays = new List<int>();
