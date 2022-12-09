@@ -83,13 +83,13 @@
                                 </Border>
                             </WrapPanel>
                             <Grid Grid.Row="1" Grid.ColumnSpan="3" Margin="0 20 0 10">
-                                <TextBox x:Name="SearchTermTextBox" FontSize="16" Padding="4"/>
-                                <TextBlock FontSize="16" Margin="6 4" IsHitTestVisible="False" Text="Search using Alberta Health ID" Foreground="DarkGray">
+                                <TextBox x:Name="SearchBar" FontSize="16" Padding="4"/>
+                                <TextBlock FontSize="16" Margin="6 4" IsHitTestVisible="False" Text="Search for Patients using Alberta Health ID, Phone Number, First Name, or Last Name." Foreground="DarkGray">
                                     <TextBlock.Style>
                                         <Style TargetType="{x:Type TextBlock}">
                                             <Setter Property="Visibility" Value="Collapsed"/>
                                             <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Text, ElementName=SearchTermTextBox}" Value="">
+                                                <DataTrigger Binding="{Binding Text, ElementName=SearchBar}" Value="">
                                                     <Setter Property="Visibility" Value="Visible"/>
                                                 </DataTrigger>
                                             </Style.Triggers>

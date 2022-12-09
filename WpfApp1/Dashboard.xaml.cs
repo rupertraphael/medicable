@@ -77,12 +77,18 @@ namespace WpfApp1
 
         private void renderList()
         {
-            quickView.ItemsSource = this.getAppointments();
+            renderList(this.getAppointments());
+        }
+
+        private void renderList(List<Appointment> appointments)
+        {
+            quickView.ItemsSource = appointments;
             quickViewTitle.Text = this.quickViewDate.ToString("D");
-            if(today.Date == quickViewDate.Date)
+            if (today.Date == quickViewDate.Date)
             {
                 quickViewSubtitle.Text = "Appointments for Today";
-            } else
+            }
+            else
             {
                 quickViewSubtitle.Text = "Appointments for ";
             }
@@ -101,6 +107,20 @@ namespace WpfApp1
                 .OrderBy(appointment => appointment.StartDate)
                 .ToList();
         }
+        private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string input = SearchBar.Text.ToUpper();
+            List<Appointment> appointments = getAppointments().Where(
+                a => 
+                    a.FullName.ToUpper().Contains(input) ||
+                    a.Patient.PatientHealthCareNumber.Contains(input) ||
+                    a.Patient.PatientPhoneNumber.Contains(input)
+            ).ToList();
+
+            renderList(appointments);
+
+        }
+
     }
 
 

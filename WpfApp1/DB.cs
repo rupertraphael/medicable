@@ -91,26 +91,25 @@ namespace WpfApp1
             _patientConditions = patientConditions;
         }
 
+        public APatient(
+            string patientName)
+        {
+            _patientName = patientName;
+        }
+
     }
     public class Appointment
     {
-        private string _firstName;
-        private string _lastName;
+        private APatient _patient;
         private string _doctor;
         private DateTime _startDate;
 
-
-        public string FirstName
+        public APatient Patient
         {
-            get { return _firstName; }
-            set { _firstName = value; }
+            get { return _patient; }
+            set { _patient = value; }
         }
 
-        public string LastName
-        {
-            get { return _lastName; }
-            set { _lastName = value; }
-        }
 
         public DateTime StartDate
         {
@@ -126,7 +125,7 @@ namespace WpfApp1
 
         public string FullName
         {
-            get { return _firstName + " " + _lastName; }
+            get { return _patient.PatientName; }
         }
 
         public string Doctor
@@ -140,8 +139,17 @@ namespace WpfApp1
             DateTime startDate,
             string doctor)
         {
-            _firstName = firstname;
-            _lastName = lastname;
+            _patient = new APatient(firstname + " " + lastname);
+            _startDate = startDate;
+            _doctor = doctor;
+        }
+
+        public Appointment(
+            APatient patient,
+            DateTime startDate,
+            string doctor)
+        {
+            _patient = patient;
             _startDate = startDate;
             _doctor = doctor;
         }
@@ -150,12 +158,13 @@ namespace WpfApp1
     // Followed the pattern in: https://stackoverflow.com/a/17779402
     public static class DB
     {
-
+        private static APatient jake = new APatient("Jake Peralta");
         // Appointments that have already been added to our 'DB'
         private static List<Appointment> _Appointments = new List<Appointment>()
         {
-            new Appointment("Rupert", "Amodia", DateTime.Parse("2022-12-01 09:00:00"), "Dr. Amr, GP"),
-            new Appointment("Rupert", "Amodia", DateTime.Parse("2022-12-01 09:30:00"), "Dr. Amr, GP"),
+            
+            new Appointment(jake, DateTime.Parse("2022-12-01 09:00:00"), "Dr. Amr, GP"),
+            new Appointment(jake, DateTime.Parse("2022-12-01 09:30:00"), "Dr. Amr, GP"),
             new Appointment("Amy", "Santiago", DateTime.Parse("2022-12-01 12:00:00"), "Dr. Amr, GP"),
             new Appointment("Charles", "Boyle", DateTime.Parse("2022-10-31 14:00:00"), "Dr. Amr, GP"),
             new Appointment("Rosa", "Diaz", DateTime.Parse("2022-11-07 09:00:00"), "Dr. Amr, GP"),
