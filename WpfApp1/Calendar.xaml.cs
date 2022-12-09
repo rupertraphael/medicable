@@ -23,6 +23,8 @@ namespace WpfApp1
     {
         // TODO
         // 5. Colour the doctor items
+        // Display selected appointment
+        // disable previous dates
 
         private List<int> calendarDays = new List<int>();
         private List<string> Days = new List<string>()
