@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,7 +23,7 @@ namespace WpfApp1
     public partial class Patients : Page
 
     {
-        public List<APatient> patientList = new List<APatient>();
+        private List<APatient> patientList = DB.APatients;
         public Patients()
         {
             InitializeComponent();
@@ -35,12 +36,6 @@ namespace WpfApp1
             emptyPatientView.FontSize = 24;
             PatientView.Child = emptyPatientView;
 
-            patientList.Add(new APatient("Scott Turner", "403-555-1430", "13256-1231", "03/02/1983", "73 5 Ave NW Calgary AB", "Dr Rupert", "", ""));
-            patientList.Add(new APatient("Rosy Usher", "403-555-6122", "11661-1209", "07/15/2002", "65 Hills Rd NE Calgary AB", "Dr Amr", "", ""));
-            patientList.Add(new APatient("Linda Walsh", "403-555-1112", "15671-1200", "01/01/2000", "86 1 ST SE Calgary AB", "Dr Chirag", "", ""));
-            patientList.Add(new APatient("Albert Zander", "403-555-1430", "13112-1764", "09/22/1967", "123 Martin Crescent NE Calgary AB", "Dr Raphael", "", ""));
-            patientList.Add(new APatient("Antony Simmons", "587-412-8666", "16543-1289", "11/19/2005", "432 Panaroma RD NW Calgary AB", "Dr Araiz", "", ""));
-            patientList.Add(new APatient("Bruno Simmons", "587-222-8656", "16552-1139", "05/06/1945", "170 Ridge ST SW Calgary AB", "", "", ""));
             patientView.ItemsSource = patientList.OrderBy(patient => patient.PatientName).ToList(); ;
         }
 
@@ -70,19 +65,7 @@ namespace WpfApp1
             //SearchBar.Text = "";
         }
 
-        private void PatientView_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            APatient client = (APatient) this.patientView.SelectedItem;
-            if (client != null)
-            {
-                clientName.Content = client.PatientName;
-                clientHealthID.Text = client.PatientHealthCareNumber;
-                clientPhoneNumber.Text = client.PatientPhoneNumber;
-                clientDOB.Text = client.PatientDOB;
-                clientAddress.Text = client.PatientAddress;
-                clientPreferredDoctor.Text = client.PatientPreferredDoctor;
-            }
-        }
+        
 
         private void patientView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -104,6 +87,16 @@ namespace WpfApp1
         {
             NavigationService ns = NavigationService.GetNavigationService(this);
             ns.Navigate(new AppointmentDetails());
+        }
+
+        private void clientHealthID_LostFocus(object sender, RoutedEventArgs e)
+        {
+            bool correctFormat = Regex.IsMatch(clientHealthID.Text, "[0-9]{5}-[0-9]{4}");
+            if (correctFormat && clientHealthID.Text.Length == 10)
+                errorHealthID.Text = "";
+            else
+                errorHealthID.Text = "Incorrect Format (#####-####)";
+
         }
     }
 }

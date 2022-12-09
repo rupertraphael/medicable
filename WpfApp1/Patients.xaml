@@ -88,8 +88,13 @@
                             <ScrollViewer>
                                 <StackPanel CanVerticallyScroll="True">
                                     <StackPanel Grid.Column="0" Margin="4 0">
-                                        <Label Content="Health Care ID" FontWeight="Medium" Margin="0 6"/>
-                                        <TextBox Name="clientHealthID" Padding="6"/>
+                                        <Label>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Health ID Number  " FontWeight="Medium"/>
+                                                <TextBlock Name="errorHealthID" Foreground="Red" Text="" Width="252" FontWeight="Medium"/>
+                                            </StackPanel>
+                                        </Label>
+                                        <TextBox Name="clientHealthID" Padding="6" LostFocus="clientHealthID_LostFocus"/>
                                     </StackPanel>
                                     <Grid Margin="4 0">
 
