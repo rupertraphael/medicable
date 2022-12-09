@@ -22,8 +22,6 @@ namespace WpfApp1
     public partial class Calendar : Page
     {
         // TODO
-        // 2. Today button that goes to the page of the current day/date.
-        // 3. Highlight the today's date
         // 5. Colour the doctor items
 
         private List<int> calendarDays = new List<int>();
