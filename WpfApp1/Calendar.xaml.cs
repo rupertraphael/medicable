@@ -22,16 +22,37 @@ namespace WpfApp1
     public partial class Calendar : Page
     {
         // TODO
-        // 1. Fix bug when cancelling change doctor, selected appointments are cleared.
-        // 2. Today button that goes to the page of the current day/date.
-        // 3. Highlight the today's date
+        // 5. Colour the doctor items
+        // Display selected appointment
+        // disable previous dates
 
         private List<int> calendarDays = new List<int>();
         private List<string> Days = new List<string>()
         {
             "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
         };
-        private int page = 2;
+
+        private List<DateTime> grayedOutDates = new List<DateTime>()
+        {
+            DateTime.Parse("2022-10-31 09:00:00"),
+            DateTime.Parse("2022-11-28 09:00:00"),
+            DateTime.Parse("2022-11-29 09:00:00"),
+            DateTime.Parse("2022-11-30 09:00:00"),
+            DateTime.Parse("2023-01-01 09:00:00"),
+            DateTime.Parse("2023-02-01 09:00:00"),
+            DateTime.Parse("2023-02-02 09:00:00"),
+            DateTime.Parse("2023-02-03 09:00:00"),
+            DateTime.Parse("2023-02-04 09:00:00"),
+            DateTime.Parse("2023-02-05 09:00:00")
+        };
+
+        private List<int> grayedOutDates2 = new List<int>()
+        {
+            0,28,29,30,62,93,94,95,96,97
+        };
+        private int page = 5;
+
+        private int today = 31;
 
         public string preSelectedDoctor = "Dr. Amr, GP";
 
@@ -62,7 +83,9 @@ namespace WpfApp1
 
             SelectedMonth.SelectedValue = getMonthByPage();
 
+            // only the time is important here and not the date.
             var startTime = DateTime.Parse("2012-01-28 09:00:00");
+            
             var endTime = startTime.AddHours(7);
 
             int row = 0;
@@ -169,6 +192,11 @@ namespace WpfApp1
 
                     appointmentCellContainer.Child = appointmentCell;
                     columns.Children.Add(appointmentCellContainer);
+
+                    if (grayedOutDates.Exists(date => date.Date.Equals(calendarStartDateTime.Date)))
+                    {
+                        appointmentCellContainer.Background = (new BrushConverter()).ConvertFromString("#fef9c3") as Brush;
+                    }
                 }
 
                 rowContainer.Child = columns;
@@ -220,7 +248,13 @@ namespace WpfApp1
         private void AppointmentButton_Unchecked(object sender, RoutedEventArgs e, DateTime dt, CheckBox cb, Border container)
         {
             selectedDateTimes.Remove(dt);
-            container.Background = Brushes.Transparent;
+            if (grayedOutDates.Exists(date => date.Date.Equals(dt.Date)))
+            {
+                container.Background = (new BrushConverter()).ConvertFromString("#fef9c3") as Brush;
+            } else
+            {
+                container.Background = Brushes.Transparent;
+            }
 
             if (selectedDateTimes.Count == 0)
             {
@@ -249,10 +283,12 @@ namespace WpfApp1
 
                 TextBlock dayTB = new TextBlock();
                 dayTB.Text = this.Days[i] + " ";
+                dayTB.Padding = new Thickness(2);
 
                 TextBlock dateTB = new TextBlock();
                 dateTB.Text = getDateForCalendarColumn(i).ToString();
                 dateTB.FontWeight = FontWeights.Bold;
+                dateTB.Padding = new Thickness(2);
 
                 dayWP.Children.Add(dayTB);
                 dayWP.Children.Add(dateTB);
@@ -265,6 +301,16 @@ namespace WpfApp1
                 dateContainer.SetValue(Grid.ColumnProperty, i + 1);
 
                 CalendarDaysRow.Children.Add(dateContainer);
+
+                // highlight today
+                if(getCalendarDaysIndexByColumn(i) == today)
+                {
+                    dateTB.Background = (new BrushConverter()).ConvertFromString("#ef4444") as Brush;
+                    dateTB.Foreground = (new BrushConverter()).ConvertFromString("#fee2e2") as Brush;
+                    dayTB.Foreground = (new BrushConverter()).ConvertFromString("#fee2e2") as Brush;
+                    dayTB.Background = (new BrushConverter()).ConvertFromString("#ef4444") as Brush;
+                }
+
             }
 
         }
@@ -381,15 +427,13 @@ namespace WpfApp1
             
             // but is a good topic
             // to discuss in the report or evaluation?
-
-            // TODO: bug.. cancel clears the selected appointments
             if(handleDoctorChange)
             {
                 if (selectedDateTimes.Count > 0)
                 {
                     MessageBoxResult result = MessageBox.Show(
                         "You have already selected appointments. Do you want to change the selected doctor and clear the selected appointments?",
-                        "Clear Selected Appointments",
+                        "Change Doctor",
                         MessageBoxButton.YesNo);
 
                     if (result == MessageBoxResult.No)
@@ -399,12 +443,15 @@ namespace WpfApp1
                         handleDoctorChange = false;
                         combo.SelectedItem = e.RemovedItems[0];
                         return;
+                    } else
+                    {
+                        clearSelectedDateTimes();
                     }
                 }
             }
             handleDoctorChange = true;
 
-            clearSelectedDateTimes();
+            
             renderCalendarPage();
         }
 
@@ -449,6 +496,68 @@ namespace WpfApp1
         {
             SelectAppointmentButton.IsEnabled = true;
             SelectAppointmentButtonBorder.BorderBrush = (new BrushConverter()).ConvertFromString("#1d4ed8") as Brush;
+        }
+
+        public AppointmentDetails appointmentDetailsPrevious { get; set; }
+        public AppointmentDetails appointmentDetailsNext { get; set; }
+        private void SkipButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Immediately skip. Don't need to confirm with user since
+            // they haven't really selected appointments. Consequence
+            // to accidentally pressing skip is not as bad as accidentally pressing
+            // back when appointments are already selected.
+           
+            goToSetAppointmentDetails(appointmentDetailsPrevious);
+        }
+
+        private void goToSetAppointmentDetails(AppointmentDetails page)
+        {
+            if (page == null)
+            {
+                throw  new NullReferenceException("You have not instantiated the given page.");
+            }
+
+            NavigationService ns = NavigationService.GetNavigationService(this);
+            ns.Navigate(page);
+        }
+
+        private void GoBackButton_Click(object sender, RoutedEventArgs e)
+        {
+            // We're confirming with user if they want to go back after already selecting appointments.
+            if (selectedDateTimes.Count > 0)
+            {
+                MessageBoxResult result = MessageBox.Show(
+                    "You have already selected appointments. Do you want to clear the selected appointments and go back?",
+                    "Go Back to Setting Appointment Details",
+                    MessageBoxButton.YesNo);
+
+                if (result == MessageBoxResult.No)
+                {
+                    return;
+                }
+                else
+                {
+                    clearSelectedDateTimes();
+                }
+            }
+
+            // appointmentDetailsPrevious must be set.
+            goToSetAppointmentDetails(appointmentDetailsPrevious);
+        }
+
+        private void SelectAppointmentSlot_Click(object sender, RoutedEventArgs e)
+        {
+            // TODO: maybe set the appointment details page with new data (i.e. selected doctor, date, slots).
+
+            goToSetAppointmentDetails(appointmentDetailsNext);
+        }
+
+        private void GoToToday(object sender, RoutedEventArgs e)
+        {
+            this.page = 5;
+
+            renderCalendarPage();
+            SelectedMonth.SelectedValue = getMonthByPage();
         }
     }
 }

@@ -38,7 +38,7 @@
 
             <StackPanel Grid.Row="1">
                 <Border Margin="20 10" Padding="1" Background="#1d4ed8" CornerRadius="4">
-                    <Button Background="#1d4ed8" Padding="9" Foreground="#eff6ff" Click="Book_Existing_Patient_Click">
+                    <Button Background="#1d4ed8" Padding="9" Foreground="#eff6ff" Click="Book_Existing_Patient_Click" Height="50" FontSize="16">
                         <TextBlock>Book for <Bold>Existing Patient</Bold></TextBlock>
                     </Button>
                     <Border.Effect>
@@ -46,7 +46,7 @@
                     </Border.Effect>
                 </Border>
                 <Border Margin="20 10" Padding="1" Background="#1d4ed8" CornerRadius="4">
-                    <Button Background="#1d4ed8" Padding="9" Foreground="#eff6ff" Click="Book_New_Patient_Click">
+                    <Button Background="#1d4ed8" Padding="9" Foreground="#eff6ff" Click="Book_New_Patient_Click" Height="50" FontSize="16">
                         <TextBlock>Book for <Bold>New Patient</Bold></TextBlock>
                     </Button>
                     <Border.Effect>
@@ -79,17 +79,20 @@
                                     <Button Content="&lt;" Padding="16 8" Background="#1d4ed8" Foreground="#eff6ff" BorderThickness="0" FontWeight="Bold" FontSize="16" Click="Quickview_Previous"></Button>
                                 </Border>
                                 <Border BorderThickness="1" Margin="4" BorderBrush="#1d4ed8" CornerRadius="2">
+                                    <Button Content="TODAY" Padding="16 8" Background="#1d4ed8" Foreground="#eff6ff" BorderThickness="0" FontWeight="Bold" FontSize="16" Click="Quickview_Today"></Button>
+                                </Border>
+                                <Border BorderThickness="1" Margin="4" BorderBrush="#1d4ed8" CornerRadius="2">
                                     <Button Content="&gt;" Padding="16 8" Background="#1d4ed8" Foreground="#eff6ff" BorderThickness="0" FontWeight="Bold" FontSize="16" Click="Quickview_Next"></Button>
                                 </Border>
                             </WrapPanel>
                             <Grid Grid.Row="1" Grid.ColumnSpan="3" Margin="0 20 0 10">
-                                <TextBox x:Name="SearchTermTextBox" FontSize="16" Padding="4"/>
-                                <TextBlock FontSize="16" Margin="6 4" IsHitTestVisible="False" Text="Search using Alberta Health ID" Foreground="DarkGray">
+                                <TextBox x:Name="SearchBar" FontSize="16" Padding="4"/>
+                                <TextBlock FontSize="16" Margin="6 4" IsHitTestVisible="False" Text="Search for Patients using Alberta Health ID, Phone Number, First Name, or Last Name." Foreground="DarkGray">
                                     <TextBlock.Style>
                                         <Style TargetType="{x:Type TextBlock}">
                                             <Setter Property="Visibility" Value="Collapsed"/>
                                             <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Text, ElementName=SearchTermTextBox}" Value="">
+                                                <DataTrigger Binding="{Binding Text, ElementName=SearchBar}" Value="">
                                                     <Setter Property="Visibility" Value="Visible"/>
                                                 </DataTrigger>
                                             </Style.Triggers>
