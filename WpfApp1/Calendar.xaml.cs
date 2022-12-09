@@ -50,7 +50,9 @@ namespace WpfApp1
         {
             0,28,29,30,62,93,94,95,96,97
         };
-        private int page = 2;
+        private int page = 5;
+
+        private int today = 31;
 
         public string preSelectedDoctor = "Dr. Amr, GP";
 
@@ -193,7 +195,7 @@ namespace WpfApp1
 
                     if (grayedOutDates.Exists(date => date.Date.Equals(calendarStartDateTime.Date)))
                     {
-                        appointmentCellContainer.Background = (new BrushConverter()).ConvertFromString("#e5e7eb") as Brush; ;
+                        appointmentCellContainer.Background = (new BrushConverter()).ConvertFromString("#fef9c3") as Brush;
                     }
                 }
 
@@ -246,7 +248,13 @@ namespace WpfApp1
         private void AppointmentButton_Unchecked(object sender, RoutedEventArgs e, DateTime dt, CheckBox cb, Border container)
         {
             selectedDateTimes.Remove(dt);
-            container.Background = Brushes.Transparent;
+            if (grayedOutDates.Exists(date => date.Date.Equals(dt.Date)))
+            {
+                container.Background = (new BrushConverter()).ConvertFromString("#fef9c3") as Brush;
+            } else
+            {
+                container.Background = Brushes.Transparent;
+            }
 
             if (selectedDateTimes.Count == 0)
             {
@@ -275,10 +283,12 @@ namespace WpfApp1
 
                 TextBlock dayTB = new TextBlock();
                 dayTB.Text = this.Days[i] + " ";
+                dayTB.Padding = new Thickness(2);
 
                 TextBlock dateTB = new TextBlock();
                 dateTB.Text = getDateForCalendarColumn(i).ToString();
                 dateTB.FontWeight = FontWeights.Bold;
+                dateTB.Padding = new Thickness(2);
 
                 dayWP.Children.Add(dayTB);
                 dayWP.Children.Add(dateTB);
@@ -291,6 +301,16 @@ namespace WpfApp1
                 dateContainer.SetValue(Grid.ColumnProperty, i + 1);
 
                 CalendarDaysRow.Children.Add(dateContainer);
+
+                // highlight today
+                if(getCalendarDaysIndexByColumn(i) == today)
+                {
+                    dateTB.Background = (new BrushConverter()).ConvertFromString("#ef4444") as Brush;
+                    dateTB.Foreground = (new BrushConverter()).ConvertFromString("#fee2e2") as Brush;
+                    dayTB.Foreground = (new BrushConverter()).ConvertFromString("#fee2e2") as Brush;
+                    dayTB.Background = (new BrushConverter()).ConvertFromString("#ef4444") as Brush;
+                }
+
             }
 
         }
@@ -530,6 +550,14 @@ namespace WpfApp1
             // TODO: maybe set the appointment details page with new data (i.e. selected doctor, date, slots).
 
             goToSetAppointmentDetails(appointmentDetailsNext);
+        }
+
+        private void GoToToday(object sender, RoutedEventArgs e)
+        {
+            this.page = 5;
+
+            renderCalendarPage();
+            SelectedMonth.SelectedValue = getMonthByPage();
         }
     }
 }
