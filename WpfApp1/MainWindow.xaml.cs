@@ -42,49 +42,47 @@ namespace WpfApp1
 
         private void MainNavFrame_LoadCompleted(object sender, NavigationEventArgs e)
         {
-            if (e.Content.GetType() == PatientsPage.GetType() || e.Content.GetType() == (new Calendar()).GetType())
+            if (e.Content.GetType() == PatientsPage.GetType())
             {
-                Patients_Button.Background = (new BrushConverter()).ConvertFromString("#1e40af") as Brush;
-                Dashboard_Button.Background = (new BrushConverter()).ConvertFromString("#1d4ed8") as Brush;
 
+                selectPatientsNav();
                 
-            } else if(e.Content.GetType() == DashboardPage.GetType())
+            } 
+            else if(e.Content.GetType() == DashboardPage.GetType())
             {
-                Dashboard_Button.Background = (new BrushConverter()).ConvertFromString("#1e40af") as Brush;
-                Patients_Button.Background = (new BrushConverter()).ConvertFromString("#1d4ed8") as Brush;
+                selectDashboardNav();
+            }
+            else
+            {
+                selectNoNav();
             }
         }
 
-        private void DashboardPage_Loaded(object sender, RoutedEventArgs e)
+        private void selectDashboardNav()
         {
             Dashboard_Button.Background = (new BrushConverter()).ConvertFromString("#1e40af") as Brush;
             Patients_Button.Background = (new BrushConverter()).ConvertFromString("#1d4ed8") as Brush;
         }
 
-        private void PatientsPage_Loaded(object sender, RoutedEventArgs e)
+        private void selectPatientsNav()
         {
             Patients_Button.Background = (new BrushConverter()).ConvertFromString("#1e40af") as Brush;
             Dashboard_Button.Background = (new BrushConverter()).ConvertFromString("#1d4ed8") as Brush;
         }
 
+        private void selectNoNav()
+        {
+            Dashboard_Button.Background = (new BrushConverter()).ConvertFromString("#1d4ed8") as Brush;
+            Patients_Button.Background = (new BrushConverter()).ConvertFromString("#1d4ed8") as Brush;
+        }
 
         private void Dashboard_Button_Click(object sender, RoutedEventArgs e)
         {
-            //Dashboard_Button.Background = (new BrushConverter()).ConvertFromString("#1e40af") as Brush;
-            //Patients_Button.Background = (new BrushConverter()).ConvertFromString("#1d4ed8") as Brush;
-            //Patients_Button.FontWeight = FontWeights.Regular;
-
-            //MainNavFrame.Source = new Uri("Dashboard.xaml", UriKind.Relative);
-
             MainNavFrame.NavigationService.Navigate(this.DashboardPage);
         }
 
         private void Patients_Button_Click(object sender, RoutedEventArgs e)
         {
-            //Patients_Button.Background = (new BrushConverter()).ConvertFromString("#1e40af") as Brush;
-            //Dashboard_Button.Background = (new BrushConverter()).ConvertFromString("#1d4ed8") as Brush;
-            //Dashboard_Button.FontWeight = FontWeights.Regular;
-
             MainNavFrame.NavigationService.Navigate(this.PatientsPage);
         }
     }
