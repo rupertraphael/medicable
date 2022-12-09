@@ -88,8 +88,14 @@
                             <ScrollViewer>
                                 <StackPanel CanVerticallyScroll="True">
                                     <StackPanel Grid.Column="0" Margin="4 0">
-                                        <Label Content="Health Care ID" FontWeight="Medium" Margin="0 6"/>
-                                        <TextBox Name="clientHealthID" Padding="6"/>
+                                        <Label>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Health ID Number  " FontWeight="Medium"/>
+                                                <TextBlock Name="errorHealthID" Foreground="Red" Text="" Width="252" FontWeight="Medium"/>
+                                            </StackPanel>
+
+                                        </Label>
+                                        <TextBox Name="clientHealthID" Padding="6" TextChanged="clientHealthID_TextChanged" LostFocus="clientHealthID_LostFocus"/>
                                     </StackPanel>
                                     <Grid Margin="4 0">
 
@@ -98,23 +104,43 @@
                                             <ColumnDefinition></ColumnDefinition>
                                         </Grid.ColumnDefinitions>
                                         <StackPanel Grid.Column="0" Margin="0 0 4 0">
-                                            <Label Content="Telephone #" FontWeight="Medium" Margin="0 6"/>
-                                            <TextBox Name="clientPhoneNumber" Padding="6"/>
+
+                                            <Label>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="Telephone Number  " FontWeight="Medium"/>
+                                                    <TextBlock Name="errorTelephone" Foreground="Red" Text="" Width="300" FontWeight="Medium"/>
+                                                </StackPanel>
+                                            </Label>
+
+                                            <TextBox Name="clientPhoneNumber" Padding="6" TextChanged="clientPhoneNumber_TextChanged" LostFocus="clientPhoneNumber_LostFocus"/>
+
                                         </StackPanel>
                                         <StackPanel Grid.Column="1" Margin="4 0 0 0">
-                                            <Label Content="Date of Birth" FontWeight="Medium" Margin="0 6"/>
-                                            <TextBox Name="clientDOB" Padding="6"/>
+
+                                            <Label>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="Date of Birth  " FontWeight="Medium"/>
+                                                    <TextBlock Name="errorDOB" Foreground="Red" Text="" Width="450" FontWeight="Medium"/>
+                                                </StackPanel>
+                                            </Label>
+
+                                            <TextBox Name="clientDOB" Padding="6" TextChanged="clientDOB_TextChanged" LostFocus="clientDOB_LostFocus"/>
                                         </StackPanel>
                                     </Grid>
 
                                     <StackPanel Margin="4 0">
-                                        <Label Content="Address" FontWeight="Medium" Margin="0 6"/>
-                                        <TextBox Name="clientAddress" Padding="6"/>
+                                        <Label>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Address  " FontWeight="Medium"/>
+                                                <TextBlock Name="errorAddress" Foreground="Red" Text="" Width="450" FontWeight="Medium"/>
+                                            </StackPanel>
+                                        </Label>
+                                        <TextBox Name="clientAddress" TextChanged="clientAddress_TextChanged" LostFocus="clientAddress_LostFocus" Padding="6" />
                                     </StackPanel>
 
                                     <StackPanel Margin="4 0">
                                         <Label Content="Preferred Doctor" FontWeight="Medium" Margin="0 6"/>
-                                        <TextBox Name="clientPreferredDoctor" Padding="6"/>
+                                        <TextBox Name="clientPreferredDoctor" LostFocus="clientPreferredDoctor_LostFocus" Padding="6"/>
                                     </StackPanel>
 
                                     <StackPanel Margin="4 0">
@@ -128,14 +154,14 @@
 
                                 </StackPanel>
                             </ScrollViewer>
-                            
+
                             <!--<Button Background="#1d4ed8" Padding="9" Foreground="#eff6ff" Margin="402,139,28,217" Grid.Column="2" Grid.Row="1">
                             <TextBlock Text="Health History"/>
                         </Button>-->
                         </DockPanel>
-                        
+
                     </Grid>
-                    
+
                 </Border>
             </Grid>
         </Border>
