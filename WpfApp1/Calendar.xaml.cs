@@ -22,7 +22,6 @@ namespace WpfApp1
     public partial class Calendar : Page
     {
         // TODO
-        // 1. Fix bug when cancelling change doctor, selected appointments are cleared.
         // 2. Today button that goes to the page of the current day/date.
         // 3. Highlight the today's date
 
@@ -387,7 +386,7 @@ namespace WpfApp1
                 {
                     MessageBoxResult result = MessageBox.Show(
                         "You have already selected appointments. Do you want to change the selected doctor and clear the selected appointments?",
-                        "Clear Selected Appointments",
+                        "Change Doctor",
                         MessageBoxButton.YesNo);
 
                     if (result == MessageBoxResult.No)
@@ -450,6 +449,60 @@ namespace WpfApp1
         {
             SelectAppointmentButton.IsEnabled = true;
             SelectAppointmentButtonBorder.BorderBrush = (new BrushConverter()).ConvertFromString("#1d4ed8") as Brush;
+        }
+
+        public AppointmentDetails appointmentDetailsPrevious { get; set; }
+        public AppointmentDetails appointmentDetailsNext { get; set; }
+        private void SkipButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Immediately skip. Don't need to confirm with user since
+            // they haven't really selected appointments. Consequence
+            // to accidentally pressing skip is not as bad as accidentally pressing
+            // back when appointments are already selected.
+           
+            goToSetAppointmentDetails(appointmentDetailsPrevious);
+        }
+
+        private void goToSetAppointmentDetails(AppointmentDetails page)
+        {
+            if (page == null)
+            {
+                throw  new NullReferenceException("You have not instantiated the given page.");
+            }
+
+            NavigationService ns = NavigationService.GetNavigationService(this);
+            ns.Navigate(page);
+        }
+
+        private void GoBackButton_Click(object sender, RoutedEventArgs e)
+        {
+            // We're confirming with user if they want to go back after already selecting appointments.
+            if (selectedDateTimes.Count > 0)
+            {
+                MessageBoxResult result = MessageBox.Show(
+                    "You have already selected appointments. Do you want to clear the selected appointments and go back?",
+                    "Go Back to Setting Appointment Details",
+                    MessageBoxButton.YesNo);
+
+                if (result == MessageBoxResult.No)
+                {
+                    return;
+                }
+                else
+                {
+                    clearSelectedDateTimes();
+                }
+            }
+
+            // appointmentDetailsPrevious must be set.
+            goToSetAppointmentDetails(appointmentDetailsPrevious);
+        }
+
+        private void SelectAppointmentSlot_Click(object sender, RoutedEventArgs e)
+        {
+            // TODO: maybe set the appointment details page with new data (i.e. selected doctor, date, slots).
+
+            goToSetAppointmentDetails(appointmentDetailsNext);
         }
     }
 }

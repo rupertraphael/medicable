@@ -36,7 +36,7 @@
                 <WrapPanel>
                     <!--<Button Height="24" Margin="2 2 16 2">Go Back</Button>-->
                     <Border BorderThickness="1" Margin="2 2 16 2" CornerRadius="2" BorderBrush="#f9fafb" VerticalAlignment="Center">
-                        <Button Content="&lt; Go Back" Background="#f9fafb" BorderThickness="0" FontWeight="Bold" FontSize="12"></Button>
+                        <Button Content="&lt; Go Back" Background="#f9fafb" BorderThickness="0" FontWeight="Bold" FontSize="12" Click="GoBackButton_Click"></Button>
                     </Border>
                     <TextBlock FontSize="24" VerticalAlignment="Center">Select an Appointment for Robert Smith</TextBlock>
                 </WrapPanel>
@@ -71,10 +71,10 @@
                         <Button Content="&gt;" Padding="16 8" Background="#1d4ed8" Foreground="#eff6ff" BorderThickness="0" FontWeight="Bold" FontSize="16" Click="NextWeek"></Button>
                     </Border>
                     <Border BorderThickness="1" Margin="8 4" BorderBrush="LightGray" CornerRadius="2" Name="SelectAppointmentButtonBorder">
-                        <Button Name="SelectAppointmentButton" Content="Select Appointment Slot" Padding="16 8" Style="{StaticResource BlueButton}" BorderThickness="0" FontWeight="Bold" FontSize="16" IsEnabled="False"></Button>
+                        <Button Name="SelectAppointmentButton" Content="Select Appointment Slot" Padding="16 8" Style="{StaticResource BlueButton}" BorderThickness="0" FontWeight="Bold" FontSize="16" IsEnabled="False" Click="SelectAppointmentSlot_Click"></Button>
                     </Border>
                     <Border BorderThickness="1" Margin="8 4" CornerRadius="2" BorderBrush="#f9fafb" Name="SkipButtonBorder">
-                        <Button Content="Skip &gt;" Padding="16 8" Background="#f9fafb" BorderThickness="0" FontWeight="Bold" FontSize="16" Name="SkipButton"></Button>
+                        <Button Content="Skip &gt;" Padding="16 8" Background="#f9fafb" BorderThickness="0" FontWeight="Bold" FontSize="16" Name="SkipButton" Click="SkipButton_Click"></Button>
                     </Border>
                 </WrapPanel>
                 <Grid Grid.Row="1" Grid.ColumnSpan="3" Name="CalendarDaysRow">
