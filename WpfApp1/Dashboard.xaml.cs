@@ -75,6 +75,13 @@ namespace WpfApp1
             renderList();
         }
 
+        private void Quickview_Today(object sender, RoutedEventArgs e)
+
+        {
+            quickViewDate = today;
+            renderList();
+        }
+
         private void renderList()
         {
             renderList(this.getAppointments());
