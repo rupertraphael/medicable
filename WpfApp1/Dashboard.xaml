@@ -87,7 +87,7 @@
                             </WrapPanel>
                             <Grid Grid.Row="1" Grid.ColumnSpan="3" Margin="0 20 0 10">
                                 <TextBox x:Name="SearchBar" FontSize="16" Padding="4" TextChanged="SearchBar_TextChanged"/>
-                                <TextBlock FontSize="16" Margin="6 4" IsHitTestVisible="False" Text="Search for Patients using Alberta Health ID, Phone Number, First Name, or Last Name." Foreground="DarkGray">
+                                <TextBlock FontSize="16" Margin="6 4" IsHitTestVisible="False" Text="Search for Patients using Alberta HealthCare #, Phone Number, First Name, or Last Name." Foreground="DarkGray">
                                     <TextBlock.Style>
                                         <Style TargetType="{x:Type TextBlock}">
                                             <Setter Property="Visibility" Value="Collapsed"/>
@@ -141,17 +141,38 @@
                             <DataTemplate>
                                 <Grid>
                                     <Border Padding="4 10" BorderThickness="0 0 0 1" BorderBrush="#d1d5db">
-                                        <StackPanel>
-                                            <TextBlock FontSize="16" FontWeight="Medium" Text="{Binding FullName}"></TextBlock>
-                                            <TextBlock FontSize="16" Foreground="#6b7280">
-                                                <TextBlock.Text>
-                                                    <MultiBinding StringFormat="{}{0:t} w/ {1}">
-                                                        <Binding Path="StartDate" />
-                                                        <Binding Path="Doctor.DisplayName" />
-                                                    </MultiBinding>
-                                                </TextBlock.Text>
-                                            </TextBlock>
-                                        </StackPanel>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="2*"></ColumnDefinition>
+                                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel Grid.Column="0">
+                                                <WrapPanel>
+                                                    <TextBlock FontSize="16" FontWeight="SemiBold" Text="{Binding FullName}"></TextBlock>
+                                                    <TextBlock FontSize="16" TextAlignment="Right">
+                                                        <TextBlock.Text>
+                                                            <MultiBinding StringFormat="{} ({0})">
+                                                                <Binding Path="Patient.PatientHealthCareNumber" />
+                                                            </MultiBinding>
+                                                        </TextBlock.Text>
+                                                    </TextBlock>
+                                                    
+                                                </WrapPanel>
+                                                <TextBlock FontSize="16" Text="{Binding Reason}"></TextBlock>
+                                                <TextBlock FontSize="16" Foreground="#6b7280">
+                                                    <TextBlock.Text>
+                                                        <MultiBinding StringFormat="{}{0:t} w/ {1}">
+                                                            <Binding Path="StartDate" />
+                                                            <Binding Path="Doctor.DisplayName" />
+                                                        </MultiBinding>
+                                                    </TextBlock.Text>
+                                                </TextBlock>
+                                            </StackPanel>
+                                            <StackPanel Grid.Column="1">
+                                                <TextBlock FontSize="12" Text="Phone Number:" TextAlignment="Right"></TextBlock>
+                                                <TextBlock FontSize="16" Text="{Binding Patient.PatientPhoneNumber}" TextAlignment="Right"></TextBlock>
+                                            </StackPanel>
+                                        </Grid>
                                     </Border>
                                 </Grid>
                             </DataTemplate>

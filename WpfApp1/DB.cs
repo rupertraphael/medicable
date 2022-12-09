@@ -103,6 +103,8 @@ namespace WpfApp1
         private APatient _patient;
         private Doctor _doctor;
         private DateTime _startDate;
+        private string _reason;
+        private string _notes;
 
         public APatient Patient
         {
@@ -133,6 +135,18 @@ namespace WpfApp1
             get { return _doctor; }
         }
 
+        public string Reason
+        {
+            get { return _reason; }
+            set { _reason = value; }
+        }
+
+        public string Notes
+        {
+            get { return _notes; }
+            set { _notes = value; }
+        }
+
         public Appointment(
             string firstname,
             string lastname,
@@ -142,6 +156,8 @@ namespace WpfApp1
             _patient = new APatient(firstname + " " + lastname);
             _startDate = startDate;
             _doctor = doctor;
+            _reason = "";
+            _notes = "";
         }
 
         public Appointment(
@@ -152,6 +168,22 @@ namespace WpfApp1
             _patient = patient;
             _startDate = startDate;
             _doctor = doctor;
+            _reason = "";
+            _notes = "";
+        }
+
+        public Appointment(
+            APatient patient,
+            DateTime startDate,
+            Doctor doctor,
+            string reason,
+            string notes)
+        {
+            _patient = patient;
+            _startDate = startDate;
+            _doctor = doctor;
+            _reason = reason;
+            _notes = notes;
         }
     }
 
@@ -241,21 +273,22 @@ namespace WpfApp1
         // Appointments that have already been added to our 'DB'
         private static List<Appointment> _Appointments = new List<Appointment>()
         {
+            // https://uhs.princeton.edu/health-resources/common-illnesses
 
-            new Appointment(APatients[0], DateTime.Parse("2022-12-01 09:00:00"), Doctors[0]),
-            new Appointment(APatients[2], DateTime.Parse("2022-12-01 09:30:00"), Doctors[0]),
-            new Appointment(APatients[1], DateTime.Parse("2022-12-01 09:00:00"), Doctors[1]),
-            new Appointment(APatients[1], DateTime.Parse("2022-12-01 09:30:00"), Doctors[1]),
-            new Appointment(APatients[3], DateTime.Parse("2022-12-01 10:30:00"), Doctors[0]),
-            new Appointment(APatients[4], DateTime.Parse("2022-12-01 10:30:00"), Doctors[2]),
-            new Appointment(APatients[5], DateTime.Parse("2022-12-01 11:30:00"), Doctors[2]),
-            new Appointment(APatients[6], DateTime.Parse("2022-12-01 13:00:00"), Doctors[0]),
-            new Appointment(APatients[7], DateTime.Parse("2022-12-01 13:00:00"), Doctors[1]),
-            new Appointment(APatients[8], DateTime.Parse("2022-12-01 13:30:00"), Doctors[0]),
-            new Appointment(APatients[9], DateTime.Parse("2022-12-01 14:30:00"), Doctors[0]),
-            new Appointment(APatients[10], DateTime.Parse("2022-12-01 14:00:00"), Doctors[1]),
-            new Appointment(APatients[11], DateTime.Parse("2022-12-01 14:00:00"), Doctors[2]),
-            new Appointment(APatients[12], DateTime.Parse("2022-12-01 14:30:00"), Doctors[2]),
+            new Appointment(APatients[0], DateTime.Parse("2022-12-01 09:00:00"), Doctors[0], "Flu-like Symptoms", ""),
+            new Appointment(APatients[2], DateTime.Parse("2022-12-01 09:30:00"), Doctors[0], "Nausea", ""),
+            new Appointment(APatients[1], DateTime.Parse("2022-12-01 09:00:00"), Doctors[1], "Muscle/Joint Pain", ""),
+            new Appointment(APatients[1], DateTime.Parse("2022-12-01 09:30:00"), Doctors[1], "Muscle/Joint Pain", ""),
+            new Appointment(APatients[3], DateTime.Parse("2022-12-01 10:30:00"), Doctors[0], "Stomach Problems", ""),
+            new Appointment(APatients[4], DateTime.Parse("2022-12-01 10:30:00"), Doctors[2], "Muscle/Joint Pain", ""),
+            new Appointment(APatients[5], DateTime.Parse("2022-12-01 11:30:00"), Doctors[2], "Muscle/Joint Pain", ""),
+            new Appointment(APatients[6], DateTime.Parse("2022-12-01 13:00:00"), Doctors[0], "Other", "Feeling sleepy all the time"),
+            new Appointment(APatients[7], DateTime.Parse("2022-12-01 13:00:00"), Doctors[1], "Family Doctor Meet and Greet", ""),
+            new Appointment(APatients[8], DateTime.Parse("2022-12-01 13:30:00"), Doctors[0], "Other", "Frequent nose bleeds"),
+            new Appointment(APatients[9], DateTime.Parse("2022-12-01 14:30:00"), Doctors[0], "Other", "Heavy Snoring"),
+            new Appointment(APatients[10], DateTime.Parse("2022-12-01 14:00:00"), Doctors[1], "Flu-like Symptoms", ""),
+            new Appointment(APatients[11], DateTime.Parse("2022-12-01 14:00:00"), Doctors[2], "Nausea", ""),
+            new Appointment(APatients[12], DateTime.Parse("2022-12-01 14:30:00"), Doctors[2], "Stomach Problems", ""),
         };
 
         // getter method to retrieve Appointments from our 'DB'

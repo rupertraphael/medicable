@@ -200,6 +200,8 @@ namespace WpfApp1
                         //appointmentButton.RenderTransformOrigin = new Point(0.5, 0.5);
                         //appointmentButton.RenderTransform = scale;
 
+                        appointmentButton.IsEnabled = getCalendarDaysIndexByColumn(i) >= today;
+
                         appointmentButton.Background = Brushes.Transparent;
                         appointmentButton.BorderThickness = new Thickness(0);
 
@@ -268,6 +270,7 @@ namespace WpfApp1
             container.Background = (new BrushConverter()).ConvertFromString("#bbf7d0") as Brush;
             enableSelectAppointment();
             disableSkip();
+            setSelectedAppointmentText();
         }
         private void AppointmentButton_Unchecked(object sender, RoutedEventArgs e, DateTime dt, CheckBox cb, Border container)
         {
@@ -285,6 +288,24 @@ namespace WpfApp1
                 enableSkip();
                 disableSelectAppointment();
             }
+
+            setSelectedAppointmentText();
+        }
+
+        private void setSelectedAppointmentText()
+        {
+            List <DateTime> times = selectedDateTimes.Keys.ToList().OrderBy(dt => dt).ToList();
+
+            if(times.Count == 0) 
+            {
+                SelectedAppointmentText.Text = "None";
+                return;
+            }
+
+            DateTime first = times.First();
+            DateTime last = times.Last();
+
+            SelectedAppointmentText.Text = times.First().ToString("f") + " - " + times.Last().AddMinutes(30).ToString("t");
         }
 
 
