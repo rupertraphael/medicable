@@ -21,11 +21,6 @@ namespace WpfApp1
     /// </summary>
     public partial class Calendar : Page
     {
-        // TODO
-        // 5. Colour the doctor items
-        // Display selected appointment
-        // disable previous dates
-
         private List<int> calendarDays = new List<int>();
         private List<string> Days = new List<string>()
         {
