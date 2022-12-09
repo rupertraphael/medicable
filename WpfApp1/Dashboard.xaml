@@ -149,17 +149,11 @@
                                             <StackPanel Grid.Column="0">
                                                 <WrapPanel>
                                                     <TextBlock FontSize="16" FontWeight="SemiBold" Text="{Binding FullName}"></TextBlock>
-                                                    <TextBlock FontSize="16" TextAlignment="Right">
-                                                        <TextBlock.Text>
-                                                            <MultiBinding StringFormat="{} ({0})">
-                                                                <Binding Path="Patient.PatientHealthCareNumber" />
-                                                            </MultiBinding>
-                                                        </TextBlock.Text>
-                                                    </TextBlock>
+                                                    
                                                     
                                                 </WrapPanel>
-                                                <TextBlock FontSize="16" Text="{Binding Reason}"></TextBlock>
-                                                <TextBlock FontSize="16" Foreground="#6b7280">
+                                                
+                                                <TextBlock FontSize="16" >
                                                     <TextBlock.Text>
                                                         <MultiBinding StringFormat="{}{0:t} w/ {1}">
                                                             <Binding Path="StartDate" />
@@ -167,10 +161,19 @@
                                                         </MultiBinding>
                                                     </TextBlock.Text>
                                                 </TextBlock>
+                                                <TextBlock FontSize="16" Text="{Binding Reason}" Foreground="#6b7280"></TextBlock>
                                             </StackPanel>
                                             <StackPanel Grid.Column="1">
-                                                <TextBlock FontSize="12" Text="Phone Number:" TextAlignment="Right"></TextBlock>
-                                                <TextBlock FontSize="16" Text="{Binding Patient.PatientPhoneNumber}" TextAlignment="Right"></TextBlock>
+                                                <TextBlock FontSize="10" Text="HealthCare Number:" TextAlignment="Right"></TextBlock>
+                                                <TextBlock FontSize="14" TextAlignment="Right">
+                                                    <TextBlock.Text>
+                                                        <MultiBinding StringFormat="{} ({0})">
+                                                            <Binding Path="Patient.PatientHealthCareNumber" />
+                                                        </MultiBinding>
+                                                    </TextBlock.Text>
+                                                </TextBlock>
+                                                <TextBlock FontSize="10" Text="Phone Number:" TextAlignment="Right"></TextBlock>
+                                                <TextBlock FontSize="14" Text="{Binding Patient.PatientPhoneNumber}" TextAlignment="Right"></TextBlock>
                                             </StackPanel>
                                         </Grid>
                                     </Border>
