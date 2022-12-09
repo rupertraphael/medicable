@@ -101,7 +101,7 @@ namespace WpfApp1
     public class Appointment
     {
         private APatient _patient;
-        private string _doctor;
+        private Doctor _doctor;
         private DateTime _startDate;
 
         public APatient Patient
@@ -128,7 +128,7 @@ namespace WpfApp1
             get { return _patient.PatientName; }
         }
 
-        public string Doctor
+        public Doctor Doctor
         {
             get { return _doctor; }
         }
@@ -137,7 +137,7 @@ namespace WpfApp1
             string firstname,
             string lastname,
             DateTime startDate,
-            string doctor)
+            Doctor doctor)
         {
             _patient = new APatient(firstname + " " + lastname);
             _startDate = startDate;
@@ -147,7 +147,7 @@ namespace WpfApp1
         public Appointment(
             APatient patient,
             DateTime startDate,
-            string doctor)
+            Doctor doctor)
         {
             _patient = patient;
             _startDate = startDate;
@@ -155,36 +155,46 @@ namespace WpfApp1
         }
     }
 
+    public class Doctor
+    {
+        private string _name;
+        private string _specialization;
+
+        public string Name
+        {
+            set { _name = value; }
+        }
+
+        public string DisplayName
+        {
+            get { return "Dr. " + _name + ", " + _specialization;  }
+        }
+
+        public string Specialization
+        {
+            get { return _specialization; }
+            set { _specialization = value; }
+        }
+
+        public Doctor(string name, string specialization)
+        {
+            _name = name;
+            _specialization = specialization;
+        }
+
+        public bool Equals(Doctor other)
+        {
+            if (other == null) { return false; }
+            if (object.ReferenceEquals(this, other)) { return true; }
+            return this.DisplayName == other.DisplayName;
+        }
+
+
+    }
+
     // Followed the pattern in: https://stackoverflow.com/a/17779402
     public static class DB
     {
-        private static APatient jake = new APatient("Jake Peralta");
-        // Appointments that have already been added to our 'DB'
-        private static List<Appointment> _Appointments = new List<Appointment>()
-        {
-            
-            new Appointment(jake, DateTime.Parse("2022-12-01 09:00:00"), "Dr. Amr, GP"),
-            new Appointment(jake, DateTime.Parse("2022-12-01 09:30:00"), "Dr. Amr, GP"),
-            new Appointment("Amy", "Santiago", DateTime.Parse("2022-12-01 12:00:00"), "Dr. Amr, GP"),
-            new Appointment("Charles", "Boyle", DateTime.Parse("2022-10-31 14:00:00"), "Dr. Amr, GP"),
-            new Appointment("Rosa", "Diaz", DateTime.Parse("2022-11-07 09:00:00"), "Dr. Amr, GP"),
-            new Appointment("Rosa", "Diaz", DateTime.Parse("2022-11-07 09:30:00"), "Dr. Amr, GP"),
-            new Appointment("Raymond", "Holt", DateTime.Parse("2022-11-07 11:30:00"), "Dr. Amr, GP"),
-            new Appointment("Kevin", "Cozner", DateTime.Parse("2022-11-07 13:30:00"), "Dr. Amr, GP"),
-            new Appointment("Araiz", "Asad", DateTime.Parse("2022-11-07 09:00:00"), "Dr. Raphael, GP"),
-            new Appointment("Elizabeth Chu", "Asad", DateTime.Parse("2022-11-08 15:00:00"), "Dr. Amr, GP"),
-            new Appointment("David", "Smith", DateTime.Parse("2022-11-02 11:30:00"), "Dr. Raphael, GP")
-        };
-
-        // getter method to retrieve Appointments from our 'DB'
-        public static List<Appointment> Appointments
-        {
-            get
-            {
-                return (_Appointments);
-            }
-        }
-
         private static List<APatient> _aPatients = new List<APatient>()
         {
             new APatient("Scott Turner", "403-555-1430", "13256-1231", "03/02/1983", "73 5 Ave NW Calgary AB", "Dr Rupert", "", ""),
@@ -193,14 +203,66 @@ namespace WpfApp1
             new APatient("Albert Zander", "403-555-1430", "13112-1764", "09/22/1967", "123 Martin Crescent NE Calgary AB", "Dr Raphael", "", ""),
             new APatient("Antony Simmons", "587-412-8666", "16543-1289", "11/19/2005", "432 Panaroma RD NW Calgary AB", "Dr Araiz", "", ""),
             new APatient("Bruno Simmons", "587-222-8656", "16552-1139", "05/06/1945", "170 Ridge ST SW Calgary AB", "", "", ""),
-            new APatient("Alfred Simmons", "403-855-0215", "17442-1577", "10/10/2010", "170 Ridge ST SW Calgary AB", "Dr Rupert", "", "")
+            new APatient("Alfred Simmons", "403-855-0215", "17442-1577", "10/10/2010", "170 Ridge ST SW Calgary AB", "Dr Rupert", "", ""),
+            new APatient("Jake Peralta", "403-123-4561", "17442-1578", "01/01/1977", "170 Dalhousie Drive NW Calgary AB", "Dr Rupert", "", ""),
+            new APatient("Rosa Diaz", "403-123-4572", "17442-1579", "01/02/1977", "2 Brentwood Drive NW Calgary AB", "Dr Rupert", "", ""),
+            new APatient("Raymond Holt", "403-397-4542", "10322-1579", "04/02/1957", "84 Bearspaw Circle NW Calgary AB", "", "", ""),
+            new APatient("Kevin Conzer", "403-397-4543", "10582-3401", "09/29/1957", "84 Bearspaw Circle NW Calgary AB", "", "", ""),
+            new APatient("Amy Santiago", "403-123-4562", "17992-2134", "03/29/1978", "170 Dalhousie Drive NW Calgary AB", "Dr Rupert", "", ""),
+            new APatient("Charles Boyle", "403-569-5421", "14022-9814", "03/30/1974", "42 Dalhousie Drive NW Calgary AB", "Dr Rupert", "", ""),
         };
 
         public static List<APatient> APatients
         {
             get
             {
-                return (_aPatients); 
+                return (_aPatients);
+            }
+        }
+
+        public static List<Doctor> Doctors
+        {
+            get
+            {
+                return (_doctors); 
+            }
+        }
+        
+        private static List<Doctor> _doctors = new List<Doctor>()
+        {
+            new Doctor("Rupert Amodia", "GP"),
+            new Doctor("Amr Elhefnawy", "GP"),
+            new Doctor("Chirag Asrani", "GP"),
+            new Doctor("Raphael Castillo", "GP"),
+            new Doctor("Araiz Asad", "GP")
+        };
+
+        // Appointments that have already been added to our 'DB'
+        private static List<Appointment> _Appointments = new List<Appointment>()
+        {
+
+            new Appointment(APatients[0], DateTime.Parse("2022-12-01 09:00:00"), Doctors[0]),
+            new Appointment(APatients[2], DateTime.Parse("2022-12-01 09:30:00"), Doctors[0]),
+            new Appointment(APatients[1], DateTime.Parse("2022-12-01 09:00:00"), Doctors[1]),
+            new Appointment(APatients[1], DateTime.Parse("2022-12-01 09:30:00"), Doctors[1]),
+            new Appointment(APatients[3], DateTime.Parse("2022-12-01 10:30:00"), Doctors[0]),
+            new Appointment(APatients[4], DateTime.Parse("2022-12-01 10:30:00"), Doctors[2]),
+            new Appointment(APatients[5], DateTime.Parse("2022-12-01 11:30:00"), Doctors[2]),
+            new Appointment(APatients[6], DateTime.Parse("2022-12-01 13:00:00"), Doctors[0]),
+            new Appointment(APatients[7], DateTime.Parse("2022-12-01 13:00:00"), Doctors[1]),
+            new Appointment(APatients[8], DateTime.Parse("2022-12-01 13:30:00"), Doctors[0]),
+            new Appointment(APatients[9], DateTime.Parse("2022-12-01 14:30:00"), Doctors[0]),
+            new Appointment(APatients[10], DateTime.Parse("2022-12-01 14:00:00"), Doctors[1]),
+            new Appointment(APatients[11], DateTime.Parse("2022-12-01 14:00:00"), Doctors[2]),
+            new Appointment(APatients[12], DateTime.Parse("2022-12-01 14:30:00"), Doctors[2]),
+        };
+
+        // getter method to retrieve Appointments from our 'DB'
+        public static List<Appointment> Appointments
+        {
+            get
+            {
+                return (_Appointments);
             }
         }
     }

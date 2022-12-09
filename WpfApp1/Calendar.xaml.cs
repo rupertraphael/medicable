@@ -469,7 +469,7 @@ namespace WpfApp1
         {
             List<Appointment> Appointments = DB.Appointments;
 
-            Appointments = Appointments.Where(a => a.Doctor == (string) SelectedDoctor.SelectedValue).ToList();
+            Appointments = Appointments.Where(a => a.Doctor.DisplayName == (string) SelectedDoctor.SelectedValue).ToList();
 
             return Appointments.ToDictionary(appointment => appointment.StartDate, appointment => appointment);
         }

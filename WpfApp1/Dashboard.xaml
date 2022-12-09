@@ -86,7 +86,7 @@
                                 </Border>
                             </WrapPanel>
                             <Grid Grid.Row="1" Grid.ColumnSpan="3" Margin="0 20 0 10">
-                                <TextBox x:Name="SearchBar" FontSize="16" Padding="4"/>
+                                <TextBox x:Name="SearchBar" FontSize="16" Padding="4" TextChanged="SearchBar_TextChanged"/>
                                 <TextBlock FontSize="16" Margin="6 4" IsHitTestVisible="False" Text="Search for Patients using Alberta Health ID, Phone Number, First Name, or Last Name." Foreground="DarkGray">
                                     <TextBlock.Style>
                                         <Style TargetType="{x:Type TextBlock}">
@@ -147,7 +147,7 @@
                                                 <TextBlock.Text>
                                                     <MultiBinding StringFormat="{}{0:t} w/ {1}">
                                                         <Binding Path="StartDate" />
-                                                        <Binding Path="Doctor" />
+                                                        <Binding Path="Doctor.DisplayName" />
                                                     </MultiBinding>
                                                 </TextBlock.Text>
                                             </TextBlock>
