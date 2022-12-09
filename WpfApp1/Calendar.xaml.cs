@@ -54,10 +54,14 @@ namespace WpfApp1
 
         private int today = 31;
 
-        public string preSelectedDoctor = "Dr. Amr, GP";
+        private string preSelectedDoctor = "Dr. Amr, GP";
 
         private String selectedDoctor;
 
+        public Calendar(Doctor selectedDoctor) : this()
+        {
+            SelectedDoctor.SelectedValue = selectedDoctor.DisplayName;
+        }
         public Calendar()
         {
             // initialize days being shown on the calendar
@@ -70,10 +74,30 @@ namespace WpfApp1
 
             InitializeComponent();
 
-            SelectedDoctor.SelectedValue = preSelectedDoctor;
-            selectedDoctor = (string) SelectedDoctor.SelectedValue;
-
             renderCalendarPage();
+
+            // insert doctors to combo box
+            foreach (Doctor doctor in DB.Doctors.OrderBy(doctor => doctor.Name).ToList())
+            {
+                ComboBoxItem doctorContainer = new ComboBoxItem();
+                switch (doctor.Specialization)
+                {
+                    case "GP":
+                        doctorContainer.Background = Brushes.LightBlue;
+                        break;
+                    case "Dermatologist":
+                        doctorContainer.Background = Brushes.LightGoldenrodYellow;
+                        break;
+                    case "Chiropractor":
+                        doctorContainer.Background = Brushes.LightPink;
+                        break;
+                    default:
+                        doctorContainer.Background = Brushes.Transparent;
+                        break;
+                }
+                doctorContainer.Content = doctor.DisplayName;
+                SelectedDoctor.Items.Add(doctorContainer);
+            }
         }
 
         private void renderCalendarPage()
@@ -195,7 +219,7 @@ namespace WpfApp1
 
                     if (grayedOutDates.Exists(date => date.Date.Equals(calendarStartDateTime.Date)))
                     {
-                        appointmentCellContainer.Background = (new BrushConverter()).ConvertFromString("#fef9c3") as Brush;
+                        appointmentCellContainer.Background = (new BrushConverter()).ConvertFromString("#e5e7eb") as Brush;
                     }
                 }
 
@@ -250,7 +274,7 @@ namespace WpfApp1
             selectedDateTimes.Remove(dt);
             if (grayedOutDates.Exists(date => date.Date.Equals(dt.Date)))
             {
-                container.Background = (new BrushConverter()).ConvertFromString("#fef9c3") as Brush;
+                container.Background = (new BrushConverter()).ConvertFromString("#e5e7eb") as Brush;
             } else
             {
                 container.Background = Brushes.Transparent;

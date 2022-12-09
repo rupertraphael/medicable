@@ -163,6 +163,7 @@ namespace WpfApp1
         public string Name
         {
             set { _name = value; }
+            get { return _name; }
         }
 
         public string DisplayName
@@ -232,9 +233,9 @@ namespace WpfApp1
         {
             new Doctor("Rupert Amodia", "GP"),
             new Doctor("Amr Elhefnawy", "GP"),
-            new Doctor("Chirag Asrani", "GP"),
+            new Doctor("Chirag Asrani", "Chiropractor"),
             new Doctor("Raphael Castillo", "GP"),
-            new Doctor("Araiz Asad", "GP")
+            new Doctor("Araiz Asad", "Dermatologist")
         };
 
         // Appointments that have already been added to our 'DB'
