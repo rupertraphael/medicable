@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,7 +23,7 @@ namespace WpfApp1
     public partial class Patients : Page
 
     {
-        public List<APatient> patientList = new List<APatient>();
+        private List<APatient> patientList = DB.APatients;
         public Patients()
         {
             InitializeComponent();
@@ -30,17 +31,11 @@ namespace WpfApp1
             // no patient selected
             TextBlock emptyPatientView = new TextBlock();
             emptyPatientView.Text = "Select a patient and you will see their details here.";
-            emptyPatientView.HorizontalAlignment= HorizontalAlignment.Center;
+            emptyPatientView.HorizontalAlignment = HorizontalAlignment.Center;
             emptyPatientView.VerticalAlignment = VerticalAlignment.Center;
             emptyPatientView.FontSize = 24;
             PatientView.Child = emptyPatientView;
 
-            patientList.Add(new APatient("Scott Turner", "403-555-1430", "13256-1231", "03/02/1983", "73 5 Ave NW Calgary AB", "Dr Rupert", "", ""));
-            patientList.Add(new APatient("Rosy Usher", "403-555-6122", "11661-1209", "07/15/2002", "65 Hills Rd NE Calgary AB", "Dr Amr", "", ""));
-            patientList.Add(new APatient("Linda Walsh", "403-555-1112", "15671-1200", "01/01/2000", "86 1 ST SE Calgary AB", "Dr Chirag", "", ""));
-            patientList.Add(new APatient("Albert Zander", "403-555-1430", "13112-1764", "09/22/1967", "123 Martin Crescent NE Calgary AB", "Dr Raphael", "", ""));
-            patientList.Add(new APatient("Antony Simmons", "587-412-8666", "16543-1289", "11/19/2005", "432 Panaroma RD NW Calgary AB", "Dr Araiz", "", ""));
-            patientList.Add(new APatient("Bruno Simmons", "587-222-8656", "16552-1139", "05/06/1945", "170 Ridge ST SW Calgary AB", "", "", ""));
             patientView.ItemsSource = patientList.OrderBy(patient => patient.PatientName).ToList(); ;
         }
 
@@ -70,19 +65,7 @@ namespace WpfApp1
             //SearchBar.Text = "";
         }
 
-        private void PatientView_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            APatient client = (APatient) this.patientView.SelectedItem;
-            if (client != null)
-            {
-                clientName.Content = client.PatientName;
-                clientHealthID.Text = client.PatientHealthCareNumber;
-                clientPhoneNumber.Text = client.PatientPhoneNumber;
-                clientDOB.Text = client.PatientDOB;
-                clientAddress.Text = client.PatientAddress;
-                clientPreferredDoctor.Text = client.PatientPreferredDoctor;
-            }
-        }
+
 
         private void patientView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -104,6 +87,115 @@ namespace WpfApp1
         {
             NavigationService ns = NavigationService.GetNavigationService(this);
             ns.Navigate(new AppointmentDetails());
+        }
+
+        private void clientHealthID_LostFocus(object sender, RoutedEventArgs e)
+        {
+            bool correctFormat = Regex.IsMatch(clientHealthID.Text, "[0-9]{5}-[0-9]{4}");
+            if (correctFormat && clientHealthID.Text.Length == 10)
+            {
+                errorHealthID.Text = "";
+                APatient client = (APatient)this.patientView.SelectedItem;
+                client.PatientHealthCareNumber = clientHealthID.Text;
+            }
+            else
+                errorHealthID.Text = "Incorrect Format (#####-####)";
+
+        }
+
+        private void clientPhoneNumber_LostFocus(object sender, RoutedEventArgs e)
+        {
+            bool correctFormat = Regex.IsMatch(clientPhoneNumber.Text, "[0-9]{3}-[0-9]{3}-[0-9]{4}");
+            if (correctFormat && clientPhoneNumber.Text.Length == 12)
+            {
+                errorTelephone.Text = "";
+                APatient client = (APatient)this.patientView.SelectedItem;
+                client.PatientPhoneNumber = clientPhoneNumber.Text;
+            }
+            else
+                errorTelephone.Text = "Incorrect Format (###-###-####)";
+
+        }
+
+        private void clientDOB_LostFocus(object sender, RoutedEventArgs e)
+        {
+            bool correctFormat = Regex.IsMatch(clientDOB.Text, "[0-9]{2}/[0-9]{2}/[0-9]{4}");
+
+            if (clientDOB.Text.Length == 10)
+            {
+                string month = clientDOB.Text.Substring(0, 2);
+                string day = clientDOB.Text.Substring(3, 2);
+                string year = clientDOB.Text.Substring(6, 4);
+
+                if (Convert.ToInt32(month) < 1 || Convert.ToInt32(month) > 12)
+                    errorDOB.Text = "Incorrect Month Entry (1-12) (MM/DD/YYYY)";
+
+                else if (Convert.ToInt32(day) < 1 || Convert.ToInt32(day) > 31)
+                    errorDOB.Text = "Incorrect Day Entry (1-31) (MM/DD/YYYY)";
+
+                else if (Convert.ToInt32(year) > 2022)
+                    errorDOB.Text = "Incorrect Year Entry (No More Than 2022) (MM/DD/YYYY)";
+
+                else if (correctFormat && clientDOB.Text.Length == 10)
+                {
+                    errorDOB.Text = "";
+                    APatient client = (APatient)this.patientView.SelectedItem;
+                    client.PatientDOB = clientDOB.Text;
+                }
+                else
+                    errorDOB.Text = "Incorrect Format (MM/DD/YYYY)";
+            }
+            else
+                errorDOB.Text = "Incorrect Format (MM/DD/YYYY)";
+        }
+
+        private void clientHealthID_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            bool correctFormat = Regex.IsMatch(clientHealthID.Text, "[0-9]{5}-[0-9]{4}");
+            if (correctFormat && clientHealthID.Text.Length == 10)
+                errorHealthID.Text = "";
+        }
+
+        private void clientPhoneNumber_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            bool correctFormat = Regex.IsMatch(clientPhoneNumber.Text, "[0-9]{3}-[0-9]{3}-[0-9]{4}");
+            if (correctFormat && clientPhoneNumber.Text.Length == 12)
+                errorTelephone.Text = "";
+        }
+
+        private void clientDOB_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            bool correctFormat = Regex.IsMatch(clientDOB.Text, "[0-9]{2}/[0-9]{2}/[0-9]{4}");
+            if (correctFormat && clientDOB.Text.Length == 10)
+                errorDOB.Text = "";
+        }
+
+        private void clientAddress_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (clientAddress.Text.Length == 0)
+            {
+                errorAddress.Text = "Please Make Sure Address Field is not Blank";
+            }
+            else
+            {
+                errorAddress.Text = "";
+                APatient client = (APatient)this.patientView.SelectedItem;
+                client.PatientAddress = clientAddress.Text;
+            }
+        }
+
+        private void clientPreferredDoctor_LostFocus(object sender, RoutedEventArgs e)
+        {
+            APatient client = (APatient)this.patientView.SelectedItem;
+            client.PatientPreferredDoctor = clientPreferredDoctor.Text;
+        }
+
+        private void clientAddress_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (clientAddress.Text.Length != 0)
+            {
+                errorAddress.Text = "";
+            }
         }
     }
 }
