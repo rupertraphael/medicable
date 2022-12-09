@@ -381,8 +381,6 @@ namespace WpfApp1
             
             // but is a good topic
             // to discuss in the report or evaluation?
-
-            // TODO: bug.. cancel clears the selected appointments
             if(handleDoctorChange)
             {
                 if (selectedDateTimes.Count > 0)
@@ -399,12 +397,15 @@ namespace WpfApp1
                         handleDoctorChange = false;
                         combo.SelectedItem = e.RemovedItems[0];
                         return;
+                    } else
+                    {
+                        clearSelectedDateTimes();
                     }
                 }
             }
             handleDoctorChange = true;
 
-            clearSelectedDateTimes();
+            
             renderCalendarPage();
         }
 
