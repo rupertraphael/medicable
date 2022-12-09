@@ -23,7 +23,6 @@ namespace WpfApp1
 
     public partial class MainWindow : Window
     {
-        private Dictionary<string, Page> pages = new Dictionary<string, Page>();
         private Dashboard DashboardPage = new Dashboard();
         private Patients PatientsPage = new Patients();
 
@@ -31,9 +30,6 @@ namespace WpfApp1
         public MainWindow()
         {
             InitializeComponent();
-
-            //this.DashboardPage.Loaded += DashboardPage_Loaded;
-            //this.PatientsPage.Loaded += PatientsPage_Loaded;
 
             DashboardPage.PatientsPageLink = PatientsPage;
 
