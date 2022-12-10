@@ -88,4 +88,5 @@ namespace WpfApp1
             MainNavFrame.NavigationService.Navigate(this.PatientsPage);
         }
     }
+
 }
