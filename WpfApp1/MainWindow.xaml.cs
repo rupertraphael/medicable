@@ -74,11 +74,27 @@ namespace WpfApp1
 
         private void Dashboard_Button_Click(object sender, RoutedEventArgs e)
         {
+            if (MainNavFrame.Content.GetType() == (new Calendar()).GetType() || MainNavFrame.Content.GetType() == (new AppointmentDetails()).GetType())
+            {
+                if(MessageBox.Show("You are currently booking an appointment. Do you want to cancel booking an appointment and go to another page?", "Cancel Appointment Booking", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+                {
+                    return;
+                }
+            }
+
             MainNavFrame.NavigationService.Navigate(this.DashboardPage);
         }
 
         private void Patients_Button_Click(object sender, RoutedEventArgs e)
         {
+            if (MainNavFrame.Content.GetType() == (new Calendar()).GetType() || MainNavFrame.Content.GetType() == (new AppointmentDetails()).GetType())
+            {
+                if (MessageBox.Show("You are currently booking an appointment. Do you want to cancel booking an appointment and go to another page?", "Cancel Appointment Booking", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+                {
+                    return;
+                }
+            }
+
             MainNavFrame.NavigationService.Navigate(this.PatientsPage);
         }
     }
