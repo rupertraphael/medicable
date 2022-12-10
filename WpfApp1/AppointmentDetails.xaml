@@ -63,12 +63,7 @@
                                 <TextBlock FontSize="16" Text="*" Foreground="Red"></TextBlock>
 
                             </WrapPanel>
-                            <ComboBox x:Name="doctorlist" Foreground="Black" SelectionChanged="doctorlist_SelectionChanged">
-                                <ComboBoxItem Background="LightBlue">Dr. Raphael, GP</ComboBoxItem>
-                                <ComboBoxItem Background="LightBlue">Dr. Amr, GP</ComboBoxItem>
-                                <ComboBoxItem Background="LightBlue">Dr. Rupert, GP</ComboBoxItem>
-                                <ComboBoxItem Background="LightGoldenrodYellow">Dr. Araiz, Dermatologist</ComboBoxItem>
-                                <ComboBoxItem Background="LightPink">Dr. Chirag, Chiropractor</ComboBoxItem>
+                            <ComboBox x:Name="doctorlist" SelectedValuePath="Content" SelectionChanged="doctorlist_SelectionChanged">
                             </ComboBox>
                         </StackPanel>
 

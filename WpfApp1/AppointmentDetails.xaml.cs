@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +29,35 @@ namespace WpfApp1
             patientname.Text = patient.PatientName;
             healthcareid.Text = patient.PatientHealthCareNumber;
             phonenumber.Text = patient.PatientPhoneNumber;
+
+            // insert doctors to combo box
+            foreach (Doctor doctor in DB.Doctors.OrderBy(doctor => doctor.Name).ToList())
+            {
+                ComboBoxItem doctorContainer = new ComboBoxItem();
+                switch (doctor.Specialization)
+                {
+                    case "GP":
+                        doctorContainer.Background = Brushes.LightBlue;
+                        break;
+                    case "Dermatologist":
+                        doctorContainer.Background = Brushes.LightGoldenrodYellow;
+                        break;
+                    case "Chiropractor":
+                        doctorContainer.Background = Brushes.LightPink;
+                        break;
+                    default:
+                        doctorContainer.Background = Brushes.Transparent;
+                        break;
+                }
+                doctorContainer.Content = doctor.DisplayName;
+                doctorlist.Items.Add(doctorContainer);
+            }
+
+            if (patient.PatientPreferredDoctor != "")
+            {
+                Trace.WriteLine(patient.PatientPreferredDoctor);
+                doctorlist.SelectedValue = patient.PatientPreferredDoctor;
+            }
         }
 
         private void timepicker_SelectionChanged(object sender, SelectionChangedEventArgs e)
