@@ -8,12 +8,30 @@
       d:DesignHeight="1000" d:DesignWidth="800"
       Title="AppointmentDetails">
 
+    <Page.Resources>
+        <Style TargetType="Button" x:Key="BlueButton">
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="True">
+                    <Setter Property="Background" Value="#1d4ed8"/>
+                    <Setter Property="Foreground" Value="#eff6ff"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="#6b7280"/>
+                    <Setter Property="Foreground" Value="#6b7280"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+
     <Grid Background="#e2e8f0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"></ColumnDefinition>
             <ColumnDefinition Width="3*"></ColumnDefinition>
             <ColumnDefinition Width="1*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
+        <Border Grid.Column="0" BorderThickness="1" Margin="2" CornerRadius="2" BorderBrush="#e2e8f0" VerticalAlignment="Top" HorizontalAlignment="Left">
+            <Button Content="&lt; Go Back" Background="#e2e8f0" BorderThickness="0" FontWeight="Bold" FontSize="12" Click="GoBackButton_Click"></Button>
+        </Border>
         <Border Margin="0 20" Padding="8" CornerRadius="4" Background="#f9fafb" Grid.Column="1" VerticalAlignment="Top">
             <Border.Effect>
                 <DropShadowEffect Opacity=".06" Direction="270" BlurRadius="4" ShadowDepth="2"/>
@@ -21,6 +39,7 @@
             <ScrollViewer>
                 <DockPanel VerticalAlignment="Top">
                     <StackPanel DockPanel.Dock="Top">
+                        
                         <WrapPanel>
                             
                             <TextBlock Text="Book an Appointment" FontSize="24" FontWeight="Bold"/>
@@ -112,19 +131,15 @@
                             <DatePicker x:Name="datepicker" Grid.Row="1"  SelectedDateChanged="datepicker_DateChanged" />
                             <TextBlock Grid.Row="1" TextWrapping="Wrap" FontSize="14"><Run Language="en-in" Text="Time"/></TextBlock>
                             <ComboBox IsEnabled="False" x:Name="timepicker" SelectionChanged="timepicker_SelectionChanged" >
-                                <Label>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text=" " FontWeight="Medium"/>
-                                    </StackPanel>
-                                </Label>
+                                <ComboBoxItem>-</ComboBoxItem>
                                 <ComboBoxItem>9:00AM-9:30AM</ComboBoxItem>
                                 <ComboBoxItem>2:30PM-3:00PM</ComboBoxItem>
                                 <ComboBoxItem>3:00PM-3:30PM</ComboBoxItem>
                             </ComboBox>
-                            <StackPanel Margin="0 8">
-                                <TextBlock FontSize="12" TextWrapping="Wrap" Text="You may use the calendar to select an appointment date and time if the patient does not have an exact date in mind."></TextBlock>
-                                <Button x:Name="GoToCalendarButton" HorizontalAlignment="Left" Padding="8 4" Margin="0 4 0 0"  FontSize="14" Content="Use Calendar to Select Date and Time" Background="#1d4ed8" Foreground="#eff6ff" FontWeight="Medium"/>
-                            </StackPanel>
+                            <!--<StackPanel Margin="0 8">
+                                
+                                <Button x:Name="GoToCalendarButton" HorizontalAlignment="Left" Padding="8 4" Margin="0 4 0 0"  FontSize="14" Content="Use Calendar to Select Date and Time" FontWeight="Medium" Style="{StaticResource BlueButton}" Click="GoToCalendarButton_Click"/>
+                            </StackPanel>-->
                         </StackPanel>
 
                         <Grid>
@@ -132,10 +147,8 @@
                                 <ColumnDefinition></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Border Grid.Column="0" BorderThickness="1" Margin="2" CornerRadius="2" BorderBrush="#f9fafb" VerticalAlignment="Center" HorizontalAlignment="Left">
-                                <Button Content="&lt; Go Back" Background="#f9fafb" BorderThickness="0" FontWeight="Bold" FontSize="12" Click="GoBackButton_Click"></Button>
-                            </Border>
-                            <Button Grid.Column="1" x:Name="BookButton" FontSize="16" Padding="8 4" HorizontalAlignment="Right" Content="Book the Appointment" Background="#1d4ed8" Foreground="#eff6ff" FontWeight="Bold" Click="BookButton_Click"/>
+                            <TextBlock Grid.Column="0" FontSize="12" TextWrapping="Wrap" Text="You may use the calendar to select an appointment date and time if the patient does not have an exact date in mind or needs to book more than 30 minutes of time."></TextBlock>
+                            <Button Grid.Column="1" x:Name="BookButton" FontSize="16" Padding="8 4" HorizontalAlignment="Right" Content="Proceed to Calendar" Style="{StaticResource BlueButton}" FontWeight="Bold" Click="BookButton_Click"/>
                         </Grid>
                     </StackPanel>
                 </DockPanel>

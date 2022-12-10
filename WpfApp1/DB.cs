@@ -249,11 +249,11 @@ namespace WpfApp1
         {
             new APatient("Scott Turner", "403-555-1430", "13256-1231", "03/02/1983", "73 5 Ave NW Calgary AB", Doctors[0].DisplayName, "", ""),
             new APatient("Rosy Usher", "403-555-6122", "11661-1209", "07/15/2002", "65 Hills Rd NE Calgary AB", Doctors[1].DisplayName, "", ""),
-            new APatient("Linda Walsh", "403-555-1112", "15671-1200", "01/01/2000", "86 1 ST SE Calgary AB", "Dr Chirag", "", ""),
+            new APatient("Linda Walsh", "403-555-1112", "15671-1200", "01/01/2000", "86 1 ST SE Calgary AB", Doctors[2].DisplayName, "", ""),
             new APatient("Albert Zander", "403-555-1430", "13112-1764", "09/22/1967", "123 Martin Crescent NE Calgary AB", Doctors[3].DisplayName, "", ""),
             new APatient("Antony Simmons", "587-412-8666", "16543-1289", "11/19/2005", "432 Panaroma RD NW Calgary AB", Doctors[4].DisplayName, "", ""),
             new APatient("Bruno Simmons", "587-222-8656", "16552-1139", "05/06/1945", "170 Ridge ST SW Calgary AB", "", "", ""),
-            new APatient("Alfred Simmons", "403-855-0215", "17442-1577", "10/10/2010", "170 Ridge ST SW Calgary AB", "Dr Rupert", "", ""),
+            new APatient("Alfred Simmons", "403-855-0215", "17442-1577", "10/10/2010", "170 Ridge ST SW Calgary AB", Doctors[0].DisplayName, "", ""),
             new APatient("Jake Peralta", "403-123-4561", "17442-1578", "01/01/1977", "170 Dalhousie Drive NW Calgary AB", Doctors[0].DisplayName, "", ""),
             new APatient("Rosa Diaz", "403-123-4572", "17442-1579", "01/02/1977", "2 Brentwood Drive NW Calgary AB", Doctors[0].DisplayName, "", ""),
             new APatient("Raymond Holt", "403-397-4542", "10322-1579", "04/02/1957", "84 Bearspaw Circle NW Calgary AB", "", "", ""),

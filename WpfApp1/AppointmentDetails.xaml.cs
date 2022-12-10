@@ -57,6 +57,7 @@ namespace WpfApp1
             {
                 Trace.WriteLine(patient.PatientPreferredDoctor);
                 doctorlist.SelectedValue = patient.PatientPreferredDoctor;
+
             }
         }
 
@@ -87,6 +88,7 @@ namespace WpfApp1
             {
                 timepicker.IsEnabled = true;
                 Reasonerror.Visibility = Visibility.Collapsed;
+                populateTime();
             }
 
         }
@@ -110,6 +112,7 @@ namespace WpfApp1
             {
                 timepicker.IsEnabled = true;
                 Reasonerror.Visibility = Visibility.Collapsed;
+                populateTime();
             }
 
         }
@@ -151,6 +154,66 @@ namespace WpfApp1
         private void GoBackButton_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void GoToCalendarButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService ns = NavigationService.GetNavigationService(this);
+
+            if ((string)doctorlist.SelectedValue == "" || (DB.Doctors.Find(d => d.DisplayName == (string)doctorlist.SelectedValue)) == null)
+            {
+                ns.Navigate(new Calendar());
+            } else
+            {
+                ns.Navigate(new Calendar((DB.Doctors.Find(d => d.DisplayName == (string)doctorlist.SelectedValue))));
+            }
+        }
+
+        private void populateTime()
+        {
+            timepicker.Items.Clear();
+
+
+            ComboBoxItem blank = new ComboBoxItem();
+            blank.Content = "";
+            timepicker.Items.Add(blank);
+
+            List <Appointment> appointments = DB.Appointments.Where(a => a.StartDate.Date == datepicker.SelectedDate).ToList();
+
+            if(datepicker.SelectedDate == null) {
+                Trace.WriteLine("cant do tanads");
+                return;
+            }
+
+            timepicker.IsEnabled = true;
+            
+            DateTime start = ((DateTime) datepicker.SelectedDate).AddHours(9);
+            DateTime end = ((DateTime)datepicker.SelectedDate).AddHours(16);
+
+            List<DateTime> slots = new List<DateTime>();
+
+            while (start <= end)
+            {
+                if(appointments.Where(a => a.StartDate == start && a.Doctor.DisplayName == (string)doctorlist.SelectedValue).Count() == 0)
+                {
+                    slots.Add(start);
+                    Trace.WriteLine(start.ToString("f"));
+                }
+
+                
+
+                start = start.AddMinutes(30);
+            }
+
+            foreach (DateTime slot in slots)
+            {
+                ComboBoxItem timeContainer = new ComboBoxItem();
+
+                timeContainer.Content = slot.ToString("t") + " - " + slot.AddMinutes(30).ToString("t");
+                timepicker.Items.Add(timeContainer);
+            }
+
+            
         }
     }
 }
