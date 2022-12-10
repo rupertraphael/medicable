@@ -75,74 +75,134 @@ namespace WpfApp1
 
         private void reason_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (doctorlist.SelectedIndex > -1 && reason.SelectedIndex > -1 && datepicker.SelectedDate.HasValue)
+            if (reason.SelectedIndex > -1)
             {
-                timepicker.IsEnabled = true;
+                if (datepicker.SelectedDate.HasValue)
+                {
+                    timepicker.IsEnabled = true;
+                    populateTime();
+                }
                 Reasonerror.Visibility = Visibility.Collapsed;
             }
 
         }
+
         private void datepicker_DateChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (doctorlist.SelectedIndex > -1 && reason.SelectedIndex > -1 && datepicker.SelectedDate.HasValue)
+            if (reason.SelectedIndex > -1)
             {
-                timepicker.IsEnabled = true;
+                if (datepicker.SelectedDate.HasValue)
+                {
+                    timepicker.IsEnabled = true;
+                    populateTime();
+                }
                 Reasonerror.Visibility = Visibility.Collapsed;
-                populateTime();
             }
 
         }
 
-/*|       private void datepicker_CalendarOpened(object sender, RoutedEventArgs e)
-        {
-            var calendar = datepicker.Template.FindName("PART_Calendar", datepicker) as Calendar;
-            var clearButton = new Button { Content = "Clear" };
-            clearButton.Click += OnClearButtonClick;
-            calendar.Children.Add(clearButton);
-        }*/
+        /*|       private void datepicker_CalendarOpened(object sender, RoutedEventArgs e)
+                {
+                    var calendar = datepicker.Template.FindName("PART_Calendar", datepicker) as Calendar;
+                    var clearButton = new Button { Content = "Clear" };
+                    clearButton.Click += OnClearButtonClick;
+                    calendar.Children.Add(clearButton);
+                }*/
 
-/*        private void OnClearButtonClick(object sender, RoutedEventArgs e)
-        {
-            datepicker.SelectedDate = null;
-        }*/
+        /*        private void OnClearButtonClick(object sender, RoutedEventArgs e)
+                {
+                    datepicker.SelectedDate = null;
+                }*/
 
         private void doctorlist_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (doctorlist.SelectedIndex > -1 && reason.SelectedIndex > -1 && datepicker.SelectedDate.HasValue)
+            if (reason.SelectedIndex > -1)
             {
-                timepicker.IsEnabled = true;
+                if (datepicker.SelectedDate.HasValue)
+                {
+                    timepicker.IsEnabled = true;
+                    populateTime();
+                }
                 Reasonerror.Visibility = Visibility.Collapsed;
-                populateTime();
             }
-
         }
 
         private void BookButton_Click(object sender, RoutedEventArgs e)
         {
             if (reason.SelectedIndex > -1)
             {
-                if (timepicker.SelectedIndex > 0)
+                if (reason.SelectedValue!="Other")
                 {
-                    string messageBoxText = "Appointment Confirmed!";
-                    string caption = "Appointment Confirmation";
-                    MessageBoxButton button = MessageBoxButton.OK;
-                    MessageBoxImage icon = MessageBoxImage.Information;
-                    MessageBoxResult result;
+                    if (timepicker.SelectedIndex > 0)
+                    {
+                        string messageBoxText = "Appointment Confirmed!";
+                        string caption = "Appointment Confirmation";
+                        MessageBoxButton button = MessageBoxButton.OK;
+                        MessageBoxImage icon = MessageBoxImage.Information;
+                        MessageBoxResult result;
 
-                    result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
+                        result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
 
-                    if (result == MessageBoxResult.OK)
+                        if (result == MessageBoxResult.OK)
+                        {
+                            NavigationService ns = NavigationService.GetNavigationService(this);
+                            ns.Navigate(new Dashboard());
+                        }
+
+
+                    }
+                    else
                     {
                         NavigationService ns = NavigationService.GetNavigationService(this);
-                        ns.Navigate(new Dashboard());
+                        if ((string)doctorlist.SelectedValue == "" || (DB.Doctors.Find(d => d.DisplayName == (string)doctorlist.SelectedValue)) == null)
+                        {
+                            ns.Navigate(new Calendar());
+                        }
+                        else
+                        {
+                            ns.Navigate(new Calendar((DB.Doctors.Find(d => d.DisplayName == (string)doctorlist.SelectedValue))));
+                        }
                     }
-
-
                 }
-                else
+                else if (reason.SelectedValue == "Other")
                 {
-                    NavigationService ns = NavigationService.GetNavigationService(this);
-                    ns.Navigate(new Calendar());
+                    if(notes.Text != "")
+                    {
+                        if (timepicker.SelectedIndex > 0)
+                        {
+                            string messageBoxText = "Appointment Confirmed!";
+                            string caption = "Appointment Confirmation";
+                            MessageBoxButton button = MessageBoxButton.OK;
+                            MessageBoxImage icon = MessageBoxImage.Information;
+                            MessageBoxResult result;
+
+                            result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
+
+                            if (result == MessageBoxResult.OK)
+                            {
+                                NavigationService ns = NavigationService.GetNavigationService(this);
+                                ns.Navigate(new Dashboard());
+                            }
+
+
+                        }
+                        else
+                        {
+                            NavigationService ns = NavigationService.GetNavigationService(this);
+                            if ((string)doctorlist.SelectedValue == "" || (DB.Doctors.Find(d => d.DisplayName == (string)doctorlist.SelectedValue)) == null)
+                            {
+                                ns.Navigate(new Calendar());
+                            }
+                            else
+                            {
+                                ns.Navigate(new Calendar((DB.Doctors.Find(d => d.DisplayName == (string)doctorlist.SelectedValue))));
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Noteserror.Visibility= Visibility.Visible;
+                    }
                 }
             }
             else
@@ -156,7 +216,7 @@ namespace WpfApp1
 
         }
 
-        private void GoToCalendarButton_Click(object sender, RoutedEventArgs e)
+       /* private void GoToCalendarButton_Click(object sender, RoutedEventArgs e)
         {
             NavigationService ns = NavigationService.GetNavigationService(this);
 
@@ -167,7 +227,7 @@ namespace WpfApp1
             {
                 ns.Navigate(new Calendar((DB.Doctors.Find(d => d.DisplayName == (string)doctorlist.SelectedValue))));
             }
-        }
+        }*/
 
         private void populateTime()
         {

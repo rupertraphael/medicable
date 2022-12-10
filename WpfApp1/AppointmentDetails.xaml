@@ -39,9 +39,9 @@
             <ScrollViewer>
                 <DockPanel VerticalAlignment="Top">
                     <StackPanel DockPanel.Dock="Top">
-                        
+
                         <WrapPanel>
-                            
+
                             <TextBlock Text="Book an Appointment" FontSize="24" FontWeight="Bold"/>
                         </WrapPanel>
                         <WrapPanel>
@@ -50,9 +50,9 @@
                             <TextBlock Text=" are required"></TextBlock>
                         </WrapPanel>
                     </StackPanel>
-                    
+
                     <StackPanel Margin="0 8">
-                        <Border BorderBrush="SlateGray" BorderThickness="0 0 0 1" Padding="0 0 0 8"> 
+                        <Border BorderBrush="SlateGray" BorderThickness="0 0 0 1" Padding="0 0 0 8">
                             <StackPanel>
                                 <TextBlock Text="Patient" FontWeight="Medium"/>
                                 <TextBlock x:Name="patientname" Text="Patient Name" FontSize="20"/>
@@ -63,8 +63,8 @@
                                     </Grid.ColumnDefinitions>
                                     <StackPanel Grid.Column="0">
 
-                                    <TextBlock Text="Healthcare ID Number" FontWeight="Medium"/>
-                                    <TextBlock Text="Healthcare ID" Name="healthcareid" FontSize="16"/>
+                                        <TextBlock Text="Healthcare ID Number" FontWeight="Medium"/>
+                                        <TextBlock Text="Healthcare ID" Name="healthcareid" FontSize="16"/>
 
                                     </StackPanel>
                                     <StackPanel Grid.Column="1">
@@ -79,7 +79,6 @@
                         <StackPanel Margin="0 8 0 0">
                             <WrapPanel>
                                 <TextBlock FontSize="16" Text="Select a Doctor"></TextBlock>
-                                <TextBlock FontSize="16" Text="*" Foreground="Red"></TextBlock>
 
                             </WrapPanel>
                             <ComboBox x:Name="doctorlist" SelectedValuePath="Content" SelectionChanged="doctorlist_SelectionChanged">
@@ -90,7 +89,7 @@
                             <WrapPanel>
                                 <TextBlock FontSize="16" Text="Select an Appointment Reason"></TextBlock>
                                 <TextBlock FontSize="16" Text="*" Foreground="Red"></TextBlock>
-                                
+
 
                             </WrapPanel>
                             <TextBlock Visibility="Collapsed" x:Name="Reasonerror" Text="Please select a reason for the appointment." Foreground="Red" FontWeight="SemiBold" FontStyle="Italic"/>
@@ -101,15 +100,15 @@
                                 <ComboBoxItem>Stomach Problems</ComboBoxItem>
                                 <ComboBoxItem>Other</ComboBoxItem>
                             </ComboBox>
-                            
+
                         </StackPanel>
-                       
+
                         <StackPanel Margin="0 4 0 0">
                             <TextBlock FontSize="14" Text="Add Notes"></TextBlock>
                             <TextBlock>This field is going to be required if 'Other' is selected as the reason.</TextBlock>
                             <Grid>
-                                <TextBox x:Name="notes" FontSize="14" Padding="4" MinHeight="100"/>
-                                <TextBlock FontSize="14" Margin="6 4" IsHitTestVisible="False" TextWrapping="Wrap" Text="Write some notes in this field if needed." Foreground="DarkGray" MinHeight="100">
+                            <TextBox x:Name="notes" FontSize="14" Padding="4" MinHeight="100"/>
+                                <TextBlock FontSize="14" Margin="2,10,10,-2" IsHitTestVisible="False" TextWrapping="Wrap" Text="Write some notes in this field if needed." Foreground="DarkGray" MinHeight="100">
                                     <TextBlock.Style>
                                         <Style TargetType="{x:Type TextBlock}">
                                             <Setter Property="Visibility" Value="Collapsed"/>
@@ -122,6 +121,7 @@
                                     </TextBlock.Style>
                                 </TextBlock>
                             </Grid>
+                            <TextBlock Visibility="Collapsed" x:Name="Noteserror" Foreground="Red" Text="please describe the appointment reason" FontStyle="Italic"/>
                         </StackPanel>
 
                         <StackPanel Margin="0 8 0 8">
@@ -147,8 +147,8 @@
                                 <ColumnDefinition></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" FontSize="12" TextWrapping="Wrap" Text="You may use the calendar to select an appointment date and time if the patient does not have an exact date in mind or needs to book more than 30 minutes of time."></TextBlock>
-                            <Button Grid.Column="1" x:Name="BookButton" FontSize="16" Padding="8 4" HorizontalAlignment="Right" Content="Proceed to Calendar" Style="{StaticResource BlueButton}" FontWeight="Bold" Click="BookButton_Click"/>
+                            <TextBlock Grid.Column="0" FontSize="12" TextWrapping="Wrap" Text="You may use the calendar to select an appointment date and time if the patient does not have an exact date in mind or needs to book more than 30 minutes of time." Grid.ColumnSpan="2" Margin="0,0,185,0"></TextBlock>
+                            <Button Grid.Column="1" x:Name="BookButton" FontSize="16" Padding="8 4" HorizontalAlignment="Right" Content="Proceed to Calendar" Style="{StaticResource BlueButton}" FontWeight="Bold" Click="BookButton_Click" Width="180"/>
                         </Grid>
                     </StackPanel>
                 </DockPanel>
