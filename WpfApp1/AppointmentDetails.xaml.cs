@@ -113,6 +113,11 @@ namespace WpfApp1
                 Reasonerror.Visibility = Visibility.Visible;
             }
         }
+
+        private void GoBackButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
 
