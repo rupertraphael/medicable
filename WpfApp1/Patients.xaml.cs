@@ -24,6 +24,7 @@ namespace WpfApp1
 
     {
         private List<APatient> patientList = DB.APatients;
+        private APatient selectedPatient;
         public Patients()
         {
             InitializeComponent();
@@ -72,6 +73,9 @@ namespace WpfApp1
             APatient client = (APatient)this.patientView.SelectedItem;
             if (client != null)
             {
+                // select patient
+                selectedPatient = client;
+
                 clientName.Content = client.PatientName;
                 clientHealthID.Text = client.PatientHealthCareNumber;
                 clientPhoneNumber.Text = client.PatientPhoneNumber;
@@ -86,7 +90,7 @@ namespace WpfApp1
         private void Book_Appointment(object sender, RoutedEventArgs e)
         {
             NavigationService ns = NavigationService.GetNavigationService(this);
-            ns.Navigate(new AppointmentDetails());
+            ns.Navigate(new AppointmentDetails(selectedPatient));
         }
 
         private void clientHealthID_LostFocus(object sender, RoutedEventArgs e)

@@ -21,9 +21,13 @@ namespace WpfApp1
     /// </summary>
     public partial class AppointmentDetails : Page
     {
-        public AppointmentDetails()
+        public AppointmentDetails(APatient patient)
         {
             InitializeComponent();
+
+            patientname.Text = patient.PatientName;
+            healthcareid.Text = patient.PatientHealthCareNumber;
+            phonenumber.Text = patient.PatientPhoneNumber;
         }
 
         private void timepicker_SelectionChanged(object sender, SelectionChangedEventArgs e)
