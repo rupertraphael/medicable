@@ -338,9 +338,3 @@ namespace WpfApp1
         }
     }
 }
-
-// did not include bordercolor change for reason combobox for errors
-// did not include a clear button for the datepicker 
-// did not connect functionalities -- autofilling patient name, preferred doctor, AND setting doctor, date -> calendar
-// rescheduling, followup, cancel appointment
-// screen size adjust
