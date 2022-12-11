@@ -86,6 +86,26 @@ namespace WpfApp1
             string patientAddress,
             string patientPreferredDoctor,
             string patientHealthHistory,
+            string patientConditions)
+        {
+            _patientName = patientName;
+            _patientPhoneNumber = patientPhoneNumber;
+            _patientHealthCareNumber = patientHealthCareNumber;
+            _patientDOB = patientDOB;
+            _patientAddress = patientAddress;
+            _patientPreferredDoctor = patientPreferredDoctor;
+            _patientHealthHistory = patientHealthHistory;
+            _patientConditions = patientConditions;
+        }
+
+        public APatient(
+            string patientName,
+            string patientPhoneNumber,
+            string patientHealthCareNumber,
+            string patientDOB,
+            string patientAddress,
+            string patientPreferredDoctor,
+            string patientHealthHistory,
             string patientConditions, 
             List<Appointment> appointments)
         {
@@ -309,7 +329,7 @@ namespace WpfApp1
             }
         }
 
-        private static List<Appointment> scottAppointments = new List<Appointment>()
+        /*private static List<Appointment> scottAppointments = new List<Appointment>()
         {
             new Appointment("Scott", "Turner", DateTime.Parse("2022-12-01 09:00:00"), "Dr. Amr, GP")
         };
@@ -337,9 +357,9 @@ namespace WpfApp1
         private static List<Appointment> alfredAppointments = new List<Appointment>()
         {
             new Appointment("Alfred", "Simmons", DateTime.Parse("2022-12-01 09:00:00"), "Dr. Amr, GP")
-        };
+        };*/
 
-        private static List<APatient> _aPatients = new List<APatient>()
+        /*private static List<APatient> _aPatients = new List<APatient>()
         {
             new APatient("Scott Turner", "403-555-1430", "13256-1231", "03/02/1983", "73 5 Ave NW Calgary AB", "Dr Rupert", "", "", scottAppointments),
             new APatient("Rosy Usher", "403-555-6122", "11661-1209", "07/15/2002", "65 Hills Rd NE Calgary AB", "Dr Amr", "", "", rosyAppointments),
@@ -348,14 +368,14 @@ namespace WpfApp1
             new APatient("Antony Simmons", "587-412-8666", "16543-1289", "11/19/2005", "432 Panaroma RD NW Calgary AB", "Dr Araiz", "", "", antonyAppointments),
             new APatient("Bruno Simmons", "587-222-8656", "16552-1139", "05/06/1945", "170 Ridge ST SW Calgary AB", "", "", "", brunoAppointments),
             new APatient("Alfred Simmons", "403-855-0215", "17442-1577", "10/10/2010", "170 Ridge ST SW Calgary AB", "Dr Rupert", "", "", alfredAppointments)
-        };
+        };*/
 
-        public static List<APatient> APatients
+        /*public static List<APatient> APatients
         {
             get
             {
                 return (_aPatients); 
             }
-        }
+        }*/
     }
 }

@@ -85,7 +85,10 @@ namespace WpfApp1
                 clientPreferredDoctor.Text = client.PatientPreferredDoctor;
 
                 PatientView.Child = PatientViewGrid;
-                upcomingAppointments.ItemsSource = client.Appointments;
+
+                List<Appointment> appointments = DB.Appointments.Where(a => a.Patient.PatientHealthCareNumber == client.PatientHealthCareNumber).ToList();
+
+                upcomingAppointments.ItemsSource = appointments;
             }
         }
 

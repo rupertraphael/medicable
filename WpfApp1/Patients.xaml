@@ -150,7 +150,7 @@
                                                 <GridView>
                                                     <GridViewColumn Width="Auto" Header="Name" DisplayMemberBinding="{Binding FullName}"/>
                                                     <GridViewColumn Width="Auto" Header="Time" DisplayMemberBinding="{Binding StartDate}" />
-                                                    <GridViewColumn Width="Auto" Header="Doctor" DisplayMemberBinding="{Binding Doctor}" />
+                                                    <GridViewColumn Width="Auto" Header="Doctor" DisplayMemberBinding="{Binding Doctor.DisplayName}" />
                                                 </GridView>
                                             </ListView.View>
                                         </ListView>
