@@ -116,7 +116,7 @@ namespace WpfApp1
             if (appointment != null)
             {
                 NavigationService ns = NavigationService.GetNavigationService(this);
-                ns.Navigate(new AppointmentDetailsCancelReschedule(client, appointment));
+                ns.Navigate(new AppointmentDetails(client, appointment));
             }
         }
 

@@ -65,6 +65,49 @@ namespace WpfApp1
             }
         }
 
+        public AppointmentDetails(APatient patient, Appointment appointment)
+        {
+            InitializeComponent();
+
+            this.patient = patient;
+
+            patientname.Text = patient.PatientName;
+            healthcareid.Text = patient.PatientHealthCareNumber;
+            phonenumber.Text = patient.PatientPhoneNumber;
+
+            // insert doctors to combo box
+            foreach (Doctor doctor in DB.Doctors.OrderBy(doctor => doctor.Name).ToList())
+            {
+                ComboBoxItem doctorContainer = new ComboBoxItem();
+                switch (doctor.Specialization)
+                {
+                    case "GP":
+                        doctorContainer.Background = Brushes.LightBlue;
+                        break;
+                    case "Dermatologist":
+                        doctorContainer.Background = Brushes.LightGoldenrodYellow;
+                        break;
+                    case "Chiropractor":
+                        doctorContainer.Background = Brushes.LightPink;
+                        break;
+                    default:
+                        doctorContainer.Background = Brushes.Transparent;
+                        break;
+                }
+                doctorContainer.Content = doctor.DisplayName;
+                doctorlist.Items.Add(doctorContainer);
+            }
+
+            if (patient.PatientPreferredDoctor != "")
+            {
+                doctorlist.SelectedValue = patient.PatientPreferredDoctor;
+
+            }
+
+            reason.SelectedValue = appointment.Reason;
+            notes.Text = appointment.Notes;
+        }
+
         public void selectDoctor(string doctor)
         {
             doctorlist.SelectedValue = doctor;

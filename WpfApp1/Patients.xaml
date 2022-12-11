@@ -145,7 +145,7 @@
 
                                     <StackPanel Margin="4 0">
                                         <Label Content="Upcoming Appointments" FontWeight="Medium" Margin="0 6"/>
-                                        <ListView Height="300" FontSize="16" Grid.Row="1" Name="upcomingAppointments" d:ItemsSource="{d:SampleData ItemCount=13}" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible" PreviewMouseLeftButtonDown="upcomingAppointments_SelectionChanged" >
+                                        <ListView MaxHeight="300" FontSize="16" Grid.Row="1" Name="upcomingAppointments" d:ItemsSource="{d:SampleData ItemCount=13}" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible" PreviewMouseLeftButtonDown="upcomingAppointments_SelectionChanged" >
                                             <ListView.Style>
                                                 <Style TargetType="ListView">
                                                     <Style.Triggers>
@@ -216,7 +216,7 @@
 
                                     <StackPanel Margin="4 0">
                                         <Label Content="Past Appointments" FontWeight="Medium" Margin="0 6"/>
-                                        <ListView Height="300" FontSize="16" Grid.Row="1" Name="pastAppointments" d:ItemsSource="{d:SampleData ItemCount=13}" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible" PreviewMouseLeftButtonDown="pastAppointments_SelectionChanged" >
+                                        <ListView MaxHeight="300" FontSize="16" Grid.Row="1" Name="pastAppointments" d:ItemsSource="{d:SampleData ItemCount=13}" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible" PreviewMouseLeftButtonDown="pastAppointments_SelectionChanged" >
                                             <ListView.Style>
                                                 <Style TargetType="ListView">
                                                     <Style.Triggers>

@@ -319,6 +319,8 @@ namespace WpfApp1
             new Appointment(APatients[10], DateTime.Parse("2022-12-01 14:00:00"), Doctors[1], "Flu-like Symptoms", ""),
             new Appointment(APatients[11], DateTime.Parse("2022-12-01 14:00:00"), Doctors[2], "Nausea", ""),
             new Appointment(APatients[12], DateTime.Parse("2022-12-01 14:30:00"), Doctors[2], "Stomach Problems", ""),
+
+            new Appointment(APatients[12], DateTime.Parse("2022-11-15 14:30:00"), Doctors[2], "Stomach Problems", "hurts very much"),
         };
 
         // getter method to retrieve Appointments from our 'DB'

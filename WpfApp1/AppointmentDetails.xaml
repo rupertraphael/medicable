@@ -113,7 +113,7 @@
                             </WrapPanel>
                             <Grid>
                             <TextBox x:Name="notes" FontSize="14" Padding="4" MinHeight="100" TextChanged="notes_TextChanged"/>
-                                <TextBlock FontSize="14" Margin="2,10,10,-2" IsHitTestVisible="False" TextWrapping="Wrap" Text="Write some notes in this field if needed." Foreground="DarkGray" MinHeight="100">
+                                <TextBlock FontSize="14" IsHitTestVisible="False" TextWrapping="Wrap" Text="Write some notes in this field if needed." Foreground="DarkGray" MinHeight="100">
                                     <TextBlock.Style>
                                         <Style TargetType="{x:Type TextBlock}">
                                             <Setter Property="Visibility" Value="Collapsed"/>
