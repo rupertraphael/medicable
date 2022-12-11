@@ -130,12 +130,10 @@
                             <TextBlock Margin="0 8 0 0" FontSize="14" Text="Date (dd-mm-yyyy)"></TextBlock>
                             <DatePicker x:Name="datepicker" Grid.Row="1"  SelectedDateChanged="datepicker_DateChanged" />
                             <TextBlock Grid.Row="1" TextWrapping="Wrap" FontSize="14"><Run Language="en-in" Text="Time"/></TextBlock>
-                            <ComboBox IsEnabled="False" x:Name="timepicker" SelectionChanged="timepicker_SelectionChanged" >
-                                <ComboBoxItem>-</ComboBoxItem>
-                                <ComboBoxItem>9:00AM-9:30AM</ComboBoxItem>
-                                <ComboBoxItem>2:30PM-3:00PM</ComboBoxItem>
-                                <ComboBoxItem>3:00PM-3:30PM</ComboBoxItem>
-                            </ComboBox>
+                            <ListBox x:Name="timepicker" SelectionChanged="timepicker_SelectionChanged" SelectionMode="Multiple" ItemsSource="{Binding timeslots, Mode=OneTime}"
+                                SelectedValuePath="Key"
+                                DisplayMemberPath="Value">
+                            </ListBox>
                             <!--<StackPanel Margin="0 8">
                                 
                                 <Button x:Name="GoToCalendarButton" HorizontalAlignment="Left" Padding="8 4" Margin="0 4 0 0"  FontSize="14" Content="Use Calendar to Select Date and Time" FontWeight="Medium" Style="{StaticResource BlueButton}" Click="GoToCalendarButton_Click"/>

@@ -56,19 +56,79 @@ namespace WpfApp1
 
             if (patient.PatientPreferredDoctor != "")
             {
-                Trace.WriteLine(patient.PatientPreferredDoctor);
                 doctorlist.SelectedValue = patient.PatientPreferredDoctor;
 
             }
         }
 
+        public void selectDoctor(string doctor)
+        {
+            doctorlist.SelectedValue = doctor;
+        }
+
+        public void selectDate(DateTime date)
+        {
+            datepicker.SelectedDate = date;
+        }
+
+        private List<DateTime> selectedDateTimes = new List<DateTime>();
+        public void clearSelectedDateTimes()
+        {
+            selectedDateTimes.Clear();
+        }
+
+        public void selectTime(DateTime dt) 
+        {
+            KeyValuePair<DateTime, string> item = new KeyValuePair<DateTime, string>(
+                        dt,
+                        dt.ToString("t") + " - " + dt.AddMinutes(30).ToString("t")
+                    );
+
+            timepicker.SelectedItems.Add(item);
+        }
+
+        public void selectTime(KeyValuePair<DateTime, string> dt)
+        {
+            var adjacent = selectedDateTimes.Where(i => dt.Key.Equals(i.AddMinutes(30)) || dt.Key.Equals(i.AddMinutes(-30))).ToList();
+
+            if (selectedDateTimes.Count == 0 || adjacent.Count > 0)
+            {
+                selectedDateTimes.Add(dt.Key);
+            }
+            else
+            {
+                selectedDateTimes = new List<DateTime>()
+                {
+                    dt.Key
+                };
+
+                timepicker.UnselectAll();
+                timepicker.SelectedItems.Add(dt);
+            }
+        }
+        public void unselectTime(KeyValuePair<DateTime, string> dt)
+        {
+            selectedDateTimes.Remove(dt.Key);
+        }
+
         private void timepicker_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (timepicker.SelectedIndex > 0)
+            List<int> indices = new List<int>();
+
+            if (e.AddedItems.Count > 0)
+            {
+                selectTime((KeyValuePair<DateTime, string>)e.AddedItems[0]);
+            } else
+            {
+                unselectTime((KeyValuePair<DateTime, string>)e.RemovedItems[0]);
+            }
+            
+
+            if (timepicker.SelectedItems.Count > 0)
             {
                 BookButton.Content = "Book Appointment";
             }
-            if (timepicker.SelectedIndex == 0)
+            if (timepicker.SelectedItems.Count == 0)
             {
                 BookButton.Content = "Proceed to Calendar";
             }
@@ -158,15 +218,7 @@ namespace WpfApp1
                     }
                     else
                     {
-                        NavigationService ns = NavigationService.GetNavigationService(this);
-                        if ((string)doctorlist.SelectedValue == "" || (DB.Doctors.Find(d => d.DisplayName == (string)doctorlist.SelectedValue)) == null)
-                        {
-                            ns.Navigate(new Calendar());
-                        }
-                        else
-                        {
-                            ns.Navigate(new Calendar((DB.Doctors.Find(d => d.DisplayName == (string)doctorlist.SelectedValue))));
-                        }
+                        GoToCalendar();
                     }
                 }
                 else if (reason.SelectedIndex == 4)
@@ -193,15 +245,7 @@ namespace WpfApp1
                         }
                         else
                         {
-                            NavigationService ns = NavigationService.GetNavigationService(this);
-                            if ((string)doctorlist.SelectedValue == "" || (DB.Doctors.Find(d => d.DisplayName == (string)doctorlist.SelectedValue)) == null)
-                            {
-                                ns.Navigate(new Calendar());    
-                            }
-                            else
-                            {
-                                ns.Navigate(new Calendar((DB.Doctors.Find(d => d.DisplayName == (string)doctorlist.SelectedValue))));
-                            }
+                            GoToCalendar();
                         }
                     }
                     else
@@ -218,35 +262,47 @@ namespace WpfApp1
 
         private void GoBackButton_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService ns = NavigationService.GetNavigationService(this);
+            ns.GoBack();
         }
 
-       /* private void GoToCalendarButton_Click(object sender, RoutedEventArgs e)
+        private void GoToCalendar()
         {
             NavigationService ns = NavigationService.GetNavigationService(this);
+            Calendar page;
 
             if ((string)doctorlist.SelectedValue == "" || (DB.Doctors.Find(d => d.DisplayName == (string)doctorlist.SelectedValue)) == null)
             {
-                ns.Navigate(new Calendar());
+                page = new Calendar();
             } else
             {
-                ns.Navigate(new Calendar((DB.Doctors.Find(d => d.DisplayName == (string)doctorlist.SelectedValue))));
+                page = new Calendar((DB.Doctors.Find(d => d.DisplayName == (string)doctorlist.SelectedValue)));
             }
-        }*/
 
-        private void populateTime()
+            if (datepicker.SelectedDate.HasValue)
+            {
+                page.GoToDate((DateTime) datepicker.SelectedDate);
+                Trace.WriteLine(datepicker.SelectedDate);
+            }
+
+            page.appointmentDetailsNext = this;
+            page.appointmentDetailsPrevious = this;
+
+            ns.Navigate(page);
+        }
+
+        public void populateTime()
         {
             timepicker.Items.Clear();
 
 
-            ComboBoxItem blank = new ComboBoxItem();
-            blank.Content = "";
-            timepicker.Items.Add(blank);
+            //ListBoxItem blank = new ListBoxItem();
+            //blank.Content = "";
+            //timepicker.Items.Add(blank);
 
             List <Appointment> appointments = DB.Appointments.Where(a => a.StartDate.Date == datepicker.SelectedDate).ToList();
 
             if(datepicker.SelectedDate == null) {
-                Trace.WriteLine("cant do tanads");
                 return;
             }
 
@@ -262,7 +318,6 @@ namespace WpfApp1
                 if(appointments.Where(a => a.StartDate == start && a.Doctor.DisplayName == (string)doctorlist.SelectedValue).Count() == 0)
                 {
                     slots.Add(start);
-                    Trace.WriteLine(start.ToString("f"));
                 }
 
                 
@@ -272,10 +327,11 @@ namespace WpfApp1
 
             foreach (DateTime slot in slots)
             {
-                ComboBoxItem timeContainer = new ComboBoxItem();
-
-                timeContainer.Content = slot.ToString("t") + " - " + slot.AddMinutes(30).ToString("t");
-                timepicker.Items.Add(timeContainer);
+                timepicker.Items.Add(
+                    new KeyValuePair<DateTime, string>(
+                        slot,
+                        slot.ToString("t") + " - " + slot.AddMinutes(30).ToString("t")
+                    ));
             }
 
             

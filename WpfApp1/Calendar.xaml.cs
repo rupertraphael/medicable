@@ -93,6 +93,7 @@ namespace WpfApp1
             }
 
             SelectedDoctor.SelectedValue = preSelectedDoctor;
+
         }
 
         private void renderCalendarPage()
@@ -552,12 +553,15 @@ namespace WpfApp1
 
         private void goToSetAppointmentDetails(AppointmentDetails page)
         {
+            NavigationService ns = NavigationService.GetNavigationService(this);
+
             if (page == null)
             {
-                throw  new NullReferenceException("You have not instantiated the given page.");
+                ns.GoBack();
+                return;
             }
 
-            NavigationService ns = NavigationService.GetNavigationService(this);
+            
             ns.Navigate(page);
         }
 
@@ -589,12 +593,32 @@ namespace WpfApp1
         {
             // TODO: maybe set the appointment details page with new data (i.e. selected doctor, date, slots).
 
+            appointmentDetailsNext.selectDoctor((string)SelectedDoctor.SelectedValue);
+            appointmentDetailsNext.selectDate(selectedDateTimes.First().Key.Date);
+            appointmentDetailsNext.populateTime();
+            appointmentDetailsNext.clearSelectedDateTimes();
+
+            foreach (DateTime dt in selectedDateTimes.Keys)
+            {
+                appointmentDetailsNext.selectTime(dt);
+            }
+
             goToSetAppointmentDetails(appointmentDetailsNext);
         }
 
         private void GoToToday(object sender, RoutedEventArgs e)
         {
             this.page = 5;
+
+            renderCalendarPage();
+            SelectedMonth.SelectedValue = getMonthByPage();
+        }
+
+        public void GoToDate(DateTime date)
+        {
+            int page = ((int) (date - DateTime.Parse("2022-10-31 00:00:00")).TotalDays) / 7 + 1;
+
+            this.page = page;
 
             renderCalendarPage();
             SelectedMonth.SelectedValue = getMonthByPage();
