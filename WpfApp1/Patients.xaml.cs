@@ -37,6 +37,7 @@ namespace WpfApp1
             PatientView.Child = emptyPatientView;
 
             patientView.ItemsSource = patientList.OrderBy(patient => patient.PatientName).ToList(); ;
+
         }
 
         private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
@@ -80,6 +81,7 @@ namespace WpfApp1
                 clientPreferredDoctor.Text = client.PatientPreferredDoctor;
 
                 PatientView.Child = PatientViewGrid;
+                upcomingAppointments.ItemsSource = client.Appointments;
             }
         }
 

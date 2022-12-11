@@ -145,7 +145,15 @@
 
                                     <StackPanel Margin="4 0">
                                         <Label Content="Upcoming Appointments" FontWeight="Medium" Margin="0 6"/>
-                                        <ListBox d:ItemsSource="{d:SampleData ItemCount=2}" MinHeight="200px" Padding="6"/>
+                                        <ListView FontSize="16" Grid.Row="1" Name="upcomingAppointments" d:ItemsSource="{d:SampleData ItemCount=13}" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible" SelectionChanged="patientView_SelectionChanged" >
+                                            <ListView.View>
+                                                <GridView>
+                                                    <GridViewColumn Width="Auto" Header="Name" DisplayMemberBinding="{Binding FullName}"/>
+                                                    <GridViewColumn Width="Auto" Header="Time" DisplayMemberBinding="{Binding StartDate}" />
+                                                    <GridViewColumn Width="Auto" Header="Doctor" DisplayMemberBinding="{Binding Doctor}" />
+                                                </GridView>
+                                            </ListView.View>
+                                        </ListView>
                                     </StackPanel>
 
                                     <Button Foreground="#1d4ed8" Background="Transparent" BorderThickness="0" Padding="8" Margin="4 16">

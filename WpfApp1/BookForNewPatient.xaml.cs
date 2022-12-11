@@ -36,6 +36,7 @@ namespace WpfApp1
 
         private void CreatePatientBtn_Click(object sender, RoutedEventArgs e)
         {
+            List<Appointment> blank = new List<Appointment>();
             if (!errorFirstName.Text.Equals("") || !errorLastName.Text.Equals("") || !errorHealthID1.Text.Equals("") || !errorDOB1.Text.Equals("") || !errorAddress1.Text.Equals("") || !errorPhone.Text.Equals(""))
             {
                 string messageBoxText = "Please Make There Are No Errors Before Proceeding";
@@ -48,7 +49,7 @@ namespace WpfApp1
             }
             else
             {
-                patientList.Add(new APatient(First_name_box.Text + " " + Last_name_box.Text, phone_box.Text, health_id_box.Text, dob_box.Text, address_box.Text, "", "", ""));
+                patientList.Add(new APatient(First_name_box.Text + " " + Last_name_box.Text, phone_box.Text, health_id_box.Text, dob_box.Text, address_box.Text, "", "", "", blank));
                 NavigationService ns = NavigationService.GetNavigationService(this);
                 ns.Navigate(new Patients());
             }
