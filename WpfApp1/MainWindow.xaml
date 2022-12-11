@@ -27,7 +27,14 @@
                 <ColumnDefinition Width="10*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1" Background="#1d4ed8">
-                <TextBlock Padding="10" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#eff6ff" FontWeight="Bold">Clinic Name</TextBlock>
+                <WrapPanel>
+                    <Image Source="logo.png"></Image>
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#eff6ff" FontWeight="Bold">Medicable For</TextBlock>
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#eff6ff" FontWeight="Bold" FontSize="20">Clinic of UofC</TextBlock>
+                    </StackPanel>
+                    
+                </WrapPanel>
             </Grid>
             <Grid Grid.Column="1" Grid.Row="0" Background="#1d4ed8">
                 <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Grid.IsSharedSizeScope="True">
