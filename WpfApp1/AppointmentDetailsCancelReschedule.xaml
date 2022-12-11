@@ -46,7 +46,7 @@
                                 <ColumnDefinition Width="1*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="0" Text="Appointment Details" FontSize="24" FontWeight="Bold"/>
-                            <Button Grid.Column="1" Foreground="White" Background="Red" HorizontalAlignment="Right" Padding="8 4">
+                            <Button Grid.Column="1" Foreground="White" Background="Red" HorizontalAlignment="Right" Padding="8 4" Click="Button_Click">
                                 Cancel this Appointment
                             </Button>
                         </Grid>

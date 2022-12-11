@@ -22,11 +22,13 @@ namespace WpfApp1
     public partial class AppointmentDetailsCancelReschedule : Page
     {
         Appointment selectedAppointment;
+        APatient patient;
         public AppointmentDetailsCancelReschedule(APatient patient, Appointment appointment)
         {
             InitializeComponent();
 
             selectedAppointment = appointment;
+            this.patient = patient;
 
             patientname.Text = patient.PatientName;
             healthcareid.Text = patient.PatientHealthCareNumber;
@@ -73,6 +75,7 @@ namespace WpfApp1
         public void selectDate(DateTime date)
         {
             datepicker.SelectedDate = date;
+            selectedDateTimes.Add(date);
         }
 
         private List<DateTime> selectedDateTimes = new List<DateTime>();
@@ -206,6 +209,18 @@ namespace WpfApp1
                 {
                     if (timepicker.SelectedItems.Count > 0)
                     {
+                        var item = DB.Appointments.RemoveAll(x => x.StartDate == selectedAppointment.StartDate && x.Patient.PatientHealthCareNumber == patient.PatientHealthCareNumber);
+                        foreach (DateTime slot in selectedDateTimes)
+                        {
+                            DB.Appointments.Add(
+                                new Appointment(
+                                    patient,
+                                    slot,
+                                    DB.Doctors.Find(d => d.DisplayName == (string)doctorlist.SelectedValue),
+                                    (string)reason.SelectedValue,
+                                    notes.Text));
+                        }
+
                         string messageBoxText = "Appointment Rescheduled!";
                         string caption = "Appointment Rescheduled";
                         MessageBoxButton button = MessageBoxButton.OK;
@@ -233,6 +248,18 @@ namespace WpfApp1
                     {
                         if (timepicker.SelectedItems.Count > 0)
                         {
+                            var item = DB.Appointments.RemoveAll(x => x.StartDate == selectedAppointment.StartDate && x.Patient.PatientHealthCareNumber == patient.PatientHealthCareNumber);
+                            foreach (DateTime slot in selectedDateTimes)
+                            {
+                                DB.Appointments.Add(
+                                    new Appointment(
+                                        patient,
+                                        slot,
+                                        DB.Doctors.Find(d => d.DisplayName == (string)doctorlist.SelectedValue),
+                                        (string)reason.SelectedValue,
+                                        notes.Text));
+                            }
+
                             string messageBoxText = "Appointment Rescheduled!";
                             string caption = "Appointment Rescheduled";
                             MessageBoxButton button = MessageBoxButton.OK;
@@ -347,5 +374,22 @@ namespace WpfApp1
 
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            string messageBoxText = "Are you sure you want to cancel this appointment?";
+            string caption = "Cancel Appointment";
+            MessageBoxButton button = MessageBoxButton.YesNo;
+            MessageBoxImage icon = MessageBoxImage.Warning;
+            MessageBoxResult result;
+
+            result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                var item = DB.Appointments.RemoveAll(x => x.StartDate == selectedAppointment.StartDate && x.Patient.PatientHealthCareNumber == patient.PatientHealthCareNumber);
+                NavigationService ns = NavigationService.GetNavigationService(this);
+                ns.Navigate(new Dashboard());
+            }
+        }
     }
 }
