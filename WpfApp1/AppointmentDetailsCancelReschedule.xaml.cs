@@ -64,10 +64,11 @@ namespace WpfApp1
             notes.Text = selectedAppointment.Notes;
             notes.IsEnabled = false;
         }
-        //public void selectDoctor(string doctor)
-        //{
-          //  doctorlist.SelectedValue = doctor;
-        //}
+        
+        public void selectDoctor(string doctor)
+        {
+            doctorlist.SelectedValue = doctor;
+        }
 
         public void selectDate(DateTime date)
         {
@@ -276,8 +277,10 @@ namespace WpfApp1
                 Trace.WriteLine(datepicker.SelectedDate);
             }
 
-            page.appointmentDetailsNext = this;
-            page.appointmentDetailsPrevious = this;
+            page.reschedule = true;
+
+            page.appointmentDetailsCancelRescheduleNext = this;
+            page.appointmentDetailsCancelReschedulePrevious = this;
 
             ns.Navigate(page);
         }

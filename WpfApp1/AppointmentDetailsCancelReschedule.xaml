@@ -40,10 +40,16 @@
                 <DockPanel VerticalAlignment="Top">
                     <StackPanel DockPanel.Dock="Top">
 
-                        <WrapPanel>
-
-                            <TextBlock Text="Appointment Details" FontSize="24" FontWeight="Bold"/>
-                        </WrapPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="Appointment Details" FontSize="24" FontWeight="Bold"/>
+                            <Button Grid.Column="1" Foreground="White" Background="Red" HorizontalAlignment="Right" Padding="8 4">
+                                Cancel this Appointment
+                            </Button>
+                        </Grid>
                         <WrapPanel>
                             <TextBlock Text="Fields with an "></TextBlock>
                             <TextBlock Text="*" Foreground="Red"></TextBlock>
@@ -150,7 +156,7 @@
                                 <ColumnDefinition></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" FontSize="12" TextWrapping="Wrap" Text="You may use the calendar to select an appointment date and time if the patient does not have an exact date in mind." Grid.ColumnSpan="2" Margin="0,0,185,0"></TextBlock>
+                            <TextBlock Grid.Column="0" FontSize="12" TextWrapping="Wrap" Text="You may use the calendar to select an appointment date and time if the patient does not have an exact date in mind." Margin="0 0 8 0"></TextBlock>
                             <Button Grid.Column="1" x:Name="BookButton" FontSize="16" Padding="8 4" HorizontalAlignment="Right" Content="Proceed to Calendar" Style="{StaticResource BlueButton}" FontWeight="Bold" Click="BookButton_Click" Width="180"/>
                         </Grid>
                     </StackPanel>

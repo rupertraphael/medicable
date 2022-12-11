@@ -541,17 +541,26 @@ namespace WpfApp1
 
         public AppointmentDetails appointmentDetailsPrevious { get; set; }
         public AppointmentDetails appointmentDetailsNext { get; set; }
+
+        public bool reschedule = false;
+        public AppointmentDetailsCancelReschedule appointmentDetailsCancelReschedulePrevious { get; set; }
+        public AppointmentDetailsCancelReschedule appointmentDetailsCancelRescheduleNext { get; set; }
         private void SkipButton_Click(object sender, RoutedEventArgs e)
         {
             // Immediately skip. Don't need to confirm with user since
             // they haven't really selected appointments. Consequence
             // to accidentally pressing skip is not as bad as accidentally pressing
             // back when appointments are already selected.
+
+            if (reschedule)
+            {
+                goToSetAppointmentDetails(appointmentDetailsCancelReschedulePrevious);
+            }
            
             goToSetAppointmentDetails(appointmentDetailsPrevious);
         }
 
-        private void goToSetAppointmentDetails(AppointmentDetails page)
+        private void goToSetAppointmentDetails(Page page)
         {
             NavigationService ns = NavigationService.GetNavigationService(this);
 
@@ -586,12 +595,36 @@ namespace WpfApp1
             }
 
             // appointmentDetailsPrevious must be set.
-            goToSetAppointmentDetails(appointmentDetailsPrevious);
+            if (reschedule)
+            {
+                goToSetAppointmentDetails(appointmentDetailsCancelReschedulePrevious);
+            } else
+            {
+                goToSetAppointmentDetails(appointmentDetailsPrevious);
+            }
+            
         }
 
         private void SelectAppointmentSlot_Click(object sender, RoutedEventArgs e)
         {
             // TODO: maybe set the appointment details page with new data (i.e. selected doctor, date, slots).
+
+            if (reschedule)
+            {
+                appointmentDetailsCancelRescheduleNext.selectDoctor((string)SelectedDoctor.SelectedValue);
+                appointmentDetailsCancelRescheduleNext.selectDate(selectedDateTimes.First().Key.Date);
+                appointmentDetailsCancelRescheduleNext.populateTime();
+                appointmentDetailsCancelRescheduleNext.clearSelectedDateTimes();
+
+                foreach (DateTime dt in selectedDateTimes.Keys)
+                {
+                    appointmentDetailsCancelRescheduleNext.selectTime(dt);
+                }
+
+                goToSetAppointmentDetails(appointmentDetailsCancelRescheduleNext);
+
+                return;
+            }
 
             appointmentDetailsNext.selectDoctor((string)SelectedDoctor.SelectedValue);
             appointmentDetailsNext.selectDate(selectedDateTimes.First().Key.Date);
