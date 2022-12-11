@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -126,12 +127,16 @@ namespace WpfApp1
                 Reasonerror.Visibility = Visibility.Collapsed;
             }
         }
-
+        
+        private void notes_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Noteserror.Visibility = Visibility.Collapsed;  
+        }
         private void BookButton_Click(object sender, RoutedEventArgs e)
         {
             if (reason.SelectedIndex > -1)
             {
-                if (reason.SelectedValue!="Other")
+                if (reason.SelectedIndex < 4)
                 {
                     if (timepicker.SelectedIndex > 0)
                     {
@@ -164,7 +169,7 @@ namespace WpfApp1
                         }
                     }
                 }
-                else if (reason.SelectedValue == "Other")
+                else if (reason.SelectedIndex == 4)
                 {
                     if(notes.Text != "")
                     {
@@ -191,7 +196,7 @@ namespace WpfApp1
                             NavigationService ns = NavigationService.GetNavigationService(this);
                             if ((string)doctorlist.SelectedValue == "" || (DB.Doctors.Find(d => d.DisplayName == (string)doctorlist.SelectedValue)) == null)
                             {
-                                ns.Navigate(new Calendar());
+                                ns.Navigate(new Calendar());    
                             }
                             else
                             {
