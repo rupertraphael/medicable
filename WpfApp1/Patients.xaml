@@ -56,6 +56,34 @@
                         </StackPanel>
 
                         <ListView FontSize="16" Grid.Row="1" Name="patientView" d:ItemsSource="{d:SampleData ItemCount=13}" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible" SelectionChanged="patientView_SelectionChanged" >
+                            <ListView.Style>
+                                <Style TargetType="ListView">
+                                    <Style.Triggers>
+                                        <Trigger Property="HasItems"
+                         Value="False">
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="ListView">
+                                                        <Grid>
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition Height="3*" />
+                                                                <RowDefinition Height="2*" />
+                                                            </Grid.RowDefinitions>
+                                                            <StackPanel Grid.Row="1">
+                                                                <TextBlock TextAlignment="Center" Grid.Row="0" FontSize="24" Foreground="#6b7280" FontWeight="Medium">No Patients in This View</TextBlock>
+                                                                <TextBlock TextAlignment="Center" Grid.Row="1" Foreground="#6b7280" MaxWidth="800" TextWrapping="Wrap">Please make sure that you have entered all information correctly.</TextBlock>
+                                                            </StackPanel>
+                                                            <Border Padding="20">
+                                                                <Image Source="/empty-list.png" Grid.Row="0" Width="{Binding ActualWidth, ElementName=Tb}" />
+                                                            </Border>
+                                                        </Grid>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ListView.Style>
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Width="Auto" Header="Name" DisplayMemberBinding="{Binding PatientName}"/>
