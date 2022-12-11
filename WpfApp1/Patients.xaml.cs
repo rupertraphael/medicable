@@ -98,23 +98,25 @@ namespace WpfApp1
             }
         }
 
-        private void upcomingAppointments_SelectionChanged(object sender, MouseButtonEventArgs e)
+        private void upcomingAppointments_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             APatient client = (APatient)this.patientView.SelectedItem;
             Appointment appointment = (Appointment)this.upcomingAppointments.SelectedItem;
             if (appointment != null)
             {
+                upcomingAppointments.UnselectAll();
                 NavigationService ns = NavigationService.GetNavigationService(this);
                 ns.Navigate(new AppointmentDetailsCancelReschedule(client,appointment));
             }
         }
 
-        private void pastAppointments_SelectionChanged(object sender, MouseButtonEventArgs e)
+        private void pastAppointments_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             APatient client = (APatient)this.patientView.SelectedItem;
             Appointment appointment = (Appointment)this.pastAppointments.SelectedItem;
             if (appointment != null)
             {
+                pastAppointments.UnselectAll();
                 NavigationService ns = NavigationService.GetNavigationService(this);
                 ns.Navigate(new AppointmentDetails(client, appointment));
             }

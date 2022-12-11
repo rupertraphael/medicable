@@ -135,8 +135,6 @@ namespace WpfApp1
 
             if (appointment != null && client != null)
             {
-                //this.quickView.UnselectAll();
-
                 NavigationService ns = NavigationService.GetNavigationService(this);
                 ns.Navigate(new AppointmentDetailsCancelReschedule(client, appointment));
             }
