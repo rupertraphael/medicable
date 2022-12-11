@@ -70,7 +70,7 @@
                             <TextBlock x:Name="First_name1" Text="First Name " FontSize="16" VerticalAlignment="Top"/>
                             <TextBlock Foreground="Red" FontSize="16">*</TextBlock>
                         </WrapPanel>
-                        <TextBox x:Name="First_name_box" LostFocus="First_name_box_LostFocus" Text="{Binding BookForNewPatient.FirstName, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" FontSize="16" Foreground="Gray" TextChanged="First_name_box_TextChanged"/>
+                        <TextBox x:Name="First_name_box" LostFocus="First_name_box_LostFocus" Text="{Binding BookForNewPatient.FirstName, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" FontSize="16" TextChanged="First_name_box_TextChanged"/>
                         <TextBlock x:Name="errorFirstName" Foreground="Red" Text="" FontWeight="Medium" FontStyle="Italic">
                         </TextBlock>
                     </StackPanel>
@@ -143,7 +143,7 @@
                         <TextBlock Foreground="Red" FontSize="16">*</TextBlock>
                     </WrapPanel>
                     
-                    <TextBox x:Name="address_box" LostFocus="address_box_LostFocus" Text="" FontSize="16" Foreground="Gray" TextChanged="address_box_TextChanged"/>
+                    <TextBox x:Name="address_box" LostFocus="address_box_LostFocus" Text="" FontSize="16" TextChanged="address_box_TextChanged"/>
                     <TextBlock x:Name="errorAddress1" Foreground="Red" Text="" FontWeight="Medium" FontStyle="Italic"/>
                 </StackPanel>
 

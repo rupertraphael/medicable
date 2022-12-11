@@ -74,9 +74,17 @@ namespace WpfApp1
 
         private void Dashboard_Button_Click(object sender, RoutedEventArgs e)
         {
+
+
             if (MainNavFrame.Content.GetType() == (new Calendar()).GetType() || MainNavFrame.Content.GetType() == typeof(AppointmentDetails))
             {
                 if(MessageBox.Show("You are currently booking an appointment. Do you want to cancel booking an appointment and go to another page?", "Cancel Appointment Booking", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+                {
+                    return;
+                }
+            } else if (MainNavFrame.Content.GetType() == typeof(BookForNewPatient))
+            {
+                if (MessageBox.Show("You are currently creating a patient file. Do you want to cancel creating a patient file and go to another page?", "Cancel Patient File Creation", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
                 {
                     return;
                 }
@@ -89,10 +97,16 @@ namespace WpfApp1
         }
 
         private void Patients_Button_Click(object sender, RoutedEventArgs e)
-        {
+        {   
             if (MainNavFrame.Content.GetType() == (new Calendar()).GetType() || MainNavFrame.Content.GetType() == typeof(AppointmentDetails))
             {
                 if (MessageBox.Show("You are currently booking an appointment. Do you want to cancel booking an appointment and go to another page?", "Cancel Appointment Booking", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+                {
+                    return;
+                }
+            } else if (MainNavFrame.Content.GetType() == typeof(BookForNewPatient))
+            {
+                if (MessageBox.Show("You are currently creating a patient file. Do you want to cancel creating a patient file and go to another page?", "Cancel Patient File Creation", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
                 {
                     return;
                 }
