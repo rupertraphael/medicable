@@ -17,6 +17,7 @@ namespace WpfApp1
         private string _patientPreferredDoctor;
         private string _patientHealthHistory;
         private string _patientConditions;
+        List<Appointment> _appointments;
 
         public string PatientName
         {
@@ -71,6 +72,12 @@ namespace WpfApp1
             return this.PatientName;
         }
 
+        public List<Appointment> Appointments
+        {
+            get { return _appointments;  }
+            set { _appointments = value; }
+        }
+
         public APatient(
             string patientName,
             string patientPhoneNumber,
@@ -79,7 +86,8 @@ namespace WpfApp1
             string patientAddress,
             string patientPreferredDoctor,
             string patientHealthHistory,
-            string patientConditions)
+            string patientConditions, 
+            List<Appointment> appointments)
         {
             _patientName = patientName;
             _patientPhoneNumber = patientPhoneNumber;
@@ -89,6 +97,7 @@ namespace WpfApp1
             _patientPreferredDoctor = patientPreferredDoctor;
             _patientHealthHistory = patientHealthHistory;
             _patientConditions = patientConditions;
+            _appointments = appointments;
         }
 
         public APatient(
@@ -297,6 +306,55 @@ namespace WpfApp1
             get
             {
                 return (_Appointments);
+            }
+        }
+
+        private static List<Appointment> scottAppointments = new List<Appointment>()
+        {
+            new Appointment("Scott", "Turner", DateTime.Parse("2022-12-01 09:00:00"), "Dr. Amr, GP")
+        };
+
+        private static List<Appointment> rosyAppointments = new List<Appointment>()
+        {
+            new Appointment("Rosy", "Usher", DateTime.Parse("2022-12-01 09:00:00"), "Dr. Amr, GP")
+        };
+        private static List<Appointment> lindaAppointments = new List<Appointment>()
+        {
+            new Appointment("Linda", "Walsh", DateTime.Parse("2022-12-01 09:00:00"), "Dr. Amr, GP")
+        };
+        private static List<Appointment> albertAppointments = new List<Appointment>()
+        {
+            new Appointment("Albert", "Zander", DateTime.Parse("2022-12-01 09:00:00"), "Dr. Amr, GP")
+        };
+        private static List<Appointment> antonyAppointments = new List<Appointment>()
+        {
+            new Appointment("Antony", "Simmons", DateTime.Parse("2022-12-01 09:00:00"), "Dr. Amr, GP")
+        };
+        private static List<Appointment> brunoAppointments = new List<Appointment>()
+        {
+            new Appointment("Bruno", "Simmons", DateTime.Parse("2022-12-01 09:00:00"), "Dr. Amr, GP")
+        };
+        private static List<Appointment> alfredAppointments = new List<Appointment>()
+        {
+            new Appointment("Alfred", "Simmons", DateTime.Parse("2022-12-01 09:00:00"), "Dr. Amr, GP")
+        };
+
+        private static List<APatient> _aPatients = new List<APatient>()
+        {
+            new APatient("Scott Turner", "403-555-1430", "13256-1231", "03/02/1983", "73 5 Ave NW Calgary AB", "Dr Rupert", "", "", scottAppointments),
+            new APatient("Rosy Usher", "403-555-6122", "11661-1209", "07/15/2002", "65 Hills Rd NE Calgary AB", "Dr Amr", "", "", rosyAppointments),
+            new APatient("Linda Walsh", "403-555-1112", "15671-1200", "01/01/2000", "86 1 ST SE Calgary AB", "Dr Chirag", "", "", lindaAppointments),
+            new APatient("Albert Zander", "403-555-1430", "13112-1764", "09/22/1967", "123 Martin Crescent NE Calgary AB", "Dr Raphael", "", "", albertAppointments),
+            new APatient("Antony Simmons", "587-412-8666", "16543-1289", "11/19/2005", "432 Panaroma RD NW Calgary AB", "Dr Araiz", "", "", antonyAppointments),
+            new APatient("Bruno Simmons", "587-222-8656", "16552-1139", "05/06/1945", "170 Ridge ST SW Calgary AB", "", "", "", brunoAppointments),
+            new APatient("Alfred Simmons", "403-855-0215", "17442-1577", "10/10/2010", "170 Ridge ST SW Calgary AB", "Dr Rupert", "", "", alfredAppointments)
+        };
+
+        public static List<APatient> APatients
+        {
+            get
+            {
+                return (_aPatients); 
             }
         }
     }
