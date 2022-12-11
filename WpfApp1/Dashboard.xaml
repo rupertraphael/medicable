@@ -17,6 +17,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0">
@@ -26,9 +27,9 @@
                             Welcome!
                         </TextBlock>
                         <TextBlock FontSize="16">The following doctors are in today:</TextBlock>
-                        <TextBlock FontSize="16">Dr. Amr, GP</TextBlock>
-                        <TextBlock FontSize="16">Dr. Chirag, GP</TextBlock>
-                        <TextBlock FontSize="16">Dr. Raphael, GP</TextBlock>
+                        <TextBlock FontSize="16">Dr. Chirag Asrani, Chiropractor</TextBlock>
+                        <TextBlock FontSize="16">Dr. Raphael Castillo, GP</TextBlock>
+                        <TextBlock FontSize="16">Dr. Rupert Amodia, GP</TextBlock>
                     </StackPanel>
                     <Border.Effect>
                         <DropShadowEffect Opacity="0.06" Direction="270" BlurRadius="4" ShadowDepth="2"/>
@@ -36,7 +37,21 @@
                 </Border>
             </Grid>
 
-            <StackPanel Grid.Row="1">
+            <Grid Grid.Row="1">
+                <Border Margin="20 10 20 10" Padding="20" Background="#f9fafb" CornerRadius="4">
+                    <StackPanel>
+                        <TextBlock FontSize="24">
+                            Here are some tips you might find useful:
+                        </TextBlock>
+                        <TextBlock FontSize="16" TextWrapping="Wrap">- You can use a patients past appointments as a template for booking a new appointment by clicking on a patient's past appointment.</TextBlock>
+                    </StackPanel>
+                    <Border.Effect>
+                        <DropShadowEffect Opacity="0.06" Direction="270" BlurRadius="4" ShadowDepth="2"/>
+                    </Border.Effect>
+                </Border>
+            </Grid>
+
+            <StackPanel Grid.Row="2">
                 <Border Margin="20 10" Padding="1" Background="#1d4ed8" CornerRadius="4">
                     <Button Background="#1d4ed8" Padding="9" Foreground="#eff6ff" Click="Book_Existing_Patient_Click" Height="50" FontSize="16">
                         <TextBlock>Book for <Bold>Existing Patient</Bold></TextBlock>
@@ -75,14 +90,14 @@
                             </StackPanel>
 
                             <WrapPanel Grid.Column="2" Grid.Row="0" VerticalAlignment="Center">
-                                <Border BorderThickness="1" Margin="4" BorderBrush="#1d4ed8" CornerRadius="2">
+                                <!--<Border BorderThickness="1" Margin="4" BorderBrush="#1d4ed8" CornerRadius="2">
                                     <Button Content="&lt;" Padding="16 8" Background="#1d4ed8" Foreground="#eff6ff" BorderThickness="0" FontWeight="Bold" FontSize="16" Click="Quickview_Previous"></Button>
+                                </Border>-->
+                                <Border BorderThickness="1" Margin="4" BorderBrush="#1d4ed8" CornerRadius="2">
+                                    <Button Content="Today" Padding="16 8" Background="#1d4ed8" Foreground="#eff6ff" BorderThickness="0" FontWeight="Bold" FontSize="16" Click="Quickview_Today"></Button>
                                 </Border>
                                 <Border BorderThickness="1" Margin="4" BorderBrush="#1d4ed8" CornerRadius="2">
-                                    <Button Content="TODAY" Padding="16 8" Background="#1d4ed8" Foreground="#eff6ff" BorderThickness="0" FontWeight="Bold" FontSize="16" Click="Quickview_Today"></Button>
-                                </Border>
-                                <Border BorderThickness="1" Margin="4" BorderBrush="#1d4ed8" CornerRadius="2">
-                                    <Button Content="&gt;" Padding="16 8" Background="#1d4ed8" Foreground="#eff6ff" BorderThickness="0" FontWeight="Bold" FontSize="16" Click="Quickview_Next"></Button>
+                                    <Button Content="Next Day &gt;" Padding="16 8" Background="#1d4ed8" Foreground="#eff6ff" BorderThickness="0" FontWeight="Bold" FontSize="16" Click="Quickview_Next"></Button>
                                 </Border>
                             </WrapPanel>
                             <Grid Grid.Row="1" Grid.ColumnSpan="3" Margin="0 20 0 10">
@@ -102,7 +117,7 @@
                             </Grid>
                         </Grid>
                     </Border>
-                    <ListView BorderThickness="0" Name="quickView" Background="#f9fafb"  ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible" d:ItemsSource="{d:SampleData ItemCount=12}" DockPanel.Dock="Bottom">
+                    <ListView BorderThickness="0" Name="quickView" Background="#f9fafb"  ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible" d:ItemsSource="{d:SampleData ItemCount=12}" DockPanel.Dock="Bottom" SelectionChanged="quickview_SelectionChanged" SelectionMode="Single">
                         <ListView.Style>
                             <Style TargetType="ListView">
                                 <Style.Triggers>

@@ -128,6 +128,20 @@ namespace WpfApp1
 
         }
 
+        private void quickview_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Appointment appointment = (Appointment)this.quickView.SelectedItem;
+            APatient client = appointment.Patient;
+
+            if (appointment != null && client != null)
+            {
+                //this.quickView.UnselectAll();
+
+                NavigationService ns = NavigationService.GetNavigationService(this);
+                ns.Navigate(new AppointmentDetailsCancelReschedule(client, appointment));
+            }
+        }
+
     }
 
 
