@@ -8,43 +8,120 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="BookForNewPatient">
 
-    <Grid Background="White">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="43*"/>
-            <RowDefinition Height="391*"/>
-            <RowDefinition Height="0*"/>
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1" Background="#1d4ed8"/>
-        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1" Background="#1d4ed8">
-            <TextBlock FontSize="16" Padding="10"  VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#eff6ff" FontWeight="Bold" Text="Clinic Name" />
-        </Grid>
-        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Grid.IsSharedSizeScope="True" Margin="542,0,0,0" Width="258">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition SharedSizeGroup="mysizeGroup"/>
-                </Grid.ColumnDefinitions>
-                <Button Padding="14" BorderThickness="0" Background="#1d4ed8" Foreground="#eff6ff"  Content="Dashboard"  />
-            </Grid>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition SharedSizeGroup="mysizeGroup"/>
-                </Grid.ColumnDefinitions>
-                <Button Padding="14" BorderThickness="0" Background="#1d4ed8" Foreground="#eff6ff" Content="Patients" />
-            </Grid>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition SharedSizeGroup="mysizeGroup"/>
-                </Grid.ColumnDefinitions>
-                <Button Padding="14" BorderThickness="0" Background="#1d4ed8" Foreground="#eff6ff" Content="Calendar" />
-            </Grid>
-        </StackPanel>
-        <TextBlock x:Name="appointment1" HorizontalAlignment="Center" Margin="-40,20,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Create appointment" FontSize="18" FontWeight="Bold" VerticalAlignment="Top" Height="26" Width="180"/>
-        <TextBlock x:Name="First_name1" HorizontalAlignment="Left" Margin="125,60,0,0" Grid.Row="1" TextWrapping="Wrap" Text="First Name *" FontSize="14" VerticalAlignment="Top" Height="20" Width="77"/>
-        <TextBox x:Name="First_name_box" HorizontalAlignment="Left" Margin="125,80,0,0" LostFocus="First_name_box_LostFocus" Grid.Row="1" TextWrapping="Wrap" Text="{Binding BookForNewPatient.FirstName, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" VerticalAlignment="Top" Width="200" Height="20" FontSize="13" Foreground="Gray" TextChanged="First_name_box_TextChanged"/>
-        <TextBlock x:Name="Last_name1" HorizontalAlignment="Left" Margin="480,60,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Last Name *" FontSize="14" VerticalAlignment="Top" Height="20" Width="75"/>
-        <TextBox Name="Last_name_box" HorizontalAlignment="Left" Margin="480,80,0,0" LostFocus="Last_name_box_LostFocus" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" Height="20" FontSize="13" Foreground="Gray" TextChanged="Last_name_box_TextChanged"/>
+    <Grid Background="#e2e8f0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Border Margin="0 20" Padding="8" CornerRadius="4" Background="#f9fafb" Grid.Column="1" VerticalAlignment="Top">
+            <StackPanel>
+                <TextBlock x:Name="appointment1" TextWrapping="Wrap" Text="Create appointment" FontSize="18" FontWeight="Bold"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Health ID Number  " FontWeight="Medium"/>
+                    <TextBlock Name="errorHealthID" Foreground="Red" Text="" Width="252" FontWeight="Medium"/>
+                </StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock x:Name="First_name1" Text="First Name *" FontSize="14" VerticalAlignment="Top"/>
+                        <TextBox x:Name="First_name_box" LostFocus="First_name_box_LostFocus" Text="{Binding BookForNewPatient.FirstName, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" FontSize="13" Foreground="Gray" TextChanged="First_name_box_TextChanged"/>
+                        <TextBlock x:Name="errorFirstName" Foreground="Red" Text="" FontWeight="Medium">
+                        </TextBlock>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1">
+                        <TextBlock x:Name="Last_name1" Text="Last Name *" FontSize="14"/>
+                        <TextBox Name="Last_name_box" Text="" FontSize="13" Foreground="Gray" TextChanged="Last_name_box_TextChanged"/>
+                        <TextBlock x:Name="errorLastName" Foreground="Red" Text="" FontWeight="Medium"/>
+                    </StackPanel>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock x:Name="phone1"  Text="Phone no. *" FontSize="14"/>
 
+                        <Grid>
+                            <TextBox x:Name="phone_box" LostFocus="phone_LostFocus" Text="" FontSize="13" Foreground="Gray" TextChanged="phone_box_TextChanged"/>
+                            <TextBlock FontSize="14" IsHitTestVisible="False" Text="403-214-8873" Foreground="DarkGray">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=phone_box}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
+                        <TextBlock x:Name="errorPhone" Foreground="Red" Text="" FontWeight="Medium"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1">
+                        <TextBlock x:Name="dob1" Text="Date of birth *" FontSize="14"/>
+                        <Grid>
+                            <TextBox x:Name="dob_box" LostFocus="DOB_LostFocus" TextWrapping="Wrap" Text="" FontSize="13" Foreground="Gray" TextChanged="dob_box_TextChanged" />
+                            <TextBlock FontSize="14" IsHitTestVisible="False" Text="MM/DD/YYYY" Foreground="DarkGray">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=dob_box}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
+                        <TextBlock x:Name="errorDOB1" Foreground="Red" Text="" FontWeight="Medium"/>
+                    </StackPanel>
+                </Grid>
+                <StackPanel>
+                    <TextBlock x:Name="address1" Text="Address *" FontSize="14"/>
+                    <TextBox x:Name="address_box" LostFocus="address_box_LostFocus" Text="" FontSize="13" Foreground="Gray" TextChanged="address_box_TextChanged" />
+                    <TextBlock x:Name="errorAddress1" Foreground="Red" Text="" FontWeight="Medium"/>
+                </StackPanel>
 
+                <!--<TextBlock x:Name="allergy1" HorizontalAlignment="Left" Margin="480,190,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Allergy Information " FontSize="14" VerticalAlignment="Top" Height="20" Width="191"/>
+                <TextBox x:Name="allergy_box1" HorizontalAlignment="Left" Margin="480,210,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" Height="20" FontSize="13" Foreground="Gray"/>
+                <TextBlock x:Name="health_id1" HorizontalAlignment="Left" Margin="125,255,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Health ID *" FontSize="14" VerticalAlignment="Top" Height="20" Width="71"/>
+                <TextBlock x:Name="errorHealthID1" Foreground="Red" Text="" FontWeight="Medium" Margin="202,257,428,133" Grid.Row="1" />
+                <TextBox x:Name="health_id_box" HorizontalAlignment="Left" Margin="125,275,0,0" LostFocus="health_id_LostFocus" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" Height="20" FontSize="13" Foreground="Gray" TextChanged="health_id_box_TextChanged" />
+                <TextBlock FontSize="14" Margin="128,276,594,109" IsHitTestVisible="False" Text="98765-1234" Foreground="DarkGray" Grid.Row="1">
+                    <TextBlock.Style>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Text, ElementName=health_id_box}" Value="">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+                <TextBlock x:Name="conditions1" HorizontalAlignment="Left" Margin="480,255,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Conditions " FontSize="14" VerticalAlignment="Top" Height="20" Width="191"/>
+                <TextBox x:Name="conditions_box1" HorizontalAlignment="Left" Margin="480,275,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" Height="20" FontSize="13" Foreground="Gray" />-->
+                <Button Content="Create Patient File" HorizontalAlignment="Right" Background="#1d4ed8" Foreground="#eff6ff" FontWeight="Bold" Click="CreatePatientBtn_Click">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="IsEnabled" Value="False"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Error}" Value="{x:Null}">
+                                    <Setter Property="IsEnabled" Value="True"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </StackPanel>
+        </Border>
         <!--        
         <TextBlock x:Name="phone_error" HorizontalAlignment="Left" Margin="125,145,0,0" Grid.Row="1" TextWrapping="Wrap" Foreground="#808080" FontSize="14" VerticalAlignment="Top" Height="20" Width="150"><Run Language="en-in" Text=" 403-214-0987"/></TextBlock>
         <TextBlock x:Name="health_id_error" HorizontalAlignment="Left" Margin="125,275,0,0" Grid.Row="1" TextWrapping="Wrap" Foreground="#808080" FontSize="14" VerticalAlignment="Top" Height="20" Width="150"><Run Language="en-in" Text=" 98765-1234"/></TextBlock>
@@ -63,88 +140,10 @@
         -->
         <!--
         <Label>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Health ID Number  " FontWeight="Medium"/>
-                <TextBlock Name="errorHealthID" Foreground="Red" Text="" Width="252" FontWeight="Medium"/>
-            </StackPanel>
+            
         </Label>
         -->
-        <TextBlock x:Name="phone1" HorizontalAlignment="Left" Margin="125,125,0,0"  Grid.Row="1" TextWrapping="Wrap" Text="Phone no. *" FontSize="14" VerticalAlignment="Top" Height="20" Width="77"/>
-        <TextBlock x:Name="errorPhone" Foreground="Red" Text="" FontWeight="Medium" Margin="207,127,451,264" Grid.Row="1" />
-        <TextBox x:Name="phone_box" HorizontalAlignment="Left" Margin="125,145,0,0" LostFocus="phone_LostFocus" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" Height="20" FontSize="13" Foreground="Gray" TextChanged="phone_box_TextChanged"/>
-        <TextBlock FontSize="14" Margin="130,145,577,244" IsHitTestVisible="False" Text="403-214-8873" Foreground="DarkGray" Grid.Row="1">
-            <TextBlock.Style>
-                <Style TargetType="{x:Type TextBlock}">
-                    <Setter Property="Visibility" Value="Collapsed"/>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Text, ElementName=phone_box}" Value="">
-                            <Setter Property="Visibility" Value="Visible"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </TextBlock.Style>
-        </TextBlock>
-
-        <TextBlock x:Name="dob1" HorizontalAlignment="Left" Margin="480,125,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Date of birth *" FontSize="14" VerticalAlignment="Top" Height="20" Width="96"/>
-        <TextBlock x:Name="errorDOB1" Foreground="Red" Text="" FontWeight="Medium" Margin="581,127,94,260" Grid.Row="1" />
-        <TextBox x:Name="dob_box" HorizontalAlignment="Left" Margin="480,145,0,0"  LostFocus="DOB_LostFocus" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" Height="21" FontSize="13" Foreground="Gray" TextChanged="dob_box_TextChanged" />
-        <TextBlock FontSize="14" Margin="484,146,227,244" IsHitTestVisible="False" Text="MM/DD/YYYY" Foreground="DarkGray" Grid.Row="1">
-            <TextBlock.Style>
-                <Style TargetType="{x:Type TextBlock}">
-                    <Setter Property="Visibility" Value="Collapsed"/>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Text, ElementName=dob_box}" Value="">
-                            <Setter Property="Visibility" Value="Visible"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </TextBlock.Style>
-        </TextBlock>
-        <TextBlock x:Name="address1" HorizontalAlignment="Left" Margin="125,190,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Address *" FontSize="14" VerticalAlignment="Top" Height="20" Width="65"/>
-        <TextBox x:Name="address_box" HorizontalAlignment="Left" LostFocus="address_box_LostFocus" Margin="125,210,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" Height="20" FontSize="13" Foreground="Gray" TextChanged="address_box_TextChanged" />
-        <TextBlock x:Name="allergy1" HorizontalAlignment="Left" Margin="480,190,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Allergy Information " FontSize="14" VerticalAlignment="Top" Height="20" Width="191"/>
-        <TextBox x:Name="allergy_box1" HorizontalAlignment="Left" Margin="480,210,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" Height="20" FontSize="13" Foreground="Gray"/>
-        <TextBlock x:Name="health_id1" HorizontalAlignment="Left" Margin="125,255,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Health ID *" FontSize="14" VerticalAlignment="Top" Height="20" Width="71"/>
-        <TextBlock x:Name="errorHealthID1" Foreground="Red" Text="" FontWeight="Medium" Margin="202,257,428,133" Grid.Row="1" />
-        <TextBox x:Name="health_id_box" HorizontalAlignment="Left" Margin="125,275,0,0" LostFocus="health_id_LostFocus" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" Height="20" FontSize="13" Foreground="Gray" TextChanged="health_id_box_TextChanged" />
-        <TextBlock FontSize="14" Margin="128,276,594,109" IsHitTestVisible="False" Text="98765-1234" Foreground="DarkGray" Grid.Row="1">
-            <TextBlock.Style>
-                <Style TargetType="{x:Type TextBlock}">
-                    <Setter Property="Visibility" Value="Collapsed"/>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Text, ElementName=health_id_box}" Value="">
-                            <Setter Property="Visibility" Value="Visible"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </TextBlock.Style>
-        </TextBlock>
-        <TextBlock x:Name="conditions1" HorizontalAlignment="Left" Margin="480,255,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Conditions " FontSize="14" VerticalAlignment="Top" Height="20" Width="191"/>
-        <TextBox x:Name="conditions_box1" HorizontalAlignment="Left" Margin="480,275,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="200" Height="20" FontSize="13" Foreground="Gray" />
-        <Button Content="Create patient" HorizontalAlignment="Left" Background="#1d4ed8" Foreground="#eff6ff" FontWeight="Bold" Margin="292,328,0,0" Grid.Row="1" VerticalAlignment="Top" Height="36" Width="161" Click="CreatePatientBtn_Click">
-            <Button.Style>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="IsEnabled" Value="False"/>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Error}" Value="{x:Null}">
-                            <Setter Property="IsEnabled" Value="True"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Button.Style>
-        </Button>
-        <TextBlock x:Name="errorFirstName" Foreground="Red" Text="" FontWeight="Medium" Margin="205,61,464,328" Grid.Row="1" RenderTransformOrigin="0.5,0.5" >
-            <TextBlock.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-0.152"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </TextBlock.RenderTransform>
-        </TextBlock>
-        <TextBlock x:Name="errorLastName" Foreground="Red" Text="" FontWeight="Medium" Margin="560,62,94,329" Grid.Row="1" />
-        <TextBlock x:Name="errorAddress1" Foreground="Red" Text="" FontWeight="Medium" Margin="190,190,476,201" Grid.Row="1" />
+        
 
 
     </Grid>

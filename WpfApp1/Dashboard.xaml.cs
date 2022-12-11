@@ -60,7 +60,7 @@ namespace WpfApp1
         private void Book_New_Patient_Click(object sender, RoutedEventArgs e)
         {
             NavigationService ns = NavigationService.GetNavigationService(this);
-            ns.Navigate(new Calendar());
+            ns.Navigate(new BookForNewPatient());
         }
 
         private void Quickview_Next(object sender, RoutedEventArgs e)
