@@ -119,7 +119,7 @@
                                         <Label>
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="Health ID Number  " FontWeight="Medium"/>
-                                                <TextBlock Name="errorHealthID" Foreground="Red" Text="" Width="252" FontWeight="Medium"/>
+                                                <TextBlock Name="errorHealthID" Foreground="Red" Text="" Width="252" FontWeight="Medium" FontStyle="Italic"/>
                                             </StackPanel>
 
                                         </Label>
@@ -136,7 +136,7 @@
                                             <Label>
                                                 <StackPanel Orientation="Horizontal">
                                                     <TextBlock Text="Telephone Number  " FontWeight="Medium" Width="146"/>
-                                                    <TextBlock Name="errorTelephone" Foreground="Red" Text="" Width="400" FontWeight="Medium"/>
+                                                    <TextBlock Name="errorTelephone" Foreground="Red" Text="" Width="400" FontWeight="Medium" FontStyle="Italic"/>
                                                 </StackPanel>
                                             </Label>
 
@@ -148,7 +148,7 @@
                                             <Label>
                                                 <StackPanel Orientation="Horizontal">
                                                     <TextBlock Text="Date of Birth  " FontWeight="Medium" Width="100"/>
-                                                    <TextBlock Name="errorDOB" Foreground="Red" Text="" Width="450" FontWeight="Medium"/>
+                                                    <TextBlock Name="errorDOB" Foreground="Red" Text="" Width="450" FontWeight="Medium" FontStyle="Italic"/>
                                                 </StackPanel>
                                             </Label>
 
@@ -160,7 +160,7 @@
                                         <Label>
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="Address  " FontWeight="Medium" Width="74"/>
-                                                <TextBlock Name="errorAddress" Foreground="Red" Text="" Width="450" FontWeight="Medium"/>
+                                                <TextBlock Name="errorAddress" Foreground="Red" Text="" Width="450" FontWeight="Medium" FontStyle="Italic"/>
                                             </StackPanel>
                                         </Label>
                                         <TextBox Name="clientAddress" TextChanged="clientAddress_TextChanged" LostFocus="clientAddress_LostFocus" Padding="6" />

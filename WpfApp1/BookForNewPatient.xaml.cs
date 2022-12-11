@@ -51,9 +51,10 @@ namespace WpfApp1
             }
             else
             {
-                patientList.Add(new APatient(First_name_box.Text + " " + Last_name_box.Text, phone_box.Text, health_id_box.Text, dob_box.Text, address_box.Text, "", "", "", blank));
+                APatient newPatient = new APatient(First_name_box.Text + " " + Last_name_box.Text, phone_box.Text, health_id_box.Text, dob_box.Text, address_box.Text, "", "", "");
+                DB.APatients.Add(newPatient);
                 NavigationService ns = NavigationService.GetNavigationService(this);
-                ns.Navigate(new Patients());
+                ns.Navigate(new AppointmentDetails(newPatient));
             }
         }
 

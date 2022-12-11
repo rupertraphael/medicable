@@ -34,13 +34,17 @@
                 <DropShadowEffect Opacity=".06" Direction="270" BlurRadius="4" ShadowDepth="2"/>
             </Border.Effect>
             <StackPanel>
-                <TextBlock x:Name="appointment1" TextWrapping="Wrap" Text="Create appointment" FontSize="18" FontWeight="Bold"/>
+                <TextBlock x:Name="appointment1" TextWrapping="Wrap" Text="Create Patient File" FontSize="18" FontWeight="Bold"/>
                 <StackPanel>
-                    <TextBlock x:Name="health_id1" Text="Health ID *" FontSize="14" />
+                    <WrapPanel>
+                        <TextBlock x:Name="health_id1" Text="Health ID " FontSize="16" />
+                        <TextBlock Foreground="Red" FontSize="16">*</TextBlock>
+                    </WrapPanel>
+                    
                     
                     <Grid Width="150" HorizontalAlignment="Left">
-                        <TextBox x:Name="health_id_box" LostFocus="health_id_LostFocus" TextWrapping="Wrap" Text="" FontSize="14" Foreground="Gray" TextChanged="health_id_box_TextChanged" />
-                        <TextBlock FontSize="14" IsHitTestVisible="False" Text="98765-1234" Foreground="DarkGray">
+                        <TextBox x:Name="health_id_box" LostFocus="health_id_LostFocus" TextWrapping="Wrap" Text="" FontSize="16" TextChanged="health_id_box_TextChanged" />
+                        <TextBlock FontSize="16" IsHitTestVisible="False" Text="98765-1234" Foreground="DarkGray">
                             <TextBlock.Style>
                                 <Style TargetType="{x:Type TextBlock}">
                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -54,7 +58,7 @@
                         </TextBlock>
                     </Grid>
                     <!--<TextBlock Name="errorHealthID" Foreground="Red" Text="" FontWeight="Medium"/>-->
-                    <TextBlock x:Name="errorHealthID1" Foreground="Red" Text="" FontWeight="Medium" />
+                    <TextBlock x:Name="errorHealthID1" Foreground="Red" Text="" FontWeight="Medium" FontStyle="Italic"/>
                 </StackPanel>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -62,14 +66,21 @@
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0" Margin="0 0 4 0">
-                        <TextBlock x:Name="First_name1" Text="First Name *" FontSize="14" VerticalAlignment="Top"/>
-                        <TextBox x:Name="First_name_box" LostFocus="First_name_box_LostFocus" Text="{Binding BookForNewPatient.FirstName, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" FontSize="13" Foreground="Gray" TextChanged="First_name_box_TextChanged"/>
-                        <TextBlock x:Name="errorFirstName" Foreground="Red" Text="" FontWeight="Medium">
+                        <WrapPanel>
+                            <TextBlock x:Name="First_name1" Text="First Name " FontSize="16" VerticalAlignment="Top"/>
+                            <TextBlock Foreground="Red" FontSize="16">*</TextBlock>
+                        </WrapPanel>
+                        <TextBox x:Name="First_name_box" LostFocus="First_name_box_LostFocus" Text="{Binding BookForNewPatient.FirstName, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" FontSize="16" Foreground="Gray" TextChanged="First_name_box_TextChanged"/>
+                        <TextBlock x:Name="errorFirstName" Foreground="Red" Text="" FontWeight="Medium" FontStyle="Italic">
                         </TextBlock>
                     </StackPanel>
                     <StackPanel Grid.Column="1" Margin="4 0 0 0">
-                        <TextBlock x:Name="Last_name1" Text="Last Name *" FontSize="14"/>
-                        <TextBox Name="Last_name_box" Text="" FontSize="13" Foreground="Gray" TextChanged="Last_name_box_TextChanged"/>
+                        
+                        <WrapPanel>
+                            <TextBlock x:Name="Last_name1" Text="Last Name " FontSize="16"/>
+                            <TextBlock Foreground="Red" FontSize="16">*</TextBlock>
+                        </WrapPanel>
+                        <TextBox Name="Last_name_box" Text="" FontSize="16"  TextChanged="Last_name_box_TextChanged"/>
                         <TextBlock x:Name="errorLastName" Foreground="Red" Text="" FontWeight="Medium"/>
                     </StackPanel>
                 </Grid>
@@ -79,11 +90,15 @@
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0" Margin="0 0 4 0">
-                        <TextBlock x:Name="phone1"  Text="Phone no. *" FontSize="14"/>
+                        <WrapPanel>
+                            <TextBlock x:Name="phone1"  Text="Phone no. " FontSize="16"/>
+                            <TextBlock Foreground="Red" FontSize="16">*</TextBlock>
+                        </WrapPanel>
+                        
 
                         <Grid>
-                            <TextBox x:Name="phone_box" LostFocus="phone_LostFocus" Text="" FontSize="13" Foreground="Gray" TextChanged="phone_box_TextChanged"/>
-                            <TextBlock FontSize="14" IsHitTestVisible="False" Text="403-214-8873" Foreground="DarkGray">
+                            <TextBox x:Name="phone_box" LostFocus="phone_LostFocus" Text="" FontSize="16" TextChanged="phone_box_TextChanged"/>
+                            <TextBlock FontSize="16" IsHitTestVisible="False" Text="403-214-8873" Foreground="DarkGray">
                                 <TextBlock.Style>
                                     <Style TargetType="{x:Type TextBlock}">
                                         <Setter Property="Visibility" Value="Collapsed"/>
@@ -96,13 +111,17 @@
                                 </TextBlock.Style>
                             </TextBlock>
                         </Grid>
-                        <TextBlock x:Name="errorPhone" Foreground="Red" Text="" FontWeight="Medium"/>
+                        <TextBlock x:Name="errorPhone" Foreground="Red" Text="" FontWeight="Medium" FontStyle="Italic"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1" Margin="4 0 0 0">
-                        <TextBlock x:Name="dob1" Text="Date of birth *" FontSize="14"/>
+                        <WrapPanel>
+                            <TextBlock x:Name="dob1" Text="Date of birth " FontSize="16"/>
+                            <TextBlock Foreground="Red" FontSize="16">*</TextBlock>
+                        </WrapPanel>
+                        
                         <Grid>
-                            <TextBox x:Name="dob_box" LostFocus="DOB_LostFocus" TextWrapping="Wrap" Text="" FontSize="13" Foreground="Gray" TextChanged="dob_box_TextChanged" />
-                            <TextBlock FontSize="14" IsHitTestVisible="False" Text="MM/DD/YYYY" Foreground="DarkGray">
+                            <TextBox x:Name="dob_box" LostFocus="DOB_LostFocus" TextWrapping="Wrap" Text="" FontSize="16" TextChanged="dob_box_TextChanged" />
+                            <TextBlock FontSize="16" IsHitTestVisible="False" Text="MM/DD/YYYY" Foreground="DarkGray">
                                 <TextBlock.Style>
                                     <Style TargetType="{x:Type TextBlock}">
                                         <Setter Property="Visibility" Value="Collapsed"/>
@@ -115,13 +134,17 @@
                                 </TextBlock.Style>
                             </TextBlock>
                         </Grid>
-                        <TextBlock x:Name="errorDOB1" Foreground="Red" Text="" FontWeight="Medium"/>
+                        <TextBlock x:Name="errorDOB1" Foreground="Red" Text="" FontWeight="Medium" FontStyle="Italic"/>
                     </StackPanel>
                 </Grid>
                 <StackPanel>
-                    <TextBlock x:Name="address1" Text="Address *" FontSize="14"/>
-                    <TextBox x:Name="address_box" LostFocus="address_box_LostFocus" Text="" FontSize="13" Foreground="Gray" TextChanged="address_box_TextChanged"/>
-                    <TextBlock x:Name="errorAddress1" Foreground="Red" Text="" FontWeight="Medium"/>
+                    <WrapPanel>
+                        <TextBlock x:Name="address1" Text="Address " FontSize="16"/>
+                        <TextBlock Foreground="Red" FontSize="16">*</TextBlock>
+                    </WrapPanel>
+                    
+                    <TextBox x:Name="address_box" LostFocus="address_box_LostFocus" Text="" FontSize="16" Foreground="Gray" TextChanged="address_box_TextChanged"/>
+                    <TextBlock x:Name="errorAddress1" Foreground="Red" Text="" FontWeight="Medium" FontStyle="Italic"/>
                 </StackPanel>
 
                 <!--<TextBlock x:Name="allergy1" HorizontalAlignment="Left" Margin="480,190,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Allergy Information " FontSize="14" VerticalAlignment="Top" Height="20" Width="191"/>

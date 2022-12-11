@@ -117,7 +117,7 @@
                             </Grid>
                         </Grid>
                     </Border>
-                    <ListView BorderThickness="0" Name="quickView" Background="#f9fafb"  ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible" d:ItemsSource="{d:SampleData ItemCount=12}" DockPanel.Dock="Bottom" SelectionChanged="quickview_SelectionChanged" SelectionMode="Single">
+                    <ListView BorderThickness="0" FontSize="16" Name="quickView" d:ItemsSource="{d:SampleData ItemCount=13}" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible" SelectionChanged="quickview_SelectionChanged">
                         <ListView.Style>
                             <Style TargetType="ListView">
                                 <Style.Triggers>

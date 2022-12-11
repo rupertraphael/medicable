@@ -87,7 +87,7 @@
                             </TextBlock>
                         </WrapPanel>
                     </StackPanel>
-                    <Border BorderThickness="1" Margin="8 4" CornerRadius="2" BorderBrush="#f9fafb" Name="SkipButtonBorder" VerticalAlignment="Top">
+                    <Border BorderThickness="1" Margin="8 4" CornerRadius="2" BorderBrush="#f9fafb" Name="SkipButtonBorder" VerticalAlignment="Top" Visibility="Collapsed">
                         <Button Content="Skip &gt;" Padding="16 8" Background="#f9fafb" BorderThickness="0" FontWeight="Bold" FontSize="16" Name="SkipButton" Click="SkipButton_Click"></Button>
                     </Border>
                 </WrapPanel>
