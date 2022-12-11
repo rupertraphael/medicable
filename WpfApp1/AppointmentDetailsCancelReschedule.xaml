@@ -96,7 +96,7 @@
 
                             </WrapPanel>
                             <TextBlock Visibility="Collapsed" x:Name="Reasonerror" Text="Please select a reason for the appointment." Foreground="Red" FontWeight="SemiBold" FontStyle="Italic"/>
-                            <ComboBox Name="reason" Background="White" SelectionChanged="reason_SelectionChanged">
+                            <ComboBox Name="reason" Background="White" SelectedValuePath="Content" SelectionChanged="reason_SelectionChanged">
                                 <ComboBoxItem>Flu-like Symptoms</ComboBoxItem>
                                 <ComboBoxItem>Nausea</ComboBoxItem>
                                 <ComboBoxItem>Muscle/Joint Pain</ComboBoxItem>

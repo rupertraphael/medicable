@@ -176,6 +176,7 @@ namespace WpfApp1
             set { _notes = value; }
         }
 
+        /*
         public Appointment(
             string firstname,
             string lastname,
@@ -200,7 +201,7 @@ namespace WpfApp1
             _reason = "";
             _notes = "";
         }
-
+        */
         public Appointment(
             APatient patient,
             DateTime startDate,

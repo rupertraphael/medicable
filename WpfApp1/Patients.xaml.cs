@@ -92,6 +92,17 @@ namespace WpfApp1
             }
         }
 
+        private void upcomingAppointments_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            APatient client = (APatient)this.patientView.SelectedItem;
+            Appointment appointment = (Appointment)this.upcomingAppointments.SelectedItem;
+            if (appointment != null)
+            {
+                NavigationService ns = NavigationService.GetNavigationService(this);
+                ns.Navigate(new AppointmentDetailsCancelReschedule(client,appointment));
+            }
+        }
+
         private void Book_Appointment(object sender, RoutedEventArgs e)
         {
             if (!errorHealthID.Text.Equals("") || !errorDOB.Text.Equals("") || !errorAddress.Text.Equals("") || !errorTelephone.Text.Equals(""))
@@ -263,15 +274,4 @@ namespace WpfApp1
             }
         }
     }
-    /*
-     if (MainNavFrame.Content.GetType() == (new Calendar()).GetType() || MainNavFrame.Content.GetType() == (new AppointmentDetails()).GetType())
-            {
-                if(MessageBox.Show("You are currently booking an appointment. Do you want to cancel booking an appointment and go to another page?", "Cancel Appointment Booking", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
-                {
-                    return;
-                }
-            }
-
-            MainNavFrame.NavigationService.Navigate(this.DashboardPage);
-    */
 }

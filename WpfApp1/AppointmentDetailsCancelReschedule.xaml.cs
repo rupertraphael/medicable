@@ -19,11 +19,14 @@ namespace WpfApp1
     /// <summary>
     /// Interaction logic for AppointmentDetailsCancelReschedule.xaml
     /// </summary>
-    public partial class AppointmentDetailsCancelReschedule : AppointmentDetails
+    public partial class AppointmentDetailsCancelReschedule : Page
     {
-        public AppointmentDetailsCancelReschedule(APatient patient)
+        Appointment selectedAppointment;
+        public AppointmentDetailsCancelReschedule(APatient patient, Appointment appointment)
         {
             InitializeComponent();
+
+            selectedAppointment = appointment;
 
             patientname.Text = patient.PatientName;
             healthcareid.Text = patient.PatientHealthCareNumber;
@@ -52,16 +55,19 @@ namespace WpfApp1
                 doctorlist.Items.Add(doctorContainer);
             }
 
-            if (patient.PatientPreferredDoctor != "")
-            {
-                doctorlist.SelectedValue = patient.PatientPreferredDoctor;
+            doctorlist.SelectedValue = selectedAppointment.Doctor.DisplayName;
+            doctorlist.IsEnabled = false;
 
-            }
+            reason.SelectedValue = selectedAppointment.Reason;
+            reason.IsEnabled = false;
+
+            notes.Text = selectedAppointment.Notes;
+            notes.IsEnabled = false;
         }
-        public void selectDoctor(string doctor)
-        {
-            doctorlist.SelectedValue = doctor;
-        }
+        //public void selectDoctor(string doctor)
+        //{
+          //  doctorlist.SelectedValue = doctor;
+        //}
 
         public void selectDate(DateTime date)
         {
@@ -194,7 +200,7 @@ namespace WpfApp1
 
                         if (result == MessageBoxResult.OK)
                         {
-                            NavigationService ns = NavigationService.GetNavigationService( APatientthis);
+                            NavigationService ns = NavigationService.GetNavigationService(this);
                             ns.Navigate(new Dashboard());
                         }
 
