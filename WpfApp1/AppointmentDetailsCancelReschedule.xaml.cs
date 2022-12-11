@@ -121,11 +121,26 @@ namespace WpfApp1
 
             if (e.AddedItems.Count > 0)
             {
+                if (timepicker.Items.IndexOf(e.AddedItems[0]) == 0)
+                {
+                    clearSelectedDateTimes();
+                    timepicker.UnselectAll();
+                    if(timepicker.SelectedItems.Count == 0)
+                    {
+                        timepicker.SelectedItems.Add(e.AddedItems[0]);
+                    }
+                    
+                    BookButton.Content = "Proceed to Calendar";
+
+                    return;
+                }
+
                 selectTime((KeyValuePair<DateTime, string>)e.AddedItems[0]);
             }
             else
             {
-                unselectTime((KeyValuePair<DateTime, string>)e.RemovedItems[0]);
+                if (timepicker.Items.IndexOf(e.RemovedItems[0]) != 0)
+                    unselectTime((KeyValuePair<DateTime, string>)e.RemovedItems[0]);
             }
 
 
@@ -189,7 +204,7 @@ namespace WpfApp1
             {
                 if (reason.SelectedIndex < 4)
                 {
-                    if (timepicker.SelectedIndex > 0)
+                    if (timepicker.SelectedItems.Count > 0)
                     {
                         string messageBoxText = "Appointment Rescheduled!";
                         string caption = "Appointment Rescheduled";
@@ -216,7 +231,7 @@ namespace WpfApp1
                 {
                     if (notes.Text != "")
                     {
-                        if (timepicker.SelectedIndex > 0)
+                        if (timepicker.SelectedItems.Count > 0)
                         {
                             string messageBoxText = "Appointment Rescheduled!";
                             string caption = "Appointment Rescheduled";
@@ -290,9 +305,9 @@ namespace WpfApp1
             timepicker.Items.Clear();
 
 
-            //ListBoxItem blank = new ListBoxItem();
-            //blank.Content = "";
-            //timepicker.Items.Add(blank);
+            ListBoxItem blank = new ListBoxItem();
+            blank.Content = "Click this to clear selection";
+            timepicker.Items.Add(blank);
 
             List<Appointment> appointments = DB.Appointments.Where(a => a.StartDate.Date == datepicker.SelectedDate).ToList();
 

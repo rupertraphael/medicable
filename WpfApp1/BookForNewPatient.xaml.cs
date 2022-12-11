@@ -30,6 +30,8 @@ namespace WpfApp1
         {
             InitializeComponent();
 
+            health_id_box.Focus();
+
         }
 
         List<APatient> patientList = DB.APatients;

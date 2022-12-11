@@ -92,7 +92,7 @@ namespace WpfApp1
             }
         }
 
-        private void upcomingAppointments_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void upcomingAppointments_SelectionChanged(object sender, MouseButtonEventArgs e)
         {
             APatient client = (APatient)this.patientView.SelectedItem;
             Appointment appointment = (Appointment)this.upcomingAppointments.SelectedItem;
