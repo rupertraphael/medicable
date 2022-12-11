@@ -82,6 +82,9 @@ namespace WpfApp1
                 }
             }
 
+            DashboardPage = new Dashboard();
+            DashboardPage.PatientsPageLink = PatientsPage;
+
             MainNavFrame.NavigationService.Navigate(this.DashboardPage);
         }
 
@@ -94,6 +97,9 @@ namespace WpfApp1
                     return;
                 }
             }
+
+            PatientsPage = new Patients();
+            DashboardPage.PatientsPageLink = PatientsPage;
 
             MainNavFrame.NavigationService.Navigate(this.PatientsPage);
         }

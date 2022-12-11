@@ -30,7 +30,7 @@ namespace WpfApp1
         {
             InitializeComponent();
 
-            First_name1.Focus();
+            health_id_box.Focus();
 
         }
 
