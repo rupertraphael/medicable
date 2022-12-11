@@ -37,7 +37,7 @@ namespace WpfApp1
             emptyPatientView.FontSize = 24;
             PatientView.Child = emptyPatientView;
 
-            patientView.ItemsSource = patientList.OrderBy(patient => patient.PatientName).ToList(); ;
+            patientView.ItemsSource = patientList.OrderBy(patient => patient.PatientName).ToList();
 
         }
 
@@ -86,9 +86,15 @@ namespace WpfApp1
 
                 PatientView.Child = PatientViewGrid;
 
-                List<Appointment> appointments = DB.Appointments.Where(a => a.Patient.PatientHealthCareNumber == client.PatientHealthCareNumber).ToList();
+                List<Appointment> upcoming = DB.Appointments.Where(a => 
+                    a.Patient.PatientHealthCareNumber == client.PatientHealthCareNumber && 
+                    a.StartDate >= DateTime.Parse("2022-12-01 00:00:00")).OrderBy(a => a.StartDate).ToList();
+                List<Appointment> past = DB.Appointments.Where(a => 
+                    a.Patient.PatientHealthCareNumber == client.PatientHealthCareNumber 
+                    && a.StartDate < DateTime.Parse("2022-12-01 00:00:00")).OrderBy(a => a.StartDate).ToList();
 
-                upcomingAppointments.ItemsSource = appointments;
+                upcomingAppointments.ItemsSource = upcoming;
+                pastAppointments.ItemsSource = past;
             }
         }
 
@@ -100,6 +106,17 @@ namespace WpfApp1
             {
                 NavigationService ns = NavigationService.GetNavigationService(this);
                 ns.Navigate(new AppointmentDetailsCancelReschedule(client,appointment));
+            }
+        }
+
+        private void pastAppointments_SelectionChanged(object sender, MouseButtonEventArgs e)
+        {
+            APatient client = (APatient)this.patientView.SelectedItem;
+            Appointment appointment = (Appointment)this.pastAppointments.SelectedItem;
+            if (appointment != null)
+            {
+                NavigationService ns = NavigationService.GetNavigationService(this);
+                ns.Navigate(new AppointmentDetailsCancelReschedule(client, appointment));
             }
         }
 

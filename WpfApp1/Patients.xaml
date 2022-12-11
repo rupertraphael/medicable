@@ -161,7 +161,7 @@
                                                                             </Grid.RowDefinitions>
                                                                             <StackPanel Grid.Row="1">
                                                                                 <TextBlock TextAlignment="Center" Grid.Row="0" FontSize="24" Foreground="#6b7280" FontWeight="Medium">No Upcoming Appointments</TextBlock>
-                                                                                <TextBlock TextAlignment="Center" Grid.Row="1" Foreground="#6b7280" Width="800" TextWrapping="Wrap">Patient has no upcoming appointments. Click the button on the top to book an appointment or you can click on past appointments to book a new appointment based off of a past one.</TextBlock>
+                                                                                <TextBlock TextAlignment="Center" Grid.Row="1" Foreground="#6b7280" MaxWidth="800" TextWrapping="Wrap">Patient has no upcoming appointments. Click the button on the top to book an appointment or you can click on past appointments to book a new appointment based off of a past one.</TextBlock>
                                                                             </StackPanel>
                                                                             <Border Padding="20">
                                                                                 <Image Source="/empty-list.png" Grid.Row="0" Width="{Binding ActualWidth, ElementName=Tb}" />
@@ -214,9 +214,80 @@
                                         </ListView>
                                     </StackPanel>
 
-                                    <Button Foreground="#1d4ed8" Background="Transparent" BorderThickness="0" Padding="8" Margin="4 16">
+                                    <StackPanel Margin="4 0">
+                                        <Label Content="Past Appointments" FontWeight="Medium" Margin="0 6"/>
+                                        <ListView Height="300" FontSize="16" Grid.Row="1" Name="pastAppointments" d:ItemsSource="{d:SampleData ItemCount=13}" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible" PreviewMouseLeftButtonDown="pastAppointments_SelectionChanged" >
+                                            <ListView.Style>
+                                                <Style TargetType="ListView">
+                                                    <Style.Triggers>
+                                                        <Trigger Property="HasItems"
+                         Value="False">
+                                                            <Setter Property="Template">
+                                                                <Setter.Value>
+                                                                    <ControlTemplate TargetType="ListView">
+                                                                        <Grid>
+                                                                            <Grid.RowDefinitions>
+                                                                                <RowDefinition Height="3*" />
+                                                                                <RowDefinition Height="2*" />
+                                                                            </Grid.RowDefinitions>
+                                                                            <StackPanel Grid.Row="1">
+                                                                                <TextBlock TextAlignment="Center" Grid.Row="0" FontSize="24" Foreground="#6b7280" FontWeight="Medium">No Past Appointments</TextBlock>
+                                                                                <TextBlock TextAlignment="Center" Grid.Row="1" Foreground="#6b7280" MaxWidth="800" TextWrapping="Wrap">Patient has no past appointments. Click the button on the top to book an appointment.</TextBlock>
+                                                                            </StackPanel>
+                                                                            <Border Padding="20">
+                                                                                <Image Source="/empty-list.png" Grid.Row="0" Width="{Binding ActualWidth, ElementName=Tb}" />
+                                                                            </Border>
+                                                                        </Grid>
+                                                                    </ControlTemplate>
+                                                                </Setter.Value>
+                                                            </Setter>
+                                                        </Trigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </ListView.Style>
+                                            <ListView.ItemContainerStyle>
+                                                <Style TargetType="ListViewItem">
+                                                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+                                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                                </Style>
+                                            </ListView.ItemContainerStyle>
+                                            <ListView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid>
+                                                        <Border Padding="4 10" BorderThickness="0 0 0 1" BorderBrush="#d1d5db">
+                                                            <Grid>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                                                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                                                </Grid.ColumnDefinitions>
+                                                                <StackPanel Grid.Column="0">
+                                                                    <WrapPanel>
+                                                                        <TextBlock FontSize="16" FontWeight="SemiBold" Text="{Binding FullName}"></TextBlock>
+
+
+                                                                    </WrapPanel>
+
+                                                                    <TextBlock FontSize="16" >
+                                                                        <TextBlock.Text>
+                                                                            <MultiBinding StringFormat="{}{0:f} w/ {1}">
+                                                                                <Binding Path="StartDate" />
+                                                                                <Binding Path="Doctor.DisplayName" />
+                                                                            </MultiBinding>
+                                                                        </TextBlock.Text>
+                                                                    </TextBlock>
+                                                                    <TextBlock FontSize="16" Text="{Binding Reason}" Foreground="#6b7280"></TextBlock>
+                                                                </StackPanel>
+                                                            </Grid>
+                                                        </Border>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ListView.ItemTemplate>
+                                        </ListView>
+                                    </StackPanel>
+
+                                    <!--<Button Foreground="#1d4ed8" Background="Transparent" BorderThickness="0" Padding="8" Margin="4 16">
                                         <TextBlock Text="View Past Appointments" TextDecorations="Underline"/>
-                                    </Button>
+                                    </Button>-->
 
                                 </StackPanel>
                             </ScrollViewer>

@@ -40,7 +40,7 @@
                     </Border>
                     <StackPanel>
                         <TextBlock FontSize="16" VerticalAlignment="Center">Create an Appointment</TextBlock>
-                        <TextBlock FontSize="24" VerticalAlignment="Center" FontWeight="Bold">Select an Appointment for Robert Smith</TextBlock>
+                        <TextBlock FontSize="24" VerticalAlignment="Center" FontWeight="Bold">Select an Appointment</TextBlock>
                     </StackPanel>
                 </WrapPanel>
             </Border>
