@@ -289,6 +289,30 @@ namespace WpfApp1
             new APatient("Kevin Conzer", "403-397-4543", "10582-3401", "09/29/1957", "84 Bearspaw Circle NW Calgary AB", "", "", ""),
             new APatient("Amy Santiago", "403-123-4562", "17992-2134", "03/29/1978", "170 Dalhousie Drive NW Calgary AB", Doctors[0].DisplayName, "", ""),
             new APatient("Charles Boyle", "403-569-5421", "14022-9814", "03/30/1974", "42 Dalhousie Drive NW Calgary AB", Doctors[0].DisplayName, "", ""),
+
+            new APatient("James Gaudreau", "416-322-2015", "17442-1577", "10/10/2010", "170 Ridge ST SW Calgary AB", Doctors[0].DisplayName, "", ""),
+            new APatient("Abraham Lloyd", "519-718-1363", "17442-1578", "01/01/1997", "170 Dalhousie Drive NW Calgary AB", Doctors[0].DisplayName, "", ""),
+            new APatient("Rosa Diaz", "416-300-2067", "17442-1579", "01/02/1977", "2 Brentwood Drive NW Calgary AB", Doctors[0].DisplayName, "", ""),
+            new APatient("Thomas Austin", "905-807-5164", "10322-1579", "04/02/1957", "84 Bearspaw Circle NW Calgary AB", "", "", ""),
+            new APatient("Mary Strack", "519-821-2832", "10582-3401", "09/29/1957", "84 Bearspaw Circle NW Calgary AB", "", "", ""),
+            new APatient("Margaret Theisen", "403-607-1997", "17992-2134", "03/29/1978", "170 Dalhousie Drive NW Calgary AB", Doctors[0].DisplayName, "", ""),
+            new APatient("Jeffrey Kelley", "514-217-3364", "14022-9814", "03/30/1974", "42 Dalhousie Drive NW Calgary AB", Doctors[0].DisplayName, "", ""),
+
+            new APatient("Calvin Manseau", "902-440-4545", "17442-1577", "10/10/2010", "170 Ridge ST SW Calgary AB", Doctors[0].DisplayName, "", ""),
+            new APatient("Robert McQuiston", "514-895-8814", "17442-1578", "01/01/1997", "170 Dalhousie Drive NW Calgary AB", Doctors[0].DisplayName, "", ""),
+            new APatient("Scott Carroll", "403-309-3050", "17442-1579", "01/02/1977", "2 Brentwood Drive NW Calgary AB", Doctors[0].DisplayName, "", ""),
+            new APatient("Krista Brady", "647-295-2504", "10322-1579", "04/02/1957", "84 Bearspaw Circle NW Calgary AB", "", "", ""),
+            new APatient("Bryan Osborn", "514-942-5662", "10582-3401", "09/29/1957", "84 Bearspaw Circle NW Calgary AB", "", "", ""),
+            new APatient("James Deshotel", "416-630-0329", "17992-2134", "03/29/1978", "170 Dalhousie Drive NW Calgary AB", Doctors[0].DisplayName, "", ""),
+            new APatient("Bobbie Weakley", "250-231-0174", "14022-9814", "03/30/1974", "42 Dalhousie Drive NW Calgary AB", Doctors[0].DisplayName, "", ""),
+
+            new APatient("Arthur Pilgrim", "403-863-5802", "17442-1577", "10/10/2010", "170 Ridge ST SW Calgary AB", Doctors[0].DisplayName, "", ""),
+            new APatient("Mary Castillo", "514-940-2896", "17442-1578", "01/01/1997", "170 Dalhousie Drive NW Calgary AB", Doctors[0].DisplayName, "", ""),
+            new APatient("Maria Durr", "604-607-3769", "17442-1579", "01/02/1977", "2 Brentwood Drive NW Calgary AB", Doctors[0].DisplayName, "", ""),
+            new APatient("Marion McDowell", "250-372-1807", "10322-1579", "04/02/1957", "84 Bearspaw Circle NW Calgary AB", "", "", ""),
+            new APatient("Katia McNally", "416-292-9467", "10582-3401", "09/29/1957", "84 Bearspaw Circle NW Calgary AB", "", "", ""),
+            new APatient("Ross Mason", "416-338-218", "17992-2134", "03/29/1978", "170 Dalhousie Drive NW Calgary AB", Doctors[0].DisplayName, "", ""),
+            new APatient("Andrew Labrie", "416-352-0750", "14022-9814", "03/30/1974", "42 Dalhousie Drive NW Calgary AB", Doctors[0].DisplayName, "", ""),
         };
 
         public static List<APatient> APatients
@@ -304,20 +328,57 @@ namespace WpfApp1
         {
             // https://uhs.princeton.edu/health-resources/common-illnesses
 
+
+
             new Appointment(APatients[0], DateTime.Parse("2022-12-01 09:00:00"), Doctors[0], "Flu-like Symptoms", ""),
-            new Appointment(APatients[2], DateTime.Parse("2022-12-01 09:30:00"), Doctors[0], "Nausea", ""),
-            new Appointment(APatients[1], DateTime.Parse("2022-12-01 09:00:00"), Doctors[1], "Muscle/Joint Pain", ""),
-            new Appointment(APatients[1], DateTime.Parse("2022-12-01 09:30:00"), Doctors[1], "Muscle/Joint Pain", ""),
-            new Appointment(APatients[3], DateTime.Parse("2022-12-01 10:30:00"), Doctors[0], "Stomach Problems", ""),
-            new Appointment(APatients[4], DateTime.Parse("2022-12-01 10:30:00"), Doctors[2], "Muscle/Joint Pain", ""),
-            new Appointment(APatients[5], DateTime.Parse("2022-12-01 11:30:00"), Doctors[2], "Muscle/Joint Pain", ""),
-            new Appointment(APatients[6], DateTime.Parse("2022-12-01 13:00:00"), Doctors[0], "Other", "Feeling sleepy all the time"),
-            new Appointment(APatients[7], DateTime.Parse("2022-12-01 13:00:00"), Doctors[1], "Family Doctor Meet and Greet", ""),
-            new Appointment(APatients[8], DateTime.Parse("2022-12-01 13:30:00"), Doctors[0], "Other", "Frequent nose bleeds"),
-            new Appointment(APatients[9], DateTime.Parse("2022-12-01 14:30:00"), Doctors[0], "Other", "Heavy Snoring"),
-            new Appointment(APatients[10], DateTime.Parse("2022-12-01 14:00:00"), Doctors[1], "Flu-like Symptoms", ""),
-            new Appointment(APatients[11], DateTime.Parse("2022-12-01 14:00:00"), Doctors[2], "Nausea", ""),
-            new Appointment(APatients[12], DateTime.Parse("2022-12-01 14:30:00"), Doctors[2], "Stomach Problems", ""),
+            new Appointment(APatients[2], DateTime.Parse("2022-12-01 09:30:00"), Doctors[2], "Nausea", ""),
+            new Appointment(APatients[1], DateTime.Parse("2022-12-01 09:00:00"), Doctors[3], "Muscle/Joint Pain", ""),
+            new Appointment(APatients[1], DateTime.Parse("2022-12-01 09:30:00"), Doctors[3], "Muscle/Joint Pain", ""),
+            new Appointment(APatients[3], DateTime.Parse("2022-12-02 10:30:00"), Doctors[4], "Stomach Problems", ""),
+            new Appointment(APatients[4], DateTime.Parse("2022-12-02 10:30:00"), Doctors[1], "Muscle/Joint Pain", ""),
+            new Appointment(APatients[5], DateTime.Parse("2022-12-02 11:30:00"), Doctors[1], "Muscle/Joint Pain", ""),
+            new Appointment(APatients[6], DateTime.Parse("2022-12-02 13:00:00"), Doctors[2], "Other", "Feeling sleepy all the time"),
+            new Appointment(APatients[7], DateTime.Parse("2022-12-03 13:00:00"), Doctors[4], "Family Doctor Meet and Greet", ""),
+            new Appointment(APatients[8], DateTime.Parse("2022-12-03 13:30:00"), Doctors[3], "Other", "Frequent nose bleeds"),
+            new Appointment(APatients[9], DateTime.Parse("2022-12-03 14:30:00"), Doctors[0], "Other", "Heavy Snoring"),
+            new Appointment(APatients[10], DateTime.Parse("2022-12-03 14:00:00"), Doctors[1], "Flu-like Symptoms", ""),
+            new Appointment(APatients[11], DateTime.Parse("2022-12-04 14:00:00"), Doctors[2], "Nausea", ""),
+            new Appointment(APatients[12], DateTime.Parse("2022-12-04 14:30:00"), Doctors[2], "Stomach Problems", ""),
+
+            new Appointment(APatients[13], DateTime.Parse("2022-11-30 09:00:00"), Doctors[0], "Flu-like Symptoms", ""),
+            new Appointment(APatients[14], DateTime.Parse("2022-11-30 09:30:00"), Doctors[1], "Nausea", ""),
+            new Appointment(APatients[15], DateTime.Parse("2022-11-30 09:00:00"), Doctors[2], "Muscle/Joint Pain", ""),
+            new Appointment(APatients[16], DateTime.Parse("2022-11-29 09:30:00"), Doctors[3], "Muscle/Joint Pain", ""),
+            new Appointment(APatients[17], DateTime.Parse("2022-11-29 10:30:00"), Doctors[0], "Stomach Problems", ""),
+            new Appointment(APatients[18], DateTime.Parse("2022-11-29 10:30:00"), Doctors[4], "Muscle/Joint Pain", ""),
+            new Appointment(APatients[19], DateTime.Parse("2022-11-28 11:30:00"), Doctors[3], "Muscle/Joint Pain", ""),
+
+            new Appointment(APatients[20], DateTime.Parse("2022-11-28 09:00:00"), Doctors[0], "Flu-like Symptoms", ""),
+            new Appointment(APatients[21], DateTime.Parse("2022-11-28 09:30:00"), Doctors[1], "Nausea", ""),
+            new Appointment(APatients[22], DateTime.Parse("2022-11-27 09:00:00"), Doctors[2], "Muscle/Joint Pain", ""),
+            new Appointment(APatients[23], DateTime.Parse("2022-11-27 09:30:00"), Doctors[3], "Muscle/Joint Pain", ""),
+            new Appointment(APatients[24], DateTime.Parse("2022-11-27 10:30:00"), Doctors[0], "Stomach Problems", ""),
+            new Appointment(APatients[25], DateTime.Parse("2022-11-26 10:30:00"), Doctors[4], "Muscle/Joint Pain", ""),
+            new Appointment(APatients[26], DateTime.Parse("2022-11-26 11:30:00"), Doctors[3], "Muscle/Joint Pain", ""),
+
+            new Appointment(APatients[27], DateTime.Parse("2022-12-04 09:00:00"), Doctors[3], "Flu-like Symptoms", ""),
+            new Appointment(APatients[28], DateTime.Parse("2022-12-05 09:30:00"), Doctors[1], "Nausea", ""),
+            new Appointment(APatients[29], DateTime.Parse("2022-12-05 09:00:00"), Doctors[2], "Muscle/Joint Pain", ""),
+            new Appointment(APatients[30], DateTime.Parse("2022-12-05 09:30:00"), Doctors[4], "Muscle/Joint Pain", ""),
+            new Appointment(APatients[31], DateTime.Parse("2022-12-06 10:30:00"), Doctors[0], "Stomach Problems", ""),
+            new Appointment(APatients[32], DateTime.Parse("2022-12-06 10:30:00"), Doctors[2], "Muscle/Joint Pain", ""),
+            new Appointment(APatients[33], DateTime.Parse("2022-12-06 11:30:00"), Doctors[2], "Muscle/Joint Pain", ""),
+
+
+           /*
+            new Appointment(APatients[34], DateTime.Parse("2022-12-07 09:00:00"), Doctors[3], "Flu-like Symptoms", ""),
+            new Appointment(APatients[35], DateTime.Parse("2022-12-07 09:30:00"), Doctors[1], "Nausea", ""),
+            new Appointment(APatients[36], DateTime.Parse("2022-12-07 09:00:00"), Doctors[2], "Muscle/Joint Pain", ""),
+            new Appointment(APatients[37], DateTime.Parse("2022-12-07 09:30:00"), Doctors[4], "Muscle/Joint Pain", ""),
+            new Appointment(APatients[38], DateTime.Parse("2022-12-06 10:30:00"), Doctors[0], "Stomach Problems", ""),
+            new Appointment(APatients[39], DateTime.Parse("2022-12-05 10:30:00"), Doctors[2], "Muscle/Joint Pain", ""),
+            new Appointment(APatients[40], DateTime.Parse("2022-12-03 11:30:00"), Doctors[2], "Muscle/Joint Pain", ""),
+           */
         };
 
         // getter method to retrieve Appointments from our 'DB'
