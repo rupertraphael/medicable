@@ -9,10 +9,14 @@
 
   <ItemGroup>
     <None Remove="empty-list.png" />
+    <None Remove="logo.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="empty-list.png" />
+    <Content Include="logo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

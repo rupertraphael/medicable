@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Diagnostics;
 
 namespace WpfApp1
 {
@@ -22,86 +23,100 @@ namespace WpfApp1
 
     public partial class MainWindow : Window
     {
+        private Dashboard DashboardPage = new Dashboard();
+        private Patients PatientsPage = new Patients();
+
+
         public MainWindow()
         {
             InitializeComponent();
 
-            MainNavWindow.Source = new Uri("Calendar.xaml", UriKind.Relative);
+            DashboardPage.PatientsPageLink = PatientsPage;
 
-
-
+            MainNavFrame.LoadCompleted += MainNavFrame_LoadCompleted;
         }
 
-        public class Appointment
+        private void MainNavFrame_LoadCompleted(object sender, NavigationEventArgs e)
         {
-            private string _firstName;
-            private string _lastName;
-            private int _day;
-            private string _start;
-            private string _end;
-            private string _doctor;
-
-
-            public string FirstName
+            if (e.Content.GetType() == PatientsPage.GetType())
             {
-                get { return _firstName; }
-                set { _firstName = value; }
+
+                selectPatientsNav();
+                
+            } 
+            else if(e.Content.GetType() == DashboardPage.GetType())
+            {
+                selectDashboardNav();
+            }
+            else
+            {
+                selectNoNav();
+            }
+        }
+
+        private void selectDashboardNav()
+        {
+            Dashboard_Button.Background = (new BrushConverter()).ConvertFromString("#1e40af") as Brush;
+            Patients_Button.Background = (new BrushConverter()).ConvertFromString("#1d4ed8") as Brush;
+        }
+
+        private void selectPatientsNav()
+        {
+            Patients_Button.Background = (new BrushConverter()).ConvertFromString("#1e40af") as Brush;
+            Dashboard_Button.Background = (new BrushConverter()).ConvertFromString("#1d4ed8") as Brush;
+        }
+
+        private void selectNoNav()
+        {
+            Dashboard_Button.Background = (new BrushConverter()).ConvertFromString("#1d4ed8") as Brush;
+            Patients_Button.Background = (new BrushConverter()).ConvertFromString("#1d4ed8") as Brush;
+        }
+
+        private void Dashboard_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+
+            if (MainNavFrame.Content.GetType() == (new Calendar()).GetType() || MainNavFrame.Content.GetType() == typeof(AppointmentDetails))
+            {
+                if(MessageBox.Show("You are currently booking an appointment. Do you want to cancel booking an appointment and go to another page?", "Cancel Appointment Booking", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+                {
+                    return;
+                }
+            } else if (MainNavFrame.Content.GetType() == typeof(BookForNewPatient))
+            {
+                if (MessageBox.Show("You are currently creating a patient file. Do you want to cancel creating a patient file and go to another page?", "Cancel Patient File Creation", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+                {
+                    return;
+                }
             }
 
-            public string LastName
+            DashboardPage = new Dashboard();
+            DashboardPage.PatientsPageLink = PatientsPage;
+
+            MainNavFrame.NavigationService.Navigate(this.DashboardPage);
+        }
+
+        private void Patients_Button_Click(object sender, RoutedEventArgs e)
+        {   
+            if (MainNavFrame.Content.GetType() == (new Calendar()).GetType() || MainNavFrame.Content.GetType() == typeof(AppointmentDetails))
             {
-                get { return _lastName; }
-                set { _lastName = value; }
+                if (MessageBox.Show("You are currently booking an appointment. Do you want to cancel booking an appointment and go to another page?", "Cancel Appointment Booking", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+                {
+                    return;
+                }
+            } else if (MainNavFrame.Content.GetType() == typeof(BookForNewPatient))
+            {
+                if (MessageBox.Show("You are currently creating a patient file. Do you want to cancel creating a patient file and go to another page?", "Cancel Patient File Creation", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+                {
+                    return;
+                }
             }
 
-            public int Day
-            {
-                get { return _day; }
-                set { _day = value; }
-            }
+            PatientsPage = new Patients();
+            DashboardPage.PatientsPageLink = PatientsPage;
 
-            public string Start
-            {
-                get { return _start; }
-                set { _lastName = value; }
-            }
-
-            public string End
-            {
-                get { return _end; }
-                set { _lastName = value; }
-            }
-
-            public string StartEnd
-            {
-                get { return _start + " - " + _end; }
-            }
-
-            public string FullName
-            {
-                get { return _firstName + " " + _lastName;  }
-            }
-
-            public string Doctor
-            {
-                get { return _doctor; }
-            }
-
-            public Appointment(
-                string firstname,
-                string lastname,
-                int day,
-                string start,
-                string end,
-                string doctor)
-            {
-                _firstName = firstname;
-                _lastName = lastname;
-                _day = day;
-                _start = start;
-                _end = end;
-                _doctor = doctor;
-            }
+            MainNavFrame.NavigationService.Navigate(this.PatientsPage);
         }
     }
+
 }

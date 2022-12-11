@@ -8,7 +8,7 @@
         Title="MainWindow" Height="720" Width="1280">
     <Window.Resources>
         <Style TargetType="{x:Type Control}" x:Key="baseStyle">
-            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontSize" Value="16" />
         </Style>
         <Style TargetType="{x:Type Button}" BasedOn="{StaticResource baseStyle}"></Style>
         <Style TargetType="{x:Type Label}" BasedOn="{StaticResource baseStyle}"></Style>
@@ -21,13 +21,20 @@
             <RowDefinition Height="1*"></RowDefinition>
             <RowDefinition Height="9*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid>
+        <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"></ColumnDefinition>
                 <ColumnDefinition Width="10*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1" Background="#1d4ed8">
-                <TextBlock Padding="10" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#eff6ff" FontWeight="Bold">Clinic Name</TextBlock>
+                <WrapPanel>
+                    <Image Source="logo.png"></Image>
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#eff6ff" FontWeight="Bold">Medicable For</TextBlock>
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#eff6ff" FontWeight="Bold" FontSize="20">Clinic of UofC</TextBlock>
+                    </StackPanel>
+                    
+                </WrapPanel>
             </Grid>
             <Grid Grid.Column="1" Grid.Row="0" Background="#1d4ed8">
                 <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Grid.IsSharedSizeScope="True">
@@ -35,24 +42,18 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition SharedSizeGroup="MySizeGroup" />
                         </Grid.ColumnDefinitions>
-                        <Button Padding="14" BorderThickness="0" Background="#1e40af" Foreground="#eff6ff" FontWeight="Bold">Dashboard</Button>
+                        <Button Padding="14" BorderThickness="0" Background="#1e40af" Foreground="#eff6ff" Click="Dashboard_Button_Click" Name="Dashboard_Button">Dashboard</Button>
                     </Grid>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition SharedSizeGroup="MySizeGroup" />
                         </Grid.ColumnDefinitions>
-                        <Button Padding="5,1" BorderThickness="0" Background="#1d4ed8" Foreground="#eff6ff">Patients</Button>
-                    </Grid>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition SharedSizeGroup="MySizeGroup" />
-                        </Grid.ColumnDefinitions>
-                        <Button Padding="5,1" BorderThickness="0" Background="#1d4ed8" Foreground="#eff6ff">Calendar</Button>
+                        <Button Padding="5,1" BorderThickness="0" Background="#1d4ed8" Foreground="#eff6ff" Click="Patients_Button_Click" Name="Patients_Button">Patients</Button>
                     </Grid>
                 </StackPanel>
             </Grid>
         </Grid>
-        <Frame Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="1" Name="MainNavWindow"></Frame>
+        <Frame Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="1" Name="MainNavFrame" NavigationUIVisibility="Hidden" Source="Dashboard.xaml"></Frame>
         
     </Grid>
 </Window>
