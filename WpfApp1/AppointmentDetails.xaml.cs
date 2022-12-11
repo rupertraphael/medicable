@@ -23,9 +23,13 @@ namespace WpfApp1
     /// </summary>
     public partial class AppointmentDetails : Page
     {
+
+        private APatient patient;
         public AppointmentDetails(APatient patient)
         {
             InitializeComponent();
+
+            this.patient = patient;
 
             patientname.Text = patient.PatientName;
             healthcareid.Text = patient.PatientHealthCareNumber;
@@ -69,6 +73,7 @@ namespace WpfApp1
         public void selectDate(DateTime date)
         {
             datepicker.SelectedDate = date;
+            selectedDateTimes.Add(date);
         }
 
         private List<DateTime> selectedDateTimes = new List<DateTime>();
@@ -208,6 +213,20 @@ namespace WpfApp1
         {
             Noteserror.Visibility = Visibility.Collapsed;  
         }
+
+        private void createAppointments()
+        {
+            foreach (DateTime slot in selectedDateTimes)
+            {
+                DB.Appointments.Add(
+                    new Appointment(
+                        patient,
+                        slot,
+                        DB.Doctors.Find(d => d.DisplayName == (string)doctorlist.SelectedValue),
+                        (string)reason.SelectedValue,
+                        notes.Text));
+            }
+        }
         private void BookButton_Click(object sender, RoutedEventArgs e)
         {
             if (reason.SelectedIndex > -1)
@@ -216,6 +235,9 @@ namespace WpfApp1
                 {
                     if (timepicker.SelectedItems.Count > 0)
                     {
+                        // create appointment
+                        createAppointments();
+
                         string messageBoxText = "Appointment Confirmed!";
                         string caption = "Appointment Confirmation";
                         MessageBoxButton button = MessageBoxButton.OK;
@@ -243,6 +265,8 @@ namespace WpfApp1
                     {
                         if (timepicker.SelectedItems.Count > 0)
                         {
+                            createAppointments();
+
                             string messageBoxText = "Appointment Confirmed!";
                             string caption = "Appointment Confirmation";
                             MessageBoxButton button = MessageBoxButton.OK;
