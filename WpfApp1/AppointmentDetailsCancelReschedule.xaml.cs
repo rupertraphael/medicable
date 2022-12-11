@@ -131,7 +131,7 @@ namespace WpfApp1
 
             if (timepicker.SelectedItems.Count > 0)
             {
-                BookButton.Content = "Reschedule Appointment";
+                BookButton.Content = "Reschedule";
             }
             if (timepicker.SelectedItems.Count == 0)
             {
@@ -191,8 +191,8 @@ namespace WpfApp1
                 {
                     if (timepicker.SelectedIndex > 0)
                     {
-                        string messageBoxText = "Appointment Confirmed!";
-                        string caption = "Appointment Confirmation";
+                        string messageBoxText = "Appointment Rescheduled!";
+                        string caption = "Appointment Rescheduled";
                         MessageBoxButton button = MessageBoxButton.OK;
                         MessageBoxImage icon = MessageBoxImage.Information;
                         MessageBoxResult result;
@@ -218,8 +218,8 @@ namespace WpfApp1
                     {
                         if (timepicker.SelectedIndex > 0)
                         {
-                            string messageBoxText = "Appointment Confirmed!";
-                            string caption = "Appointment Confirmation";
+                            string messageBoxText = "Appointment Rescheduled!";
+                            string caption = "Appointment Rescheduled";
                             MessageBoxButton button = MessageBoxButton.OK;
                             MessageBoxImage icon = MessageBoxImage.Information;
                             MessageBoxResult result;
