@@ -300,7 +300,7 @@ namespace WpfApp1
             new APatient("Jeffrey Kelley", "514-217-3364", "14023-9814", "03/30/1974", "42 Dalhousie Drive NW Calgary AB", Doctors[0].DisplayName, "", ""),
 
             new APatient("Calvin Manseau", "902-440-4545", "17444-1577", "10/10/2010", "170 Ridge ST SW Calgary AB", Doctors[0].DisplayName, "", ""),
-            new APatient("Robert McQuiston", "514-895-8814", "17442-1578", "01/01/1997", "170 Dalhousie Drive NW Calgary AB", Doctors[0].DisplayName, "", ""),
+            new APatient("Robert McQuiston", "514-895-8814", "17449-1578", "01/01/1997", "170 Dalhousie Drive NW Calgary AB", Doctors[0].DisplayName, "", ""),
             new APatient("Scott Carroll", "403-309-3050", "17444-1579", "01/02/1977", "2 Brentwood Drive NW Calgary AB", Doctors[0].DisplayName, "", ""),
             new APatient("Krista Brady", "647-295-2504", "10324-1579", "04/02/1957", "84 Bearspaw Circle NW Calgary AB", "", "", ""),
             new APatient("Bryan Osborn", "514-942-5662", "10584-3401", "09/29/1957", "84 Bearspaw Circle NW Calgary AB", "", "", ""),
@@ -339,7 +339,7 @@ namespace WpfApp1
             new Appointment(APatients[4], DateTime.Parse("2022-12-02 10:30:00"), Doctors[1], "Muscle/Joint Pain", ""),
             new Appointment(APatients[5], DateTime.Parse("2022-12-02 11:30:00"), Doctors[1], "Muscle/Joint Pain", ""),
             new Appointment(APatients[6], DateTime.Parse("2022-12-02 13:00:00"), Doctors[2], "Other", "Feeling sleepy all the time"),
-            new Appointment(APatients[7], DateTime.Parse("2022-12-03 13:00:00"), Doctors[4], "Family Doctor Meet and Greet", ""),
+            new Appointment(APatients[7], DateTime.Parse("2022-12-03 13:00:00"), Doctors[4], "Other", "Family Doctor Meet and Greet"),
             new Appointment(APatients[8], DateTime.Parse("2022-12-03 13:30:00"), Doctors[3], "Other", "Frequent nose bleeds"),
             new Appointment(APatients[9], DateTime.Parse("2022-12-03 14:30:00"), Doctors[0], "Other", "Heavy Snoring"),
             new Appointment(APatients[10], DateTime.Parse("2022-12-03 14:00:00"), Doctors[1], "Flu-like Symptoms", ""),
