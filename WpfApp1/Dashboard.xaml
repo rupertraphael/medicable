@@ -44,6 +44,7 @@
                             Here are some tips you might find useful:
                         </TextBlock>
                         <TextBlock FontSize="16" TextWrapping="Wrap">- You can use a patients past appointments as a template for booking a new appointment by clicking on a patient's past appointment.</TextBlock>
+                        <TextBlock FontSize="16" TextWrapping="Wrap">- Clicking on an appointment in the dashboard or an upcoming appointment in a Patient's file will allow you reschedule/cancel an appointment.</TextBlock>
                     </StackPanel>
                     <Border.Effect>
                         <DropShadowEffect Opacity="0.06" Direction="270" BlurRadius="4" ShadowDepth="2"/>
